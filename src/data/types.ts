@@ -3,26 +3,32 @@ export type LocaleText = {
   ENG: string;
 };
 
+export interface ProjectLink {
+  label: LocaleText;
+  url: string;
+}
+
 export interface ProjectData {
   id: string;
-  category: 'film' | 'documentary';
+  category: 'film' | 'documentary' | 'experience';
   title: string;
   year: string;
   type: string;
   duration?: string | null;
   composition?: LocaleText | null;
-  producer: string;
-  videoUrl: string; // YouTube/Vimeo link or '#'
+  producer?: string; // optional "produced by" line
+  videoUrl: string; // YouTube/Vimeo link, any external video page, or '#'
   role: LocaleText;
   description: LocaleText;
-  images: string[]; // main gallery, first image used as cover
+  images: string[]; // main gallery, first image used as cover (may be empty)
   behindTheScenes?: string[]; // optional BTS gallery
   documentationUrl?: string; // optional production folder PDF
+  links?: ProjectLink[]; // optional extra links (other videos, press articles…)
 }
 
 export interface PhotoAlbumMeta {
-  id: string; // must match the leaf folder name under assets/photographies
+  id: string; // must match the leaf folder name (or group folder name) under assets/photographies
   title: LocaleText;
   description?: LocaleText;
-  order?: string[]; // filenames in display order; use "subfolder/filename" for voyages2025
+  order?: string[]; // filenames in display order; use "subfolder/filename" for theme albums (portraits, paysages, events)
 }

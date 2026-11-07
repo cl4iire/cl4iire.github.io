@@ -25,6 +25,7 @@ export const Navbar = ({
   const navItems = [
     { id: 'films', label: t.films },
     { id: 'documentaries', label: t.documentaries },
+    { id: 'experiences', label: t.experiences },
     { id: 'photography', label: t.photography },
     { id: 'contact', label: t.contact }
   ];

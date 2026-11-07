@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Play, ArrowRight, ChevronDown, X, FileText } from "lucide-react";
+import { Play, ArrowRight, ChevronDown, X, FileText, ExternalLink } from "lucide-react";
 import { LazyImage } from "./LazyImage";
 
 function getYouTubeId(url: string): string | null {
@@ -44,6 +44,27 @@ function YouTubeFacade({ embedUrl, videoId, title }: { embedUrl: string; videoId
   );
 }
 
+// Shown instead of a cover image when a project has no stills and no YouTube embed:
+// a play button for a video page, an external-link icon for a plain link (e.g. a TikTok account)
+function CoverLinkCard({ href, title, label, isVideo }: { href?: string; title: string; label: string; isVideo: boolean }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="relative flex flex-col items-center justify-center w-full h-full px-6 text-center border border-title-20 bg-title-5 hover:bg-title-10 transition-colors cursor-pointer group"
+    >
+      <div className="w-16 h-16 rounded-full bg-title-90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+        {isVideo
+          ? <Play size={28} className="text-bg fill-bg ml-1" />
+          : <ExternalLink size={26} className="text-bg" />}
+      </div>
+      <p className="mt-6 text-2xl md:text-4xl font-display uppercase leading-tight">{title}</p>
+      <p className="mt-2 text-[10px] uppercase tracking-widest opacity-50 group-hover:text-accent group-hover:opacity-100 transition-colors">{label}</p>
+    </a>
+  );
+}
+
 interface ProjectItemProps {
   key?: any;
   project: any;
@@ -57,10 +78,14 @@ export const ProjectItem = ({ project, idx, t, lang, onImageClick }: ProjectItem
   const videoImage = project.images[0];
   const videoId = getYouTubeId(project.videoUrl);
   const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}` : null;
-  // When YouTube is embedded, the first image is no longer shown as cover — include all images in the grid
+  // When YouTube is embedded, the first image is no longer shown as cover - include all images in the grid
   const otherImages = embedUrl ? project.images : project.images.slice(1);
   const [showBTS, setShowBTS] = useState(true);
   const [showDoc, setShowDoc] = useState(false);
+  // Target of the cover card when the project has no image: the video, or else its first extra link
+  const hasVideo = project.videoUrl !== '#';
+  const primaryLink = project.videoUrl !== '#' ? project.videoUrl : project.links?.[0]?.url;
+  const primaryLabel = project.videoUrl !== '#' ? t.playReel : (project.links?.[0]?.label[lang] ?? '');
 
   return (
     <motion.div 
@@ -72,10 +97,12 @@ export const ProjectItem = ({ project, idx, t, lang, onImageClick }: ProjectItem
       {/* Script Info Column */}
       <div className="lg:col-span-5 space-y-8">
         <div className="space-y-2">
-          <span className="text-xs font-bold text-accent uppercase tracking-widest">{t.extScene} {idx + 1} — {t.day}</span>
+          <span className="text-xs font-bold text-accent uppercase tracking-widest">{t.extScene} {idx + 1} - {t.day}</span>
           <h3 className="text-4xl md:text-5xl font-display uppercase leading-tight">"{project.title}"</h3>
-          <p className="text-sm opacity-60 italic">{project.year} — {project.type}</p>
-          <p className="text-[10px] opacity-40 uppercase tracking-widest">{t.producedBy} {project.producer}</p>
+          <p className="text-sm opacity-60 italic">{project.year} - {project.type}</p>
+          {project.producer && (
+            <p className="text-[10px] opacity-40 uppercase tracking-widest">{t.producedBy} {project.producer}</p>
+          )}
         </div>
 
         {/* Video Embed - Mobile Only (Above Script Page) */}
@@ -86,7 +113,7 @@ export const ProjectItem = ({ project, idx, t, lang, onImageClick }: ProjectItem
           >
             {embedUrl && videoId ? (
               <YouTubeFacade embedUrl={embedUrl} videoId={videoId} title={project.title} />
-            ) : (
+            ) : videoImage ? (
               <div className="relative w-full h-full">
                 <LazyImage
                   src={videoImage}
@@ -102,6 +129,8 @@ export const ProjectItem = ({ project, idx, t, lang, onImageClick }: ProjectItem
                   <Play size={32} className="text-title fill-title" />
                 </div>
               </div>
+            ) : (
+              <CoverLinkCard href={primaryLink} title={project.title} label={primaryLabel} isVideo={hasVideo} />
             )}
           </div>
         </div>
@@ -149,6 +178,19 @@ export const ProjectItem = ({ project, idx, t, lang, onImageClick }: ProjectItem
           </motion.a>
         )}
 
+        {project.links?.map((link: { label: Record<string, string>; url: string }) => (
+          <motion.a
+            key={link.url}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ x: 10 }}
+            className="flex items-center gap-4 text-xs uppercase tracking-widest font-bold group"
+          >
+            [ {link.label[lang]} ] <ArrowRight size={16} className="group-hover:text-accent transition-colors" />
+          </motion.a>
+        ))}
+
         {project.documentationUrl && (
           <motion.button
             whileHover={{ x: 10 }}
@@ -170,7 +212,7 @@ export const ProjectItem = ({ project, idx, t, lang, onImageClick }: ProjectItem
           >
             {embedUrl && videoId ? (
               <YouTubeFacade embedUrl={embedUrl} videoId={videoId} title={project.title} />
-            ) : (
+            ) : videoImage ? (
               <div className="relative w-full h-full">
                 <LazyImage
                   src={videoImage}
@@ -186,6 +228,8 @@ export const ProjectItem = ({ project, idx, t, lang, onImageClick }: ProjectItem
                   <Play size={32} className="text-title fill-title" />
                 </div>
               </div>
+            ) : (
+              <CoverLinkCard href={primaryLink} title={project.title} label={primaryLabel} isVideo={hasVideo} />
             )}
           </div>
         </div>
@@ -270,7 +314,7 @@ export const ProjectItem = ({ project, idx, t, lang, onImageClick }: ProjectItem
           <div className="flex-1 overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <iframe
               src={project.documentationUrl}
-              title={`${project.title} — ${t.productionFolder}`}
+              title={`${project.title} - ${t.productionFolder}`}
               className="w-full h-full border-0"
             />
           </div>

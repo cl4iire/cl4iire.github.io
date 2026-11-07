@@ -6,3 +6,7 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Client deliveries (WeTransfer)
+wetransfer_*/
+wetransfer_*.zip

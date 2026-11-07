@@ -56,7 +56,7 @@ export default function App() {
   }, [lang]);
 
   useEffect(() => {
-    const sections = ['hero', 'films', 'documentaries', 'photography', 'contact'];
+    const sections = ['hero', 'films', 'documentaries', 'experiences', 'photography', 'contact'];
     const observerOptions = {
       root: null,
       rootMargin: '-20% 0px -70% 0px',
@@ -134,6 +134,15 @@ export default function App() {
           id="documentaries"
           title={t.documentaries}
           projects={PROJECTS.filter(p => p.category === 'documentary')}
+          t={t}
+          lang={lang}
+          onImageClick={openLightbox}
+        />
+
+        <ProjectSection
+          id="experiences"
+          title={t.experiencesTitle}
+          projects={PROJECTS.filter(p => p.category === 'experience')}
           t={t}
           lang={lang}
           onImageClick={openLightbox}

@@ -1,4 +1,4 @@
-# Portfolio — Claire Buhaceanu Laborde
+# Portfolio - Claire Buhaceanu Laborde
 
 Site portfolio de Claire Buhaceanu Laborde. 
 Construit avec React, Vite et Tailwind CSS v4.
@@ -15,6 +15,7 @@ Construit avec React, Vite et Tailwind CSS v4.
    ```bash
    npm run dev
    ```
+3. Ouvrir `http://localhost:3000/portfolioClaire/` (le chemin `base` est défini dans `vite.config.ts`).
 
 ## Structure du projet
 
@@ -27,12 +28,18 @@ Le site auto-découvre les médias (photos, stills) depuis les dossiers `src/ass
   - Coulisses (optionnel) : `src/assets/projects/films/<projectId>/<projectId>BehindScenes/`
 - Documentaires : `src/assets/projects/documentaries/<projectId>/`
   - Documentation PDF (optionnel) : `src/assets/projects/documentaries/<projectId>/documentation/`
-- Photographies : `src/assets/projects/photographies/`
-  - Albums = dossiers feuilles, ex. `motors_and_blues/`, `voyages/bardenas2025/`, `voyages/Irlande2025/`, …
+- Expériences professionnelles (stages) : `src/assets/projects/experiences/<projectId>/`
+- Photographies : `src/assets/projects/photographies/` - 3 albums thématiques, chaque sous-dossier (un lieu ou un événement) est fusionné dans l'album :
+  - `portraits/<lieu>/` → album « Portraits » (ex. `portraits/nepal/`)
+  - `paysages/<lieu>/` → album « Paysages » (ex. `paysages/bretagne/`, `paysages/londres2025/`)
+  - `events/<événement>/` → album « Événements » (ex. `events/motors_and_blues/`, `events/nepal/`)
+  - Article Blues Magazine (bouton « Voir l'article ») : `events/motors_and_blues/article/`
+  - Le nom du sous-dossier s'affiche au survol de la photo (titre lisible défini dans `src/data/projects/photographies/<sous-dossier>.ts`, ex. `nepal.ts` → « Népal »)
 
 **Données (fichiers TS écrits à la main)**
 - Films : `src/data/projects/films/<projectId>.ts`
 - Documentaires : `src/data/projects/documentaries/<projectId>.ts`
+- Expériences professionnelles : `src/data/projects/experiences/<projectId>.ts`
 - Métadonnées albums photo (optionnel) : `src/data/projects/photographies/<albumId>.ts`
 
 **Fichiers clés**
@@ -50,81 +57,69 @@ Le site auto-découvre les médias (photos, stills) depuis les dossiers `src/ass
 - Films/Docs : toutes les images du dossier projet forment la galerie. La première image est la couverture. Les coulisses sont lues depuis le sous-dossier `<projectId>BehindScenes/` s'il existe.
 - Photographies : chaque dossier feuille sous `src/assets/projects/photographies/**` devient automatiquement un album.
 
-## Ajouter un film ou un documentaire
+## Ajouter un film, un documentaire ou une expérience
 
 1. Déposer les stills (et coulisses optionnelles) :
    - Films : `src/assets/projects/films/<projectId>/`
      - Coulisses : `src/assets/projects/films/<projectId>/<projectId>BehindScenes/`
    - Docs : `src/assets/projects/documentaries/<projectId>/`
+   - Expériences : `src/assets/projects/experiences/<projectId>/`
 2. Créer un fichier de données exportant `ProjectData` :
    - Films : `src/data/projects/films/<projectId>.ts`
    - Docs : `src/data/projects/documentaries/<projectId>.ts`
+   - Expériences : `src/data/projects/experiences/<projectId>.ts` (`category: 'experience'`)
 3. Enregistrer le projet dans `src/data/portfolio.ts` en important le fichier et en l'ajoutant au tableau `PROJECTS`.
 
 **Notes :**
 - `videoUrl` peut être une URL YouTube (intégrée automatiquement avec miniature HD) ou `#` pour afficher une image statique.
 - `documentationUrl` (optionnel) : importer un PDF via `?url` pour afficher un bouton "Dossier de Production".
-- La première image découverte est utilisée comme couverture.
+- La première image découverte est utilisée comme couverture. Sans image ni YouTube, une carte « vidéo » cliquable s'affiche à la place (lien vers `videoUrl`, ou vers le premier `links` si `videoUrl` vaut `#`).
+- `links` (optionnel) : liens supplémentaires (autres vidéos, article de presse, compte TikTok…), au format `{ label: { FR, ENG }, url }`.
+- `producer` (optionnel) : si absent, la ligne « produit par » est masquée.
 
-## Ajouter un album photo
+## Ajouter des photos
 
-1. Créer un dossier avec les photos :
-   - `src/assets/projects/photographies/<albumId>/`
-   - ou imbriqué dans voyages, ex. `src/assets/projects/photographies/voyages/<tripId>/`
-2. (Optionnel) Ajouter des métadonnées localisées :
-   - `src/data/projects/photographies/<albumId>.ts`
-   - Doit exporter un `PhotoAlbumMeta` avec `{ id, title: {FR, ENG}, description?: {FR, ENG} }`.
+**Dans un album existant (cas courant)** - déposer les photos (en `.webp` de préférence) dans le bon thème, dans un sous-dossier par lieu ou événement :
+- `src/assets/projects/photographies/portraits/<lieu>/`
+- `src/assets/projects/photographies/paysages/<lieu>/`
+- `src/assets/projects/photographies/events/<événement>/`
 
-Les albums sont générés automatiquement — aucune configuration supplémentaire n'est nécessaire.
+Le sous-dossier peut être nouveau (ex. `paysages/ecosse2027/`). Pour afficher un nom propre au survol des photos, créer `src/data/projects/photographies/<sous-dossier>.ts` exportant un `PhotoAlbumMeta` avec `{ id: '<sous-dossier>', title: { FR, ENG } }` (ex. `nepal.ts` → « Népal »). Sans ce fichier, le nom du dossier est utilisé tel quel.
+
+**Créer un nouvel album** - créer un dossier directement sous `src/assets/projects/photographies/<albumId>/`, puis (optionnel) `src/data/projects/photographies/<albumId>.ts` avec `{ id, title: {FR, ENG}, description?: {FR, ENG} }`. Ajouter `<albumId>` à `ALBUM_ORDER` dans `src/data/portfolio.ts` pour choisir sa position (sinon il s'affiche après les autres).
+
+Les albums sont générés automatiquement à partir des dossiers. Redémarrer `npm run dev` si des fichiers ont été déplacés.
 
 ## Réorganiser l'ordre des photos
 
-L'ordre des photos dans chaque album est contrôlé par un tableau `order` dans le fichier de métadonnées correspondant.
-
-### Utiliser l'éditeur drag & drop (recommandé)
-
-L'éditeur visuel est intégré au projet. Il affiche les photos exactement comme sur le site et permet de réorganiser par glisser-déposer.
-
-**1.** Lancer le serveur de développement (`npm run dev`)
-
-**2.** Ouvrir l'éditeur : `http://localhost:3000/?editor`
-
-**3.** Glisser-déposer les photos dans l'ordre souhaité — le numéro de position (jaune) se met à jour en temps réel
-
-**4.** Cliquer sur **Copy** sous l'album
-
-**5.** Coller dans le fichier de métadonnées correspondant :
+L'ordre des photos dans chaque album est contrôlé par le tableau `order` du fichier de métadonnées correspondant :
 
 | Album | Fichier |
 |---|---|
-| Motor & Blues | `src/data/projects/photographies/motors_and_blues.ts` |
-| Voyages 2025 | `src/data/projects/photographies/voyages2025.ts` |
+| Portraits | `src/data/projects/photographies/portraits.ts` |
+| Paysages | `src/data/projects/photographies/paysages.ts` |
+| Événements | `src/data/projects/photographies/events.ts` |
 
-Coller le bloc `order: [...]` à l'intérieur de l'objet `meta` :
+Chaque entrée est `<sous-dossier>/<fichier>`, ce qui permet d'intercaler librement les lieux. Déplacer une ligne déplace la photo :
 
 ```ts
 const meta: PhotoAlbumMeta = {
-  id: 'motors_and_blues',
-  title: { FR: 'Motor & Blues', ENG: 'Motor & Blues' },
+  id: 'events',
+  title: { FR: 'Événements', ENG: 'Events' },
   order: [
-    '3.webp',
-    '1.webp',
-    '5.webp',
+    'motors_and_blues/1.webp',
+    'nepal/DSC_0054.webp',
+    'motors_and_blues/8.webp',
     // ...
   ],
 };
 ```
 
-Pour **Voyages 2025**, les clés incluent le sous-dossier (`bardenas2025/14.webp`, `Irlande2025/2.webp`…) ce qui permet d'intercaler librement les destinations.
+Le serveur de dev recharge la page automatiquement : vérifier sur `http://localhost:3000/portfolioClaire/`.
 
-**6.** Revenir sur `http://localhost:3000/` pour vérifier le résultat.
-
-> Les photos absentes du tableau `order` s'ajoutent automatiquement à la fin (tri numérique).
-
-### Notes
-
-- L'éditeur est une page temporaire déjà intégrée — aucune installation requise.
-- Si l'éditeur n'est plus nécessaire, supprimer `src/components/PhotoOrderEditor.tsx` et retirer les 3 lignes correspondantes dans `src/main.tsx`.
+> Les photos absentes du tableau `order` s'ajoutent automatiquement à la fin (par sous-dossier, puis par nom de fichier).
+>
+> L'ordre des albums sur la page est défini par `ALBUM_ORDER` dans `src/data/portfolio.ts`.
 
 ## Système de couleurs
 
@@ -141,13 +136,14 @@ Les classes utilitaires correspondantes (`bg-bg`, `text-title`, `text-accent`, e
 
 ## Fonctionnalités
 
-- **Bilingue FR / ENG** — détection automatique de la langue du navigateur, bascule dans la navbar
-- **CV** — visionneuse PDF plein écran avec sélection FR / ENG
-- **Projets Futurs Master** — visionneuse PDF accessible depuis la navbar
-- **Visionneuse d'images** — lightbox avec navigation clavier et swipe mobile
-- **YouTube** — intégration façade (miniature HD → lecteur au clic)
-- **Photographies** — mur masonry avec albums auto-générés
-- **Responsive** — sidebar desktop, menu overlay mobile
+- **Bilingue FR / ENG** - détection automatique de la langue du navigateur, bascule dans la navbar
+- **CV** - visionneuse PDF plein écran avec sélection FR / ENG
+- **Projets Futurs Master** - visionneuse PDF accessible depuis la navbar
+- **Visionneuse d'images** - lightbox avec navigation clavier et swipe mobile
+- **YouTube** - intégration façade (miniature HD → lecteur au clic)
+- **Photographies** - mur masonry avec albums auto-générés
+- **Expériences professionnelles** - section dédiée aux stages (TVPI, SASANE…)
+- **Responsive** - sidebar desktop, menu overlay mobile
 
 ## Dépannage
 

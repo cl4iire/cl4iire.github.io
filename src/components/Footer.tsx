@@ -57,7 +57,7 @@ export const Footer = ({ t, onCvOpen, onImageClick }: FooterProps) => {
                 <Instagram size={20} aria-hidden="true" />
               </a>
             </div>
-            <p className="text-[10px] opacity-20">© 2026 — {t.rights}</p>
+            <p className="text-[10px] opacity-20">© 2026 - {t.rights}</p>
           </div>
 
         </div>

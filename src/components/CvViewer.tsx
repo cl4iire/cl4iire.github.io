@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { X } from "lucide-react";
-import cvFr from "../assets/CV/B.Laborde Claire FR  CV 2025 2026.pdf?url";
-import cvEn from "../assets/CV/B.Laborde Claire ENG CV 2025 2026.pdf?url";
+import cvFr from "../assets/CV/B.Laborde Claire FR CV 2026.pdf?url";
+import cvEn from "../assets/CV/B.Laborde Claire ENG CV 2026.pdf?url";
 
 interface CvViewerProps {
   lang: 'FR' | 'ENG';
@@ -61,7 +61,7 @@ export const CvViewer = ({ lang, onClose }: CvViewerProps) => {
         <iframe
           key={activeLang}
           src={src}
-          title={`CV — Claire Buhaceanu Laborde (${activeLang})`}
+          title={`CV - Claire Buhaceanu Laborde (${activeLang})`}
           className="w-full h-full border-0"
         />
       </div>
