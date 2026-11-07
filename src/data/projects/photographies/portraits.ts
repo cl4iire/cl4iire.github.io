@@ -4,8 +4,8 @@ const meta: PhotoAlbumMeta = {
   id: 'portraits',
   title: { FR: 'Portraits', ENG: 'Portraits' },
   description: {
-    FR: 'Visages et regards - Népal, Marrakech.',
-    ENG: 'Faces and gazes - Nepal, Marrakesh.',
+    FR: 'Visages et regards - Népal.',
+    ENG: 'Faces and gazes - Nepal.',
   },
   order: [
     'nepal/DSC_0008-2.webp',
@@ -33,9 +33,6 @@ const meta: PhotoAlbumMeta = {
     'nepal/DSC_0096.webp',
     'nepal/DSC_0129-2.webp',
     'nepal/DSC_0242.webp',
-    'nepal/DSC_0095-2.webp',
-    'nepal/DSC_0098.webp',
-    'marrakech2025/32.webp',
   ],
 };
 

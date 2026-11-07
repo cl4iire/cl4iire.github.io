@@ -172,7 +172,7 @@ const GROUPED_ALBUM_IDS = Object.values(GROUPED_ALBUMS);
 const ALBUM_ORDER = ['portraits', 'paysages', 'events'];
 
 // Extract the order-array key from a photo's original source path
-function orderKey(albumId: string, srcPath: string): string {
+export function orderKey(albumId: string, srcPath: string): string {
   const parts = srcPath.split('/');
   return GROUPED_ALBUM_IDS.includes(albumId)
     ? parts.slice(-2).join('/')   // e.g. "bardenas2025/14.webp"

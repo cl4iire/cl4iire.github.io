@@ -92,13 +92,29 @@ Les albums sont générés automatiquement à partir des dossiers. Redémarrer `
 
 ## Réorganiser l'ordre des photos
 
-L'ordre des photos dans chaque album est contrôlé par le tableau `order` du fichier de métadonnées correspondant :
+L'ordre des photos dans chaque album est enregistré dans le tableau `order` du fichier de métadonnées de l'album :
 
 | Album | Fichier |
 |---|---|
 | Portraits | `src/data/projects/photographies/portraits.ts` |
 | Paysages | `src/data/projects/photographies/paysages.ts` |
 | Événements | `src/data/projects/photographies/events.ts` |
+
+### Avec l'éditeur (recommandé)
+
+Une page cachée permet de réordonner les photos par glisser-déposer (ou avec les flèches sous chaque photo). Le numéro rouge indique la position sur le site.
+
+**En local, enregistrement direct :**
+1. Lancer `npm run dev`
+2. Ouvrir `http://localhost:3000/portfolioClaire/?editor`
+3. Déplacer les photos, puis cliquer sur **Enregistrer** sous l'album : le tableau `order` du fichier est réécrit et le site se met à jour immédiatement
+4. Commit + push pour publier
+
+**Sur le site en ligne** (`https://cl4iire.github.io/portfolioClaire/?editor`) : GitHub Pages est un hébergement statique, rien ne peut y être enregistré. Après avoir réordonné un album, cliquer sur **Copier le code** : le code s'affiche dans un encadré sous l'album (et est copié dans le presse-papiers), prêt à être envoyé par message. Sa première ligne indique le fichier concerné ; il suffit de remplacer le bloc `order: [...]` de ce fichier par celui reçu, puis commit + push.
+
+> Fichiers de l'éditeur : `src/components/PhotoOrderEditor.tsx` (la page), `photo-order-plugin.ts` (l'enregistrement, actif uniquement avec `npm run dev`) et 3 lignes dans `src/main.tsx`.
+
+### À la main
 
 Chaque entrée est `<sous-dossier>/<fichier>`, ce qui permet d'intercaler librement les lieux. Déplacer une ligne déplace la photo :
 
@@ -114,8 +130,6 @@ const meta: PhotoAlbumMeta = {
   ],
 };
 ```
-
-Le serveur de dev recharge la page automatiquement : vérifier sur `http://localhost:3000/portfolioClaire/`.
 
 > Les photos absentes du tableau `order` s'ajoutent automatiquement à la fin (par sous-dossier, puis par nom de fichier).
 >

@@ -28,11 +28,11 @@ const project: ProjectData = {
   images,
   links: [
     {
-      label: { FR: "Voir l'article - Fêtes de Bayonne", ENG: 'View the article - Fêtes de Bayonne' },
+      label: { FR: 'Voir la rubrique - Fêtes de Bayonne', ENG: 'View the segment - Fêtes de Bayonne' },
       url: 'https://www.sudouest.fr/lachainetvpi/fetes-de-bayonne/videos/2026/07/15/3vzk3x3',
     },
     {
-      label: { FR: "Voir l'article - Feria de Dax", ENG: 'View the article - Feria de Dax' },
+      label: { FR: 'Voir la rubrique - Feria de Dax', ENG: 'View the segment - Feria de Dax' },
       url: 'https://www.sudouest.fr/lachainetvpi/feria-de-dax/videos/2026/08/12/3vfmlsz',
     },
     {
