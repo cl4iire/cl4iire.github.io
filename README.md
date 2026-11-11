@@ -15,7 +15,9 @@ Construit avec React, Vite et Tailwind CSS v4.
    ```bash
    npm run dev
    ```
-3. Ouvrir `http://localhost:3000/portfolioClaire/` (le chemin `base` est défini dans `vite.config.ts`).
+3. Ouvrir `http://localhost:3000/`
+
+Site en ligne : **https://cl4iire.github.io/** (dépôt GitHub `cl4iire/cl4iire.github.io`).
 
 ## Structure du projet
 
@@ -106,11 +108,11 @@ Une page cachée permet de réordonner les photos par glisser-déposer (ou avec 
 
 **En local, enregistrement direct :**
 1. Lancer `npm run dev`
-2. Ouvrir `http://localhost:3000/portfolioClaire/?editor`
+2. Ouvrir `http://localhost:3000/?editor`
 3. Déplacer les photos, puis cliquer sur **Enregistrer** sous l'album : le tableau `order` du fichier est réécrit et le site se met à jour immédiatement
 4. Commit + push pour publier
 
-**Sur le site en ligne** (`https://cl4iire.github.io/portfolioClaire/?editor`) : GitHub Pages est un hébergement statique, rien ne peut y être enregistré. Après avoir réordonné un album, cliquer sur **Copier le code** : le code s'affiche dans un encadré sous l'album (et est copié dans le presse-papiers), prêt à être envoyé par message. Sa première ligne indique le fichier concerné ; il suffit de remplacer le bloc `order: [...]` de ce fichier par celui reçu, puis commit + push.
+**Sur le site en ligne** (`https://cl4iire.github.io/?editor`) : GitHub Pages est un hébergement statique, rien ne peut y être enregistré. Après avoir réordonné un album, cliquer sur **Copier le code** : le code s'affiche dans un encadré sous l'album (et est copié dans le presse-papiers), prêt à être envoyé par message. Sa première ligne indique le fichier concerné ; il suffit de remplacer le bloc `order: [...]` de ce fichier par celui reçu, puis commit + push.
 
 > Fichiers de l'éditeur : `src/components/PhotoOrderEditor.tsx` (la page), `photo-order-plugin.ts` (l'enregistrement, actif uniquement avec `npm run dev`) et 3 lignes dans `src/main.tsx`.
 
@@ -167,6 +169,10 @@ Les classes utilitaires correspondantes (`bg-bg`, `text-title`, `text-accent`, e
 ## Déploiement (GitHub Pages)
 
 Ce projet Vite génère des fichiers statiques déployables sur GitHub Pages.
+
+> **Configuration actuelle :** le dépôt s'appelle `cl4iire.github.io` (site utilisateur), donc le site est servi à la racine **https://cl4iire.github.io/** avec `base: '/'`. Chaque push sur `main` le republie via `.github/workflows/main.yml`.
+>
+> Ne pas renommer le dépôt : Google lit le nom du site et le favicon sur la page d'accueil du domaine (`https://cl4iire.github.io/`). Avec un dépôt de projet (ex. `portfolioClaire`), cette page n'existe pas et Google affiche « GitHub Pages documentation » sans favicon.
 
 **1. Configurer le chemin de base**
 

@@ -7,8 +7,8 @@ import {photoOrderPlugin} from './photo-order-plugin';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    // This MUST match your repository name exactly
-    base: '/portfolioClaire/',
+    // Repo "cl4iire.github.io" = GitHub user site, served at the domain root
+    base: '/',
     
     plugins: [react(), tailwindcss(), photoOrderPlugin()],
     define: {

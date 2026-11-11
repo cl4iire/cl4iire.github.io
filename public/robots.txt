@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://cl4iire.github.io/sitemap.xml
