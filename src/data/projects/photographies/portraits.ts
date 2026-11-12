@@ -9,7 +9,6 @@ const meta: PhotoAlbumMeta = {
   },
   order: [
     'nepal/DSC_0008-2.webp',
-    'nepal/DSC_0020.webp',
     'nepal/DSC_0059-2.webp',
     'nepal/DSC_0061.webp',
     'nepal/DSC_0063.webp',
@@ -30,9 +29,9 @@ const meta: PhotoAlbumMeta = {
     'nepal/DSC00251.webp',
     'nepal/DSC_0007.webp',
     'nepal/DSC_0019.webp',
-    'nepal/DSC_0096.webp',
     'nepal/DSC_0129-2.webp',
     'nepal/DSC_0242.webp',
+    'nepal/DSC_0116.webp',
   ],
 };
 
