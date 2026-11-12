@@ -30,5 +30,6 @@ export interface PhotoAlbumMeta {
   id: string; // must match the leaf folder name (or group folder name) under assets/photographies
   title: LocaleText;
   description?: LocaleText;
+  places?: Record<string, LocaleText>; // theme albums: sub-folder -> label of its place / event (photo sub-filter)
   order?: string[]; // filenames in display order; use "subfolder/filename" for theme albums (portraits, paysages, events)
 }

@@ -4,8 +4,12 @@ const meta: PhotoAlbumMeta = {
   id: 'portraits',
   title: { FR: 'Portraits', ENG: 'Portraits' },
   description: {
-    FR: 'Visages et regards - Népal.',
-    ENG: 'Faces and gazes - Nepal.',
+    FR: 'Visages et regards, Népal.',
+    ENG: 'Faces and gazes, Nepal.',
+  },
+  // Sub-folder -> label (single place: no second filter is shown)
+  places: {
+    nepal: { FR: 'Népal', ENG: 'Nepal' },
   },
   order: [
     'nepal/DSC_0008-2.webp',

@@ -10,7 +10,7 @@ const images = Object.values(imagesModules).sort((a, b) => a.localeCompare(b));
 const project: ProjectData = {
   id: 'sources',
   category: 'film',
-  title: 'SOURCES',
+  title: 'Sources',
   year: '2023',
   type: 'Film Pocket',
   duration: "2'30",

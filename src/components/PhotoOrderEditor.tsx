@@ -90,12 +90,12 @@ export default function PhotoOrderEditor() {
   const siteUrl = import.meta.env.BASE_URL + "#photography";
 
   return (
-    <div className="min-h-screen bg-bg text-text font-mono px-4 md:px-10 py-10">
+    <div className="min-h-screen bg-ink text-rose font-sans px-4 md:px-10 py-10">
       <header className="max-w-7xl mx-auto mb-12 space-y-4">
-        <a href={siteUrl} className="inline-flex items-center gap-2 text-xs uppercase tracking-widest opacity-60 hover:opacity-100 hover:text-accent transition">
+        <a href={siteUrl} className="inline-flex items-center gap-2 text-xs uppercase tracking-widest opacity-60 hover:opacity-100 hover:text-pink transition">
           <ArrowLeft size={14} /> Retour au site
         </a>
-        <h1 className="text-4xl md:text-5xl font-display uppercase">Ordre des photos</h1>
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">Ordre des photos</h1>
         <p className="text-sm opacity-70 max-w-3xl leading-relaxed">
           Glisser-déposer une photo pour la déplacer, ou utiliser les flèches sous chaque photo.
           Le numéro en rouge est sa position sur le site.{" "}
@@ -108,34 +108,34 @@ export default function PhotoOrderEditor() {
       <div className="max-w-7xl mx-auto space-y-20">
         {albums.map((album) => (
           <section key={album.id}>
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-title-20 pb-4">
-              <h2 className="text-sm uppercase tracking-[0.3em] border-l-2 border-accent pl-4">
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-rose/25 pb-4">
+              <h2 className="text-sm uppercase tracking-[0.3em] border-l-2 border-pink pl-4">
                 {album.title} <span className="opacity-40">({album.photos.length})</span>
-                {dirty[album.id] && <span className="ml-3 text-accent normal-case tracking-normal">modifié</span>}
+                {dirty[album.id] && <span className="ml-3 text-pink normal-case tracking-normal">modifié</span>}
               </h2>
               <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest">
                 {CAN_SAVE && (
                   <button
                     onClick={() => save(album)}
                     disabled={!dirty[album.id]}
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-title font-bold disabled:opacity-30 cursor-pointer disabled:cursor-default"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-pink text-ink font-bold disabled:opacity-30 cursor-pointer disabled:cursor-default"
                   >
                     <Save size={14} /> Enregistrer
                   </button>
                 )}
-                <button onClick={() => copy(album)} className="inline-flex items-center gap-2 px-4 py-2 border border-title-20 hover:bg-title-10 cursor-pointer">
+                <button onClick={() => copy(album)} className="inline-flex items-center gap-2 px-4 py-2 border border-rose/25 hover:bg-rose/10 cursor-pointer">
                   <Copy size={14} /> Copier le code
                 </button>
                 <button
                   onClick={() => reset(album.id)}
                   disabled={!dirty[album.id]}
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-title-20 hover:bg-title-10 disabled:opacity-30 cursor-pointer disabled:cursor-default"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-rose/25 hover:bg-rose/10 disabled:opacity-30 cursor-pointer disabled:cursor-default"
                 >
                   <RotateCcw size={14} /> Annuler
                 </button>
               </div>
             </div>
-            {status[album.id] && <p className="text-xs mb-4 text-accent">{status[album.id]}</p>}
+            {status[album.id] && <p className="text-xs mb-4 text-pink">{status[album.id]}</p>}
 
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 xl:grid-cols-8 gap-3">
               {album.photos.map((photo, i) => {
@@ -163,13 +163,13 @@ export default function PhotoOrderEditor() {
                       setDrag(null);
                       setOver(null);
                     }}
-                    className={`relative group bg-title-5 cursor-grab active:cursor-grabbing transition ${
+                    className={`relative group bg-rose/5 cursor-grab active:cursor-grabbing transition ${
                       drag?.albumId === album.id && drag.index === i ? "opacity-30" : ""
-                    } ${isOver ? "outline outline-2 outline-[var(--color-accent)]" : ""}`}
+                    } ${isOver ? "outline outline-2 outline-pink" : ""}`}
                     title={photo.key}
                   >
                     <img src={photo.url} alt={photo.key} loading="lazy" draggable={false} className="w-full aspect-square object-cover select-none" />
-                    <span className="absolute top-1 left-1 min-w-6 h-6 px-1 flex items-center justify-center text-[11px] font-bold bg-accent text-title">
+                    <span className="absolute top-1 left-1 min-w-6 h-6 px-1 flex items-center justify-center text-[11px] font-bold bg-pink text-ink">
                       {i + 1}
                     </span>
                     <div className="flex items-center justify-between gap-1 px-1 py-1 text-[9px] uppercase tracking-wider">
@@ -197,8 +197,8 @@ export default function PhotoOrderEditor() {
             </div>
 
             {codeShown[album.id] && (
-              <div className="mt-6 border border-accent">
-                <div className="flex items-center justify-between gap-4 px-4 py-2 border-b border-title-20 text-xs uppercase tracking-widest">
+              <div className="mt-6 border border-pink">
+                <div className="flex items-center justify-between gap-4 px-4 py-2 border-b border-rose/25 text-xs uppercase tracking-widest">
                   <span>Code à envoyer - {album.title}</span>
                   <button
                     onClick={() => setCodeShown((c) => ({ ...c, [album.id]: false }))}
@@ -213,7 +213,7 @@ export default function PhotoOrderEditor() {
                   value={orderCode(album)}
                   onFocus={(e) => e.currentTarget.select()}
                   rows={Math.min(album.photos.length + 3, 18)}
-                  className="w-full p-4 bg-title-5 text-text text-xs font-mono leading-relaxed resize-y outline-none"
+                  className="w-full p-4 bg-rose/5 text-rose text-xs font-mono leading-relaxed resize-y outline-none"
                 />
               </div>
             )}

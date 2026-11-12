@@ -137,29 +137,51 @@ const meta: PhotoAlbumMeta = {
 >
 > L'ordre des albums sur la page est défini par `ALBUM_ORDER` dans `src/data/portfolio.ts`.
 
-## Système de couleurs
+## Design « Zine rose »
 
-Toutes les couleurs du site sont définies via des variables CSS dans `src/index.css` :
+La maquette validée est dans `design/zine-rose-maquette.html` (référence visuelle, format de l'outil de design, pas du React) avec le brief `design/PROMPT-claude-code.md`.
+
+**Police :** Bricolage Grotesque (Google Fonts, chargée dans `index.html`).
+
+**Couleurs** (déclarées dans `@theme` de `src/index.css`, utilisables en classes Tailwind `bg-rose`, `text-ink`, `border-pink`, `bg-ink/75`…) :
 
 ```css
---color-bg:     #000000   /* fond principal */
---color-title:  #ffffff   /* titres et éléments forts */
---color-text:   #f4f1ea   /* texte courant */
---color-accent: #ef4444   /* rouge accent */
+--color-rose:   #F0BCC0   /* fond du site */
+--color-ink:    #121010   /* encre : nav, CV, section Photographies */
+--color-accent: #C7194F   /* accent (survol, numéros, e-mail) */
+--color-pink:   #EA5E8D   /* rose vif */
+--color-muted:  #4E3B3D   /* texte secondaire */
 ```
 
-Les classes utilitaires correspondantes (`bg-bg`, `text-title`, `text-accent`, etc.) sont toutes déclarées dans `src/index.css` et doivent être utilisées à la place des couleurs Tailwind natives.
+Le point de rupture `desk:` (901 px) sépare la navigation latérale (ordinateur) de la barre du haut + menu plein écran (mobile).
+
+**Composants (`src/components/`) :**
+
+| Composant | Rôle |
+|---|---|
+| `Sidebar.tsx` | Navigation latérale noire (01 à 05, CV, projet, e-mail, FR/EN) ; barre du haut et menu plein écran sur mobile |
+| `HeroSection.tsx` | Accueil 50/50 : photo de tournage (`about/claireAbout.webp`) et portrait N&B (`portraits/nepal/DSC00198.webp`) |
+| `AboutSection.tsx` | À propos, formations, cartes Outils / Langues / Compétences |
+| `WorksSection.tsx` | Liste des travaux filtrable, preview au survol, ligne qui s'ouvre au clic |
+| `PhotographySection.tsx` | Onglets Portraits / Paysages / Événements + second filtre par pays ou événement |
+| `ContactSection.tsx` | Contact |
+| `Lightbox.tsx` | Visionneuse plein écran (ne parcourt que les images filtrées) |
+| `DocumentModal.tsx` | Fenêtres CV (FR/EN) et projet documentaire |
+| `PhotoOrderEditor.tsx` | Éditeur d'ordre des photos (`?editor`) |
+
+Les textes de l'interface (FR/EN) sont dans `TRANSLATIONS` (`src/data/portfolio.ts`) ; l'ordre de la liste des travaux est le tableau `PROJECTS` du même fichier.
+
+**Filtres pays / événement :** chaque album thématique déclare dans son fichier (`paysages.ts`, `events.ts`, `portraits.ts`) un objet `places` qui associe chaque sous-dossier à un libellé. Plusieurs sous-dossiers peuvent partager le même libellé (`Irlande2025` et `irlande` → « Irlande »). Un album avec un seul lieu n'affiche pas de second filtre. **Un nouveau sous-dossier doit être ajouté à `places`**, sinon son nom de dossier brut s'affiche.
 
 ## Fonctionnalités
 
-- **Bilingue FR / ENG** - détection automatique de la langue du navigateur, bascule dans la navbar
-- **CV** - visionneuse PDF plein écran avec sélection FR / ENG
-- **Projets Futurs Master** - visionneuse PDF accessible depuis la navbar
-- **Visionneuse d'images** - lightbox avec navigation clavier et swipe mobile
-- **YouTube** - intégration façade (miniature HD → lecteur au clic)
-- **Photographies** - mur masonry avec albums auto-générés
-- **Expériences professionnelles** - section dédiée aux stages (TVPI, SASANE…)
-- **Responsive** - sidebar desktop, menu overlay mobile
+- **Bilingue FR / EN** - détection automatique de la langue du navigateur, bascule dans la navigation
+- **Travaux** - liste indexée filtrable (Tout, Films, Documentaires, Expériences pro), preview au survol, détails au clic (images, vidéo YouTube intégrée, liens, coulisses)
+- **Photographies** - onglets Portraits / Paysages / Événements, filtre par pays ou par événement, article Blues Magazine
+- **Visionneuse** - plein écran, flèches du clavier, Échap, swipe mobile
+- **CV et projet documentaire** - fenêtres PDF plein écran, choix FR / EN pour le CV
+- **Accessibilité** - cibles de 44 px minimum, onglets et fenêtres annotés (`aria-*`), fermeture avec Échap, respect de `prefers-reduced-motion`
+- **Responsive** - testé en 1920, 1440, 1024, 768 et 390 px
 
 ## Dépannage
 

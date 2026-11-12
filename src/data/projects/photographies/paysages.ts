@@ -7,6 +7,16 @@ const meta: PhotoAlbumMeta = {
     FR: 'Bretagne · Irlande · Londres · Bardenas · Marrakech · Népal',
     ENG: 'Brittany · Ireland · London · Bardenas · Marrakesh · Nepal',
   },
+  // Sub-folder -> country filter (several folders can share a label)
+  places: {
+    londres2025: { FR: 'Londres', ENG: 'London' },
+    marrakech2025: { FR: 'Marrakech', ENG: 'Marrakesh' },
+    Irlande2025: { FR: 'Irlande', ENG: 'Ireland' },
+    irlande: { FR: 'Irlande', ENG: 'Ireland' },
+    bardenas2025: { FR: 'Bardenas', ENG: 'Bardenas' },
+    bretagne: { FR: 'Bretagne', ENG: 'Brittany' },
+    nepal: { FR: 'Népal', ENG: 'Nepal' },
+  },
   order: [
     'londres2025/23.webp',
     'londres2025/1.webp',

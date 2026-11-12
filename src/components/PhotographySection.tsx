@@ -1,86 +1,139 @@
-import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
-import { LazyImage } from "./LazyImage";
+import { useMemo, useState } from "react";
+import type { Lang, PhotoAlbum, PhotoItem, Translations } from "../data/portfolio";
+import type { LocaleText } from "../data/types";
+import type { GalleryItem } from "./Lightbox";
 
 interface PhotographySectionProps {
-  albums: { id: string; title: { FR: string; ENG: string }; description?: { FR: string; ENG: string }; items: { title: string; desc: string; url: string }[]; articleImages?: string[] }[];
-  t: any;
-  onImageClick: (images: string[], index: number) => void;
-  lang: 'FR' | 'ENG';
+  t: Translations;
+  lang: Lang;
+  albums: PhotoAlbum[];
+  onOpenGallery: (title: string, items: GalleryItem[], index: number) => void;
 }
 
-export const PhotographySection = ({ albums, t, onImageClick, lang }: PhotographySectionProps) => {
+// Place / event of a photo, from its album sub-folder (several folders can share a label, e.g. two "Irlande")
+const placeOf = (album: PhotoAlbum, item: PhotoItem): LocaleText =>
+  album.places?.[item.group] ?? { FR: item.desc, ENG: item.desc };
+
+export function PhotographySection({ t, lang, albums, onOpenGallery }: PhotographySectionProps) {
+  const [albumId, setAlbumId] = useState(albums[0]?.id);
+  const [sub, setSub] = useState("all");
+  const album = albums.find((a) => a.id === albumId) ?? albums[0];
+
+  // Second filter: one button per place / event, in order of first appearance
+  const subs = useMemo(() => {
+    const list: { key: string; label: string; count: number }[] = [];
+    album?.items.forEach((item) => {
+      const place = placeOf(album, item);
+      const existing = list.find((s) => s.key === place.FR);
+      if (existing) existing.count++;
+      else list.push({ key: place.FR, label: place[lang], count: 1 });
+    });
+    return list;
+  }, [album, lang]);
+  const hasSubs = subs.length > 1;
+  const activeSub = hasSubs && subs.some((s) => s.key === sub) ? sub : "all";
+
+  if (!album) return null;
+
+  const items = album.items.filter((item) => activeSub === "all" || placeOf(album, item).FR === activeSub);
+  const activeSubLabel = subs.find((s) => s.key === activeSub)?.label;
+  const viewerTitle = activeSub === "all" ? album.title[lang] : `${album.title[lang]} · ${activeSubLabel}`;
+  const gallery: GalleryItem[] = items.map((item) => ({ src: item.url, alt: `${album.title[lang]} · ${placeOf(album, item)[lang]}` }));
+  const ratio = album.id === "portraits" ? "aspect-[4/5]" : "aspect-square";
+
   return (
-    <section id="photography" className="py-24 bg-bg border-y border-title-5">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
-          <div>
-            <h2 className="text-sm uppercase tracking-[0.5em] mb-2 opacity-40">{t.visualArchives}</h2>
-            <p className="text-4xl font-display uppercase text-title">{t.photographyWall}</p>
-          </div>
+    <section
+      id="photographies"
+      aria-labelledby="ph-t"
+      className="scroll-mt-16 desk:scroll-mt-0 mt-[clamp(96px,10vw,150px)] bg-ink text-rose py-[clamp(72px,9vw,120px)] px-[clamp(20px,4vw,64px)]"
+    >
+      <div className="flex flex-wrap justify-between items-end gap-x-10 gap-y-5 mb-5">
+        <h2 id="ph-t" className="m-0 text-[clamp(56px,7vw,120px)] font-extrabold leading-[0.9] tracking-[-0.04em]">
+          {t.photoTitleStart}
+          <span className="text-pink">{t.photoTitleEnd}</span>
+        </h2>
+        <div role="tablist" aria-label={t.series} className="flex flex-wrap gap-2">
+          {albums.map((a) => {
+            const on = a.id === album.id;
+            return (
+              <button
+                key={a.id}
+                type="button"
+                role="tab"
+                id={`photo-tab-${a.id}`}
+                aria-selected={on}
+                aria-controls="photo-panel"
+                onClick={() => {
+                  setAlbumId(a.id);
+                  setSub("all");
+                }}
+                className={`min-h-[46px] px-5 rounded-full border-[1.5px] border-rose text-base font-bold cursor-pointer ${on ? "bg-rose text-ink" : "bg-transparent text-rose hover:bg-rose/15"}`}
+              >
+                {a.title[lang]} <span className="opacity-65">{a.items.length}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div id="photo-panel" role="tabpanel" aria-labelledby={`photo-tab-${album.id}`}>
+        <div className="flex flex-wrap justify-between items-center gap-x-6 gap-y-3 mb-7">
+          {album.description && (
+            <p className="flex-[1_1_420px] m-0 text-[clamp(21px,1.8vw,26px)] leading-[1.4] font-medium">{album.description[lang]}</p>
+          )}
+          {album.articleImages?.length ? (
+            <button
+              type="button"
+              onClick={() => onOpenGallery(t.articleTitle, album.articleImages!.map((src) => ({ src, alt: t.articleAlt })), 0)}
+              className="min-h-12 px-5 rounded-full bg-rose text-ink border-0 text-base font-bold cursor-pointer hover:bg-pink"
+            >
+              {t.readArticle} ↗
+            </button>
+          ) : null}
         </div>
 
-        {albums.map((album) => (
-          <div className="mb-24" key={album.id}>
-            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-3 mb-6">
-              <div>
-                <h3 className="text-xs uppercase tracking-[0.3em] mb-2 opacity-60 border-l-2 border-accent pl-4">{album.title[lang]}</h3>
-                {album.description?.[lang] && (
-                  <p className="text-[10px] opacity-50 pl-4 text-justify">{album.description[lang]}</p>
-                )}
-              </div>
-              {album.articleImages?.length ? (
-                <motion.button
-                  whileHover={{ x: 10 }}
-                  onClick={() => onImageClick(album.articleImages!, 0)}
-                  className="flex flex-col items-start gap-1 group cursor-pointer"
+        {hasSubs && (
+          <div
+            role="group"
+            aria-label={album.id === "events" ? t.byEvent : t.byCountry}
+            className="flex flex-wrap items-center gap-2 mb-7 pt-5 border-t border-rose/25"
+          >
+            {[{ key: "all", label: t.all, count: album.items.length }, ...subs].map((s) => {
+              const on = activeSub === s.key;
+              return (
+                <button
+                  key={s.key}
+                  type="button"
+                  onClick={() => setSub(s.key)}
+                  aria-pressed={on}
+                  className={`min-h-[44px] px-4 rounded-full border text-[15px] font-semibold cursor-pointer ${
+                    on ? "bg-pink text-ink border-pink" : "bg-transparent text-rose border-rose/45 hover:border-rose"
+                  }`}
                 >
-                  <span className="flex items-center gap-4 text-xs uppercase tracking-widest font-bold">
-                    [ {t.seeArticle} ] <ArrowRight size={16} className="group-hover:text-accent transition-colors" />
-                  </span>
-                  <span className="text-[10px] opacity-40 uppercase tracking-widest font-mono">Blues Magazine 2025</span>
-                </motion.button>
-              ) : null}
-            </div>
-            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-              {album.items.map((photo, i) => (
-                <PhotoItem
-                  key={i}
-                  photo={photo}
-                  onClick={() => onImageClick(album.items.map(p => p.url), i)}
-                />
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
-
-function PhotoItem({ photo, onClick }: any) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="pinterest-item cursor-pointer group"
-      onClick={onClick}
-    >
-      <div className="relative overflow-hidden rounded-sm bg-bg">
-        <LazyImage
-          src={photo.url}
-          alt={photo.title}
-          className="w-full"
-          imgClassName="group-hover:scale-105"
-          naturalHeight
-        />
-        {photo.desc && (
-          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
-            <p className="text-white text-[10px] uppercase tracking-[0.2em] leading-relaxed">{photo.desc}</p>
+                  {s.label} <span className="opacity-65">{s.count}</span>
+                </button>
+              );
+            })}
           </div>
         )}
+
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(min(220px,100%),1fr))] gap-3">
+          {items.map((item, i) => (
+            <button
+              key={item.srcPath}
+              type="button"
+              onClick={() => onOpenGallery(viewerTitle, gallery, i)}
+              aria-label={gallery[i].alt}
+              className="tile relative block p-0 border-0 rounded-[14px] overflow-hidden bg-tile cursor-zoom-in"
+            >
+              <img src={item.url} alt="" loading="lazy" className={`block w-full ${ratio} object-cover`} />
+              <span className="absolute left-2.5 bottom-2.5 px-2.5 py-[3px] rounded-full bg-ink/75 text-rose text-[13px] font-semibold">
+                {placeOf(album, item)[lang]}
+              </span>
+            </button>
+          ))}
+        </div>
       </div>
-    </motion.div>
+    </section>
   );
 }

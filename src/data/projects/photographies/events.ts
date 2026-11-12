@@ -4,8 +4,15 @@ const meta: PhotoAlbumMeta = {
   id: 'events',
   title: { FR: 'Événements', ENG: 'Events' },
   description: {
-    FR: 'Festival Motors & Blues - photographe du festival et autrice d’un article pour le Blues Magazine d’octobre 2025. Fêtes et rituels au Népal, tournages.',
-    ENG: 'Motors & Blues festival - festival photographer and author of an article for the October 2025 Blues Magazine. Festivals and rituals in Nepal, film shoots.',
+    FR: 'Festival Motors & Blues : photographe du festival et autrice d’un article pour le Blues Magazine d’octobre 2025. Fêtes et rituels au Népal, tournages.',
+    ENG: 'Motors & Blues festival: festival photographer and author of an article for the October 2025 Blues Magazine. Festivals and rituals in Nepal, film shoots.',
+  },
+  // Sub-folder -> event filter
+  places: {
+    motors_and_blues: { FR: 'Motors & Blues', ENG: 'Motors & Blues' },
+    nepal: { FR: 'Fêtes au Népal', ENG: 'Festivals in Nepal' },
+    Irlande2025: { FR: 'Irlande', ENG: 'Ireland' },
+    coulisses: { FR: 'Tournage en Irlande', ENG: 'Filming in Ireland' },
   },
   order: [
     'motors_and_blues/1.webp',

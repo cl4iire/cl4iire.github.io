@@ -18,7 +18,7 @@ const behindTheScenes = Object.values(btsModules).sort((a, b) => a.localeCompare
 const project: ProjectData = {
   id: 'done-by-friday',
   category: 'film',
-  title: 'DONE BY FRIDAY',
+  title: 'Done by Friday',
   year: '2025',
   type: 'Court métrage',
   duration: "2'30",
