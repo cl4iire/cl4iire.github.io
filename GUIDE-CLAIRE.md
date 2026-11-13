@@ -2,16 +2,28 @@
 
 Ton site se modifie depuis **Pages CMS**, une interface avec des formulaires. Tu n'as jamais besoin de toucher au code.
 
+## Se connecter
+
+**La première fois, sur ton ordinateur :**
+
+1. Va sur **[github.com](https://github.com)** et connecte-toi avec ton compte **cl4iire** (ton identifiant et ton mot de passe GitHub, et le code de vérification si GitHub en demande un).
+2. Va sur **[app.pagescms.org](https://app.pagescms.org)** et clique sur **Sign in with GitHub** (se connecter avec GitHub). Si GitHub demande d'autoriser Pages CMS, accepte.
+3. Dans la liste, à côté de **cl4iire.github.io**, clique sur **Open** (ouvrir).
+4. Ajoute cette page à tes favoris : la prochaine fois, tu arriveras directement sur ton site.
+
+**Les fois suivantes :** ouvre ton favori. Si on te demande de te reconnecter, refais l'étape 2.
+
 ## Le principe
 
-1. Tu ouvres **[app.pagescms.org](https://app.pagescms.org)** et tu te connectes (avec le lien reçu par e-mail, ou ton compte GitHub).
-2. Tu choisis le site, puis une rubrique dans le menu de gauche.
-3. Tu modifies, puis tu cliques sur **Save** (enregistrer).
-4. **1 à 2 minutes plus tard**, le site en ligne est à jour : https://cl4iire.github.io/
+1. Dans le menu de gauche, partie **Contenu**, choisis une rubrique.
+2. Modifie, puis clique sur **Save** (enregistrer).
+3. **1 à 2 minutes plus tard**, le site en ligne est à jour : https://cl4iire.github.io/
 
 Pas d'inquiétude : si une information manque ou est mal remplie, le site **n'est pas modifié** et reste comme avant. Rien ne peut « casser » le site en ligne.
 
-L'interface de Pages CMS est en anglais : **Save** = enregistrer, **Add** = ajouter, **Delete** = supprimer, **Upload** = envoyer un fichier.
+Pages CMS est en anglais, mais ton navigateur peut le traduire automatiquement en français. Les boutons principaux : **Save** = enregistrer, **Add an entry** = ajouter une entrée, **Delete** = supprimer, **Upload** = envoyer un fichier, **Open** = ouvrir.
+
+**Ne touche pas à la partie « Admin »** du menu (Actions, Collaborateurs, Configuration) : c'est le réglage technique du site. Tout ce dont tu as besoin est dans **Contenu** et **Médias**.
 
 ## Les textes en anglais
 
@@ -19,7 +31,7 @@ Chaque texte a deux cases : **Français** et **Anglais**. L'anglais est facultat
 
 ## Ajouter un projet
 
-Menu **Projets (Travaux)** > **Add** (ajouter), puis remplis :
+Menu **Projets (Travaux)** > **Add an entry** (ajouter une entrée), puis remplis :
 
 - **Titre**, **Catégorie** (Film, Documentaire ou Expérience pro) et **Année** (4 chiffres) : obligatoires.
 - **Position dans la liste** : 1 = tout en haut de « Travaux ». À position égale, le projet le plus récent passe devant.
@@ -42,7 +54,7 @@ Menu **Photos (albums)** > choisis l'album (Portraits, Paysages, Événements).
 3. **Lieu ou événement** : choisis dans la liste (Népal, Irlande, Motors & Blues...). C'est ce qui sert aux filtres sous les onglets.
 4. **Save**.
 
-**Le lieu n'existe pas encore ?** Va d'abord dans **Lieux et événements** > **Add**, écris le nom en français (et en anglais si tu veux), **Save**. Il apparaîtra ensuite dans la liste des photos.
+**Le lieu n'existe pas encore ?** Va d'abord dans **Lieux et événements** > **Add an entry**, écris le nom en français (et en anglais si tu veux), **Save**. Il apparaîtra ensuite dans la liste des photos.
 
 **Changer l'ordre des photos** : déplace les lignes dans la liste **Photos** : l'ordre de la liste est l'ordre sur le site.
 
