@@ -40,6 +40,19 @@ export function ContactSection({ t, onOpenCv, onOpenProject }: { t: Translations
             </dd>
           </div>
           <div>
+            <dt className={label}>LinkedIn</dt>
+            <dd className="mt-0.5 mb-0 mx-0 font-semibold">
+              <a
+                href="https://www.linkedin.com/in/claire-buhaceanu-laborde-51a74738b/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="no-underline inline-flex items-center min-h-[44px] hover:text-accent"
+              >
+                Claire Buhaceanu Laborde
+              </a>
+            </dd>
+          </div>
+          <div>
             <dt className={label}>{t.base}</dt>
             <dd className="mt-0.5 mb-0 mx-0 font-semibold min-h-[44px] flex items-center">{t.baseValue}</dd>
           </div>
