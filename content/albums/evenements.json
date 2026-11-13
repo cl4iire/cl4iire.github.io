@@ -1,0 +1,138 @@
+{
+  "titre": {
+    "fr": "Événements",
+    "en": "Events"
+  },
+  "description": {
+    "fr": "Festival Motors & Blues : photographe du festival et autrice d’un article pour le Blues Magazine d’octobre 2025. Fêtes et rituels au Népal, tournages.",
+    "en": "Motors & Blues festival: festival photographer and author of an article for the October 2025 Blues Magazine. Festivals and rituals in Nepal, film shoots."
+  },
+  "ordre": 3,
+  "format": "carre",
+  "filtre": "evenement",
+  "photos": [
+    {
+      "image": "/media/photos/evenements/motors_and_blues/1.webp",
+      "lieu": "motors-and-blues"
+    },
+    {
+      "image": "/media/photos/evenements/motors_and_blues/8.webp",
+      "lieu": "motors-and-blues"
+    },
+    {
+      "image": "/media/photos/evenements/motors_and_blues/3.webp",
+      "lieu": "motors-and-blues"
+    },
+    {
+      "image": "/media/photos/evenements/motors_and_blues/4.webp",
+      "lieu": "motors-and-blues"
+    },
+    {
+      "image": "/media/photos/evenements/motors_and_blues/7.webp",
+      "lieu": "motors-and-blues"
+    },
+    {
+      "image": "/media/photos/evenements/motors_and_blues/6.webp",
+      "lieu": "motors-and-blues"
+    },
+    {
+      "image": "/media/photos/evenements/motors_and_blues/10.webp",
+      "lieu": "motors-and-blues"
+    },
+    {
+      "image": "/media/photos/evenements/motors_and_blues/12.webp",
+      "lieu": "motors-and-blues"
+    },
+    {
+      "image": "/media/photos/evenements/motors_and_blues/5.webp",
+      "lieu": "motors-and-blues"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0012.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0021.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0033.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0054.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0119.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0131.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0144.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0154.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc00034.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc00055.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc00248.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/sans-titre.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0072.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0091.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0100.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0111.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0117.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0132.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/coulisses/img_4972.webp",
+      "lieu": "tournage-en-irlande"
+    },
+    {
+      "image": "/media/photos/evenements/coulisses/img_4976.webp",
+      "lieu": "tournage-en-irlande"
+    },
+    {
+      "image": "/media/photos/evenements/coulisses/img_5003.webp",
+      "lieu": "tournage-en-irlande"
+    }
+  ],
+  "article": [
+    "/media/photos/evenements/article/article_motors_and_blues_2.webp"
+  ]
+}

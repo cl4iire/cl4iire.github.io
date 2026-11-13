@@ -1,8 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { Lang, Translations } from "../data/portfolio";
-import cvFr from "../assets/CV/B.Laborde Claire FR CV 2026.pdf?url";
-import cvEn from "../assets/CV/B.Laborde Claire ENG CV 2026.pdf?url";
-import projectPdf from "../assets/futur/PROJET DE FILM DOCUMENTAIRE.pdf?url";
+import { DOCUMENTS, type Lang, type Translations } from "../data/portfolio";
 
 export type DocumentKind = "cv" | "project";
 
@@ -19,7 +16,7 @@ export function DocumentModal({ t, lang, kind, onClose }: DocumentModalProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const isCv = kind === "cv";
   const title = isCv ? t.cvTitle : t.projectTitle;
-  const src = isCv ? (cvLang === "FR" ? cvFr : cvEn) : projectPdf;
+  const src = isCv ? (cvLang === "FR" ? DOCUMENTS.cvFr : DOCUMENTS.cvEn) : DOCUMENTS.project;
 
   useEffect(() => {
     closeRef.current?.focus();

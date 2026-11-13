@@ -4,8 +4,8 @@ import type { Plugin } from 'vite';
 
 /**
  * Dev-only endpoint used by the photo order editor (`?editor`).
- * POST /__photo-order { albumId, order } rewrites the `order: [...]` array of
- * src/data/projects/photographies/<albumId>.ts - Vite then hot-reloads the site.
+ * POST /__photo-order { albumId, order } reorders the "photos" list of
+ * content/albums/<albumId>.json (order = image paths) - Vite then hot-reloads the site.
  * Not part of the production build (GitHub Pages is static, nothing can be written there).
  */
 export function photoOrderPlugin(): Plugin {
@@ -13,7 +13,7 @@ export function photoOrderPlugin(): Plugin {
     name: 'photo-order-editor',
     apply: 'serve',
     configureServer(server) {
-      const metaDir = path.resolve(server.config.root, 'src/data/projects/photographies');
+      const albumsDir = path.resolve(server.config.root, 'content/albums');
 
       server.middlewares.use('/__photo-order', (req, res) => {
         const reply = (status: number, data: object) => {
@@ -31,24 +31,25 @@ export function photoOrderPlugin(): Plugin {
         req.on('end', () => {
           try {
             const { albumId, order } = JSON.parse(body);
-            // Only album ids and photo keys made of safe characters: no path traversal, no quote injection
+            // Album ids made of safe characters only: no path traversal
             if (typeof albumId !== 'string' || !/^[A-Za-z0-9_-]+$/.test(albumId)) throw new Error('albumId invalide');
-            if (!Array.isArray(order) || !order.every((k) => typeof k === 'string' && /^[\w\-. ()/]+$/.test(k) && !k.includes('..'))) {
-              throw new Error('order invalide');
+            if (!Array.isArray(order) || !order.every((k) => typeof k === 'string')) throw new Error('order invalide');
+            const file = path.join(albumsDir, `${albumId}.json`);
+            if (!fs.existsSync(file)) throw new Error(`Fichier introuvable : ${albumId}.json`);
+
+            const raw = fs.readFileSync(file, 'utf8');
+            const album = JSON.parse(raw);
+            const photos: { image: string }[] = album.photos ?? [];
+            const byImage = new Map(photos.map((p) => [p.image, p]));
+            // The new order must contain exactly the same photos (nothing added, nothing lost)
+            if (order.length !== photos.length || new Set(order).size !== order.length || !order.every((k: string) => byImage.has(k))) {
+              throw new Error("La liste reçue ne correspond pas aux photos de l'album (rechargez la page)");
             }
-            const file = path.join(metaDir, `${albumId}.ts`);
-            if (!fs.existsSync(file)) throw new Error(`Fichier introuvable : ${albumId}.ts`);
+            album.photos = order.map((k: string) => byImage.get(k));
 
-            const src = fs.readFileSync(file, 'utf8');
-            const eol = src.includes('\r\n') ? '\r\n' : '\n';
-            const block = `order: [${eol}${order.map((k: string) => `    '${k}',`).join(eol)}${eol}  ]`;
-            const next = /order:\s*\[[\s\S]*?\]/.test(src)
-              ? src.replace(/order:\s*\[[\s\S]*?\]/, block)
-              : src.replace(/(\r?\n)\};(\s*\r?\n\s*export default)/, `$1  ${block},$1};$2`);
-            if (next === src && !src.includes(block)) throw new Error('Impossible de placer le tableau order dans le fichier');
-
-            fs.writeFileSync(file, next);
-            reply(200, { ok: true, file: `src/data/projects/photographies/${albumId}.ts` });
+            const eol = raw.includes('\r\n') ? '\r\n' : '\n';
+            fs.writeFileSync(file, JSON.stringify(album, null, 2).split('\n').join(eol) + eol);
+            reply(200, { ok: true, file: `content/albums/${albumId}.json` });
           } catch (e) {
             reply(400, { ok: false, error: (e as Error).message });
           }

@@ -1,0 +1,41 @@
+{
+  "titre": "Progrey",
+  "masquer": false,
+  "ordre": 8,
+  "categorie": "film",
+  "annee": "2025",
+  "type": {
+    "fr": "Court métrage",
+    "en": "Short film"
+  },
+  "duree": "2'30",
+  "production": "Claire Buhaceanu Laborde",
+  "video": "https://youtu.be/VAf2H05Xocw?si=cwKHnsdAekn7aYZe",
+  "roles": {
+    "fr": "Scénariste, Directrice, Photographe, Co-éditrice [Première Pro]",
+    "en": "Writing, Director, Photography, Editor"
+  },
+  "description": {
+    "fr": "Ce court-métrage, réalisé en prises de vues réelles et en animation stop motion, s'inscrit dans le thème imposé, 'Dans l'œil du cyclone' pour le concours Logo Un'Animé. Dans un régime totalitaire où les femmes sont catégorisées et soumises, une jeune femme  découvre un jour, une curieuse boîte dans laquelle se trouvent les affaires personnelles d'une jeune fille d’un autre temps.",
+    "en": "This short film, made in live-action and stop-motion animation, fits the theme \"In the eye of the storm\" for the Logo Un'Anime competition. A woman subjected to a totalitarian regime discovers a curious box."
+  },
+  "composition": {
+    "fr": "",
+    "en": ""
+  },
+  "images": [
+    "/media/projets/progrey/capture-d-ecran-2026-02-01-135003.webp",
+    "/media/projets/progrey/capture-d-ecran-2026-02-01-135408.webp",
+    "/media/projets/progrey/capture-d-ecran-2026-02-01-135423.webp",
+    "/media/projets/progrey/capture-d-ecran-2026-02-01-135439.webp"
+  ],
+  "coulisses": [
+    "/media/projets/progrey/coulisses/dsc05922.webp",
+    "/media/projets/progrey/coulisses/dsc05958.webp",
+    "/media/projets/progrey/coulisses/dsc05978.webp",
+    "/media/projets/progrey/coulisses/dsc05986.webp",
+    "/media/projets/progrey/coulisses/dsc06006.webp",
+    "/media/projets/progrey/coulisses/img_4917.webp"
+  ],
+  "liens": []
+}

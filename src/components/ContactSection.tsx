@@ -2,6 +2,12 @@ import type { Translations } from "../data/portfolio";
 
 const label = "text-[13px] font-bold tracking-[0.04em] uppercase text-muted";
 
+// "06 33 99 79 06" -> "+33633997906" (French numbers), other formats are kept as typed
+const toTel = (phone: string) => {
+  const digits = phone.replace(/[^\d+]/g, "");
+  return /^0\d{9}$/.test(digits) ? `+33${digits.slice(1)}` : digits;
+};
+
 export function ContactSection({ t, onOpenCv, onOpenProject }: { t: Translations; onOpenCv: () => void; onOpenProject: () => void }) {
   return (
     <footer id="contact" aria-labelledby="ct-t" className="scroll-mt-16 desk:scroll-mt-0 pt-[clamp(80px,10vw,140px)] px-[clamp(20px,4vw,64px)] pb-10">
@@ -9,20 +15,20 @@ export function ContactSection({ t, onOpenCv, onOpenProject }: { t: Translations
         {t.contact}
       </h2>
       <a
-        href="mailto:claire.blaborde@gmail.com"
+        href={`mailto:${t.email}`}
         className="block text-[clamp(36px,6.6vw,108px)] font-extrabold leading-[0.95] tracking-[-0.045em] no-underline text-accent break-words hover:text-ink"
       >
-        claire.blaborde
-        <br />
-        @gmail.com
+        {/* Line break before the @ so the address fits on large type */}
+        {t.email.split("@")[0]}
+        <br />@{t.email.split("@")[1]}
       </a>
       <div className="flex flex-wrap justify-between items-end gap-x-10 gap-y-7 mt-12 pt-7 border-t-2 border-ink">
         <dl className="m-0 flex flex-wrap gap-x-12 gap-y-5 text-[19px]">
           <div>
             <dt className={label}>{t.phone}</dt>
             <dd className="mt-0.5 mb-0 mx-0 font-semibold">
-              <a href="tel:+33633997906" className="no-underline inline-flex items-center min-h-[44px] hover:text-accent">
-                06 33 99 79 06
+              <a href={`tel:${toTel(t.telephone)}`} className="no-underline inline-flex items-center min-h-[44px] hover:text-accent">
+                {t.telephone}
               </a>
             </dd>
           </div>
@@ -30,12 +36,12 @@ export function ContactSection({ t, onOpenCv, onOpenProject }: { t: Translations
             <dt className={label}>Instagram</dt>
             <dd className="mt-0.5 mb-0 mx-0 font-semibold">
               <a
-                href="https://www.instagram.com/kll4er"
+                href={t.instagram.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="no-underline inline-flex items-center min-h-[44px] hover:text-accent"
               >
-                @kll4er
+                {t.instagram.pseudo}
               </a>
             </dd>
           </div>
@@ -43,12 +49,12 @@ export function ContactSection({ t, onOpenCv, onOpenProject }: { t: Translations
             <dt className={label}>LinkedIn</dt>
             <dd className="mt-0.5 mb-0 mx-0 font-semibold">
               <a
-                href="https://www.linkedin.com/in/claire-buhaceanu-laborde-51a74738b/"
+                href={t.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="no-underline inline-flex items-center min-h-[44px] hover:text-accent"
               >
-                Claire Buhaceanu Laborde
+                {t.linkedin.texte}
               </a>
             </dd>
           </div>

@@ -3,10 +3,10 @@ import { ArrowLeft, ArrowRight, Copy, RotateCcw, Save, X } from "lucide-react";
 import { PHOTOGRAPHY_ALBUMS, orderKey } from "../data/portfolio";
 
 // Hidden page (`?editor`) to reorder the photos of each album by drag & drop.
-// In dev, "Enregistrer" writes the order to src/data/projects/photographies/<album>.ts
+// In dev, "Enregistrer" reorders the "photos" list of content/albums/<album>.json
 // through the photo-order-plugin endpoint. Online (static site), the order can only be copied.
 
-type Photo = { key: string; url: string; place: string };
+type Photo = { key: string; url: string; place: string; placeId: string };
 type EditableAlbum = { id: string; title: string; photos: Photo[] };
 
 const CAN_SAVE = import.meta.env.DEV;
@@ -15,13 +15,13 @@ const toEditable = (): EditableAlbum[] =>
   PHOTOGRAPHY_ALBUMS.map((a) => ({
     id: a.id,
     title: a.title.FR,
-    photos: a.items.map((p) => ({ key: orderKey(a.id, p.srcPath), url: p.url, place: p.desc })),
+    photos: a.items.map((p) => ({ key: orderKey(a.id, p.srcPath), url: p.url, place: p.desc, placeId: p.group })),
   }));
 
-// Code to send / paste: names the target file, then the order block to put in it
+// Code to send / paste: names the target file, then the "photos" list to put in it
 const orderCode = (album: EditableAlbum) =>
-  `// Album ${album.title} : remplacer le bloc order dans src/data/projects/photographies/${album.id}.ts\n` +
-  `  order: [\n${album.photos.map((p) => `    '${p.key}',`).join("\n")}\n  ],`;
+  `// Album ${album.title} : remplacer la liste "photos" dans content/albums/${album.id}.json\n` +
+  `  "photos": [\n${album.photos.map((p) => `    { "image": "${p.key}", "lieu": "${p.placeId}" }`).join(",\n")}\n  ],`;
 
 export default function PhotoOrderEditor() {
   const initial = useRef(toEditable());

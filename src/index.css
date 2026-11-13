@@ -16,6 +16,34 @@
   --breakpoint-desk: 56.3125rem;
 }
 
+/* Colour themes, chosen in the CMS settings ("Thème", content/reglages.json -> <html data-theme>).
+   "rose" is the default palette above; the ink colour is shared by every theme.
+   Keep this list in sync with THEMES in site-settings-plugin.ts and the choices in .pages.yml. */
+:root[data-theme="bleu"] {
+  --color-rose: #BFD3EE;
+  --color-accent: #1B4FC4;
+  --color-pink: #5B8DE8;
+  --color-muted: #2F3B4E;
+  --color-line: #2C3240;
+  --color-tile: #20242C;
+}
+:root[data-theme="vert"] {
+  --color-rose: #C4E2C7;
+  --color-accent: #1C6B35;
+  --color-pink: #4FB36E;
+  --color-muted: #2F4A36;
+  --color-line: #2C3A2F;
+  --color-tile: #202A22;
+}
+:root[data-theme="sable"] {
+  --color-rose: #EFDDBF;
+  --color-accent: #A8431A;
+  --color-pink: #E0894F;
+  --color-muted: #4E3F2E;
+  --color-line: #3A332C;
+  --color-tile: #2A2420;
+}
+
 /* Base styles stay in the base layer so Tailwind utilities (text-rose on a link...) always win */
 @layer base {
   html {

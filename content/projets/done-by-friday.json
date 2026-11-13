@@ -1,0 +1,43 @@
+{
+  "titre": "Done by Friday",
+  "masquer": false,
+  "ordre": 6,
+  "categorie": "film",
+  "annee": "2025",
+  "type": {
+    "fr": "Court métrage",
+    "en": "Short film"
+  },
+  "duree": "2'30",
+  "production": "Janine Hemker",
+  "video": "https://youtu.be/zKjolkqnnho?si=ysaE6niS-IOdtrPw",
+  "roles": {
+    "fr": "1ère assistante caméra [Blackmagic Cinema], Photographe, Editrice [Première Pro]",
+    "en": "1st Assistant Camera - Black Magic Pocket Cinema, Photographer, Editor - [Première Pro]"
+  },
+  "description": {
+    "fr": "Une étudiante doit faire face aux fantômes de son passé et à sa culpabilité lors d'une session d'étude.",
+    "en": "A student must face the ghosts of her past and her guilt during a study session."
+  },
+  "composition": {
+    "fr": "",
+    "en": ""
+  },
+  "images": [
+    "/media/projets/done-by-friday/capture-d-ecran-2026-02-01-133632.webp",
+    "/media/projets/done-by-friday/capture-d-ecran-2026-02-01-133712.webp",
+    "/media/projets/done-by-friday/capture-d-ecran-2026-02-01-133738.webp"
+  ],
+  "coulisses": [
+    "/media/projets/done-by-friday/coulisses/dsc_0166.webp",
+    "/media/projets/done-by-friday/coulisses/dsc_0171.webp",
+    "/media/projets/done-by-friday/coulisses/dsc_0199.webp",
+    "/media/projets/done-by-friday/coulisses/dsc_0206.webp",
+    "/media/projets/done-by-friday/coulisses/dsc_0212.webp",
+    "/media/projets/done-by-friday/coulisses/dsc_0259.webp",
+    "/media/projets/done-by-friday/coulisses/dsc_0260.webp",
+    "/media/projets/done-by-friday/coulisses/dsc_0266.webp",
+    "/media/projets/done-by-friday/coulisses/dsc_0282.webp"
+  ],
+  "liens": []
+}

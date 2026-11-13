@@ -1,0 +1,32 @@
+{
+  "titre": "In the Indies",
+  "masquer": false,
+  "ordre": 7,
+  "categorie": "film",
+  "annee": "2025",
+  "type": {
+    "fr": "Emission en direct",
+    "en": "Live show"
+  },
+  "duree": "20'",
+  "production": "Paul Finnegan",
+  "video": "https://youtu.be/kTqFGUEIue8",
+  "roles": {
+    "fr": "Co-autrice du script de l'émission, Opératrice son direct ",
+    "en": "Show Script, Sound Operator"
+  },
+  "description": {
+    "fr": "Emission en direct sur l’univers des contenus indépendants, en particulier le cinéma, la musique et le gaming. Le but était  d'introduire un nouveau public aux domaines plus spécialisés de l'industrie du divertissement et de montrer comment les petits créateurs façonnent le paysage médiatique. L'émission se devait de respecter le temps imposé de 20 minutes et contenir : un interview, un VT information, un mini concert live. Le tout diffusé sur la chaîne étudiante de DKIT",
+    "en": "Live broadcast revolving around the world of independent content, particularly cinema, music, and gaming. The goal is to introduce a new audience to more specialized areas of the entertainment industry. The show had to respect the 20-minute time limit and contain: an interview, a VT information, a live concert."
+  },
+  "composition": {
+    "fr": "un interview, un VT information, un concert live",
+    "en": "an interview, a VT information, a live concert"
+  },
+  "images": [
+    "/media/projets/in-the-indies/img-20251125-wa0007.webp",
+    "/media/projets/in-the-indies/img-20251125-wa0008.webp"
+  ],
+  "coulisses": [],
+  "liens": []
+}

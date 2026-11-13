@@ -1,6 +1,4 @@
 import type { Translations } from "../data/portfolio";
-import filmingPhoto from "../assets/about/claireAbout.webp";
-import portraitPhoto from "../assets/projects/photographies/portraits/nepal/DSC00198.webp";
 
 // Home: 50/50 grid without visible text. White left half, B&W portrait on the right,
 // the filming photo straddles the split (mostly on the white side).
@@ -13,7 +11,7 @@ export function HeroSection({ t }: { t: Translations }) {
       <div aria-hidden="true" className="bg-white" />
       <div className="relative min-w-0 overflow-hidden">
         <img
-          src={portraitPhoto}
+          src={t.image_portrait}
           alt={t.heroAltPortrait}
           fetchPriority="high"
           className="absolute inset-0 w-full h-full object-cover object-[50%_0%] grayscale"
@@ -24,7 +22,7 @@ export function HeroSection({ t }: { t: Translations }) {
           {t.heroCaption}
         </figcaption>
         <img
-          src={filmingPhoto}
+          src={t.image_tournage}
           alt={t.heroAltFilming}
           fetchPriority="high"
           className="block w-full aspect-[254/151] object-cover grayscale"

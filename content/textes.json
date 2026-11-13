@@ -1,0 +1,419 @@
+{
+  "identite": {
+    "nom": "Claire Buhaceanu Laborde",
+    "nom_court": "Claire B.L",
+    "subtitle": {
+      "fr": "Audiovisuel & Photographie",
+      "en": "Audiovisual & Photography"
+    }
+  },
+  "accueil": {
+    "image_tournage": "/media/accueil/tournage.webp",
+    "image_portrait": "/media/photos/portraits/nepal/dsc00198.webp",
+    "heroTitle": {
+      "fr": "Claire Buhaceanu Laborde, audiovisuel et photographie",
+      "en": "Claire Buhaceanu Laborde, audiovisual and photography"
+    },
+    "heroCaption": {
+      "fr": "/ Claire Buhaceanu Laborde",
+      "en": "/ Claire Buhaceanu Laborde"
+    },
+    "heroAltFilming": {
+      "fr": "Claire en tournage, caméra sur stabilisateur",
+      "en": "Claire filming, camera on a gimbal"
+    },
+    "heroAltPortrait": {
+      "fr": "Portrait d’un sadhu, Népal",
+      "en": "Portrait of a sadhu, Nepal"
+    }
+  },
+  "navigation": {
+    "nav": {
+      "films": {
+        "fr": "Films",
+        "en": "Films"
+      },
+      "documentaries": {
+        "fr": "Documentaires",
+        "en": "Documentaries"
+      },
+      "experiences": {
+        "fr": "Expériences pro",
+        "en": "Work experience"
+      },
+      "photography": {
+        "fr": "Photographies",
+        "en": "Photography"
+      },
+      "contact": {
+        "fr": "Contact",
+        "en": "Contact"
+      }
+    },
+    "sections": {
+      "fr": "Sections",
+      "en": "Sections"
+    },
+    "navigation": {
+      "fr": "Navigation",
+      "en": "Navigation"
+    },
+    "cvButton": {
+      "fr": "CV 2026",
+      "en": "CV 2026"
+    },
+    "projectButton": {
+      "fr": "Projet documentaire, master",
+      "en": "Documentary project, master"
+    },
+    "projectShort": {
+      "fr": "Projet de master",
+      "en": "Master's project"
+    },
+    "language": {
+      "fr": "Langue",
+      "en": "Language"
+    },
+    "menu": {
+      "fr": "Menu",
+      "en": "Menu"
+    },
+    "openMenu": {
+      "fr": "Ouvrir le menu",
+      "en": "Open the menu"
+    },
+    "closeMenu": {
+      "fr": "Fermer le menu",
+      "en": "Close the menu"
+    },
+    "close": {
+      "fr": "Fermer",
+      "en": "Close"
+    }
+  },
+  "a_propos": {
+    "about": {
+      "fr": "À propos",
+      "en": "About"
+    },
+    "aboutLead": {
+      "fr": "Diplômée d’un BUT Métiers du Multimédia et de l’Internet, avec une spécialisation en production cinéma et télévision en Irlande dans le cadre d’Erasmus.",
+      "en": "Graduate of a B.U.T. in Multimedia and Internet Professions, with a specialisation in film and television production completed in Ireland through Erasmus."
+    },
+    "aboutBody": {
+      "fr": "Passionnée par les voyages et les enjeux contemporains, je souhaite approfondir mes compétences techniques en audiovisuel afin d’intégrer un master en création documentaire.",
+      "en": "Passionate about travel and contemporary issues, I want to deepen my technical audiovisual skills in order to join a master's degree in documentary filmmaking."
+    },
+    "education": [
+      {
+        "years": "2026–2027",
+        "school": {
+          "fr": "Licence CIAN, Saint-Brieuc",
+          "en": "Licence CIAN, Saint-Brieuc"
+        },
+        "diploma": {
+          "fr": "Licence d’un an en production son et image",
+          "en": "One-year bachelor's degree in sound and image production"
+        }
+      },
+      {
+        "years": "2025–2026",
+        "school": {
+          "fr": "DkIT, Dundalk (Irlande)",
+          "en": "DkIT, Dundalk (Ireland)"
+        },
+        "diploma": {
+          "fr": "BA in Film and Television Production, Erasmus",
+          "en": "BA in Film and Television Production, Erasmus"
+        }
+      },
+      {
+        "years": "2023–2026",
+        "school": {
+          "fr": "IUT de Tarbes",
+          "en": "IUT de Tarbes"
+        },
+        "diploma": {
+          "fr": "BUT Métiers du Multimédia et de l’Internet, parcours Création numérique",
+          "en": "B.U.T. in Multimedia and Internet Professions, Digital Creation track"
+        }
+      }
+    ],
+    "tools": {
+      "fr": "Outils",
+      "en": "Tools"
+    },
+    "toolsList": [
+      {
+        "fr": "Premiere Pro",
+        "en": "Premiere Pro"
+      },
+      {
+        "fr": "Lightroom",
+        "en": "Lightroom"
+      },
+      {
+        "fr": "After Effects",
+        "en": "After Effects"
+      },
+      {
+        "fr": "Suite Blackmagic Design",
+        "en": "Blackmagic Design suite"
+      },
+      {
+        "fr": "Avid Pro Tools",
+        "en": "Avid Pro Tools"
+      },
+      {
+        "fr": "Figma",
+        "en": "Figma"
+      },
+      {
+        "fr": "Canva",
+        "en": "Canva"
+      },
+      {
+        "fr": "DaVinci Resolve (en cours d’apprentissage)",
+        "en": "DaVinci Resolve (currently learning)"
+      }
+    ],
+    "languages": {
+      "fr": "Langues",
+      "en": "Languages"
+    },
+    "languagesList": [
+      {
+        "name": {
+          "fr": "Anglais :",
+          "en": "English:"
+        },
+        "level": {
+          "fr": "un an en Irlande, certification Cambridge C1 (2024).",
+          "en": "one year in Ireland, Cambridge C1 certificate (2024)."
+        }
+      },
+      {
+        "name": {
+          "fr": "Espagnol :",
+          "en": "Spanish:"
+        },
+        "level": {
+          "fr": "niveau scolaire.",
+          "en": "school level."
+        }
+      }
+    ],
+    "skills": {
+      "fr": "Compétences",
+      "en": "Skills"
+    },
+    "skillsList": [
+      {
+        "fr": "Image",
+        "en": "Cinematography"
+      },
+      {
+        "fr": "Post-production",
+        "en": "Post-production"
+      },
+      {
+        "fr": "Production documentaire",
+        "en": "Documentary production"
+      },
+      {
+        "fr": "Studio TV",
+        "en": "TV studio"
+      },
+      {
+        "fr": "Écriture",
+        "en": "Writing"
+      },
+      {
+        "fr": "Réalisation",
+        "en": "Directing"
+      },
+      {
+        "fr": "Conception sonore",
+        "en": "Sound design"
+      }
+    ]
+  },
+  "travaux": {
+    "works": {
+      "fr": "Travaux",
+      "en": "Work"
+    },
+    "categories": {
+      "fr": "Catégories",
+      "en": "Categories"
+    },
+    "all": {
+      "fr": "Tout",
+      "en": "All"
+    },
+    "catPlural": {
+      "film": {
+        "fr": "Films",
+        "en": "Films"
+      },
+      "documentary": {
+        "fr": "Documentaires",
+        "en": "Documentaries"
+      },
+      "experience": {
+        "fr": "Expériences pro",
+        "en": "Work experience"
+      }
+    },
+    "catSingular": {
+      "film": {
+        "fr": "Film",
+        "en": "Film"
+      },
+      "documentary": {
+        "fr": "Documentaire",
+        "en": "Documentary"
+      },
+      "experience": {
+        "fr": "Expérience pro",
+        "en": "Work experience"
+      }
+    },
+    "roles": {
+      "fr": "Rôles",
+      "en": "Roles"
+    },
+    "duration": {
+      "fr": "Durée",
+      "en": "Duration"
+    },
+    "composition": {
+      "fr": "Composition",
+      "en": "Composition"
+    },
+    "production": {
+      "fr": "Production",
+      "en": "Production"
+    },
+    "play": {
+      "fr": "Lecture",
+      "en": "Play"
+    },
+    "watchVideo": {
+      "fr": "Voir la vidéo",
+      "en": "Watch the video"
+    },
+    "watchOnYoutube": {
+      "fr": "Voir sur YouTube",
+      "en": "Watch on YouTube"
+    },
+    "behindScenes": {
+      "fr": "Coulisses",
+      "en": "Behind the scenes"
+    },
+    "photos": {
+      "fr": "photos",
+      "en": "photos"
+    },
+    "imageOf": {
+      "fr": "Image de",
+      "en": "Image from"
+    },
+    "stillOf": {
+      "fr": "Image",
+      "en": "Image"
+    }
+  },
+  "photographies": {
+    "photoTitleStart": {
+      "fr": "Photo",
+      "en": "Photo"
+    },
+    "photoTitleEnd": {
+      "fr": "graphies",
+      "en": "graphy"
+    },
+    "series": {
+      "fr": "Séries",
+      "en": "Series"
+    },
+    "byCountry": {
+      "fr": "Par pays",
+      "en": "By country"
+    },
+    "byEvent": {
+      "fr": "Par événement",
+      "en": "By event"
+    },
+    "readArticle": {
+      "fr": "Lire l’article · Blues Magazine",
+      "en": "Read the article · Blues Magazine"
+    },
+    "articleTitle": {
+      "fr": "Blues Magazine · octobre 2025",
+      "en": "Blues Magazine · October 2025"
+    },
+    "articleAlt": {
+      "fr": "Article Motors & Blues, Blues Magazine",
+      "en": "Motors & Blues article, Blues Magazine"
+    }
+  },
+  "contact": {
+    "contact": {
+      "fr": "Contact",
+      "en": "Contact"
+    },
+    "email": "claire.blaborde@gmail.com",
+    "phone": {
+      "fr": "Téléphone",
+      "en": "Phone"
+    },
+    "telephone": "06 33 99 79 06",
+    "instagram": {
+      "pseudo": "@kll4er",
+      "url": "https://www.instagram.com/kll4er"
+    },
+    "linkedin": {
+      "texte": "Claire Buhaceanu Laborde",
+      "url": "https://www.linkedin.com/in/claire-buhaceanu-laborde-51a74738b/"
+    },
+    "base": {
+      "fr": "Base",
+      "en": "Based in"
+    },
+    "baseValue": {
+      "fr": "France",
+      "en": "France"
+    },
+    "seeCv": {
+      "fr": "Voir le CV",
+      "en": "See the CV"
+    },
+    "rights": {
+      "fr": "© 2026 Claire Buhaceanu Laborde",
+      "en": "© 2026 Claire Buhaceanu Laborde"
+    }
+  },
+  "fenetres": {
+    "viewer": {
+      "fr": "Visionneuse",
+      "en": "Viewer"
+    },
+    "prev": {
+      "fr": "Précédente",
+      "en": "Previous"
+    },
+    "next": {
+      "fr": "Suivante",
+      "en": "Next"
+    },
+    "cvTitle": {
+      "fr": "CV 2026 · Claire Buhaceanu Laborde",
+      "en": "CV 2026 · Claire Buhaceanu Laborde"
+    },
+    "projectTitle": {
+      "fr": "Projet de film documentaire · « La mémoire dans la peau »",
+      "en": "Documentary film project · « La mémoire dans la peau »"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+name: Republier une version
+# Emergency button: puts an older version of the site back online without touching the history.
+# GitHub > Actions > "Republier une version" > Run workflow > type a tag (e.g. stable-2026-11-13) or a commit number.
+# The next normal save (push on main) publishes main again.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Tag ou numéro de commit à remettre en ligne (ex. stable-2026-11-13 ou a1b2c3d)"
+        required: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: publication
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.version }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

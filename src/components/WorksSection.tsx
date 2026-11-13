@@ -146,7 +146,7 @@ function WorkRow({ project: p, num, t, lang, open, onToggle, onOpenGallery }: Wo
         <span className="work-meta work-info shrink-0 basis-[180px] text-base leading-[1.4] text-muted">
           {catLabel} · {p.year}
           <br />
-          {p.type}
+          {p.type[lang]}
         </span>
         <span
           aria-hidden="true"

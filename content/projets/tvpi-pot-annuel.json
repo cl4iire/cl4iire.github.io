@@ -1,0 +1,37 @@
+{
+  "titre": "Pot annuel TVPI",
+  "masquer": false,
+  "ordre": 2,
+  "categorie": "experience",
+  "annee": "2026",
+  "type": {
+    "fr": "Reportage TV - Stage TVPI, Bayonne",
+    "en": "TV report - TVPI internship, Bayonne"
+  },
+  "duree": "3'21",
+  "production": "TVPI",
+  "video": "",
+  "roles": {
+    "fr": "Journaliste Reporter d'Images (JRI)",
+    "en": "Video Journalist (JRI)"
+  },
+  "description": {
+    "fr": "Reportage sur le pot annuel organisé par TVPI avec ses différents partenaires, diffusé ensuite sur la chaîne.",
+    "en": "Report on the annual reception hosted by TVPI with its partners, then broadcast on the channel."
+  },
+  "composition": {
+    "fr": "",
+    "en": ""
+  },
+  "images": [],
+  "coulisses": [],
+  "liens": [
+    {
+      "texte": {
+        "fr": "Voir la vidéo sur le site de Sud Ouest",
+        "en": "Watch the video on the Sud Ouest website"
+      },
+      "url": "https://www.sudouest.fr/lachainetvpi/fetes-de-bayonne/videos/2026/07/17/3vzzuzz"
+    }
+  ]
+}

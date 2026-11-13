@@ -1,0 +1,636 @@
+# Configuration de Pages CMS (https://pagescms.org) : les formulaires que Claire utilise pour modifier le site.
+# Chaque « Enregistrer » crée un commit sur main, puis GitHub optimise les images, vérifie le contenu et publie le site (1 à 2 min).
+# Le contenu est dans content/ (JSON), les images et PDF dans public/media/.
+
+settings:
+  commit:
+    identity: user # le commit porte le nom et l'e-mail de la personne qui a modifié
+    templates:
+      create: "[CMS] {userName} · ajout : {name} ({path})"
+      update: "[CMS] {userName} · modification : {name} ({path})"
+      delete: "[CMS] {userName} · suppression : {name} ({path})"
+      rename: "[CMS] {userName} · renommage : {oldPath} → {newPath}"
+
+media:
+  - name: images
+    label: Images
+    input: public/media
+    output: /media
+    categories: [image]
+    rename: safe # noms de fichiers nettoyés (sans espaces ni accents)
+  - name: documents
+    label: Documents (PDF)
+    input: public/media/documents
+    output: /media/documents
+    extensions: [pdf]
+    rename: safe
+
+# Champs réutilisés : un texte en français + sa traduction anglaise (facultative)
+components:
+  texte:
+    type: object
+    fields:
+      - name: fr
+        label: Français
+        type: string
+      - name: en
+        label: Anglais (facultatif, le français est affiché si vide)
+        type: string
+  texte_long:
+    type: object
+    fields:
+      - name: fr
+        label: Français
+        type: text
+      - name: en
+        label: Anglais (facultatif, le français est affiché si vide)
+        type: text
+
+content:
+  # ---------------------------------------------------------------- Projets
+  - name: projets
+    label: Projets (Travaux)
+    type: collection
+    path: content/projets
+    format: json
+    filename: "{primary}.json"
+    view:
+      fields: [titre, categorie, annee, ordre, masquer]
+      primary: titre
+      sort: [ordre, annee, titre]
+      default:
+        sort: ordre
+        order: asc
+    fields:
+      - name: titre
+        label: Titre
+        type: string
+        required: true
+      - name: masquer
+        label: Masquer du site
+        type: boolean
+        description: Cochée = le projet n'apparaît plus sur le site (sans être supprimé).
+      - name: ordre
+        label: Position dans la liste
+        type: number
+        description: 1 = en haut de la liste. À position égale, le projet le plus récent passe devant.
+      - name: categorie
+        label: Catégorie
+        type: select
+        required: true
+        options:
+          values:
+            - name: film
+              label: Film
+            - name: documentaire
+              label: Documentaire
+            - name: experience
+              label: Expérience pro
+      - name: annee
+        label: Année
+        type: string
+        required: true
+        pattern:
+          regex: "^\\d{4}$"
+          message: "Année sur 4 chiffres, par exemple 2026"
+      - name: type
+        label: Type (ex. Court métrage, Reportage TV)
+        component: texte
+      - name: duree
+        label: Durée (ex. 2'30)
+        type: string
+      - name: production
+        label: Production (facultatif)
+        type: string
+      - name: video
+        label: Lien de la vidéo (YouTube ou autre page, facultatif)
+        type: string
+        description: Une vidéo YouTube se lance directement sur le site. Laisser vide s'il n'y a pas de vidéo.
+        pattern:
+          regex: "^(https?://.+)?$"
+          message: "Adresse complète commençant par https://"
+      - name: roles
+        label: Rôles
+        component: texte_long
+      - name: description
+        label: Description
+        component: texte_long
+      - name: composition
+        label: Composition (facultatif, ex. pour une émission)
+        component: texte_long
+      - name: images
+        label: Images
+        type: image
+        list: true
+        description: La première image sert de couverture et d'aperçu au survol. Les JPG sont convertis automatiquement en WebP.
+        options:
+          media: images
+          path: public/media/projets
+      - name: coulisses
+        label: Coulisses (facultatif)
+        type: image
+        list: true
+        options:
+          media: images
+          path: public/media/projets
+      - name: liens
+        label: Liens supplémentaires (article, autre vidéo, TikTok…)
+        type: object
+        list: true
+        fields:
+          - name: texte
+            label: Texte du bouton
+            component: texte
+          - name: url
+            label: Adresse (https://...)
+            type: string
+            pattern:
+              regex: "^https?://.+$"
+              message: "Adresse complète commençant par https://"
+
+  # ---------------------------------------------------------------- Photos
+  - name: albums
+    label: Photos (albums)
+    type: collection
+    path: content/albums
+    format: json
+    view:
+      fields: [titre.fr, ordre]
+      primary: titre.fr
+      sort: [ordre]
+      default:
+        sort: ordre
+        order: asc
+    fields:
+      - name: titre
+        label: Nom de l'onglet
+        component: texte
+      - name: description
+        label: Description
+        component: texte_long
+      - name: ordre
+        label: Position de l'onglet (1 = premier)
+        type: number
+      - name: format
+        label: Forme des vignettes
+        type: select
+        options:
+          values:
+            - name: portrait
+              label: Portrait (vertical)
+            - name: carre
+              label: Carré
+      - name: filtre
+        label: Le second filtre trie
+        type: select
+        options:
+          values:
+            - name: pays
+              label: Par pays
+            - name: evenement
+              label: Par événement
+      - name: photos
+        label: Photos
+        type: object
+        list: true
+        description: Dans l'ordre d'affichage sur le site. Les JPG sont convertis automatiquement en WebP.
+        fields:
+          - name: image
+            label: Photo
+            type: image
+            options:
+              media: images
+              path: public/media/photos
+          - name: lieu
+            label: Lieu ou événement
+            type: reference
+            description: S'il manque, le créer d'abord dans « Lieux et événements ».
+            options:
+              collection: lieux
+              value: "{path}"
+              label: "{nom}"
+      - name: article
+        label: Pages d'article (bouton « Lire l'article », facultatif)
+        type: image
+        list: true
+        options:
+          media: images
+          path: public/media/photos
+
+  # ---------------------------------------------------------------- Lieux
+  - name: lieux
+    label: Lieux et événements (filtres photo)
+    type: collection
+    path: content/lieux
+    format: json
+    filename: "{primary}.json"
+    view:
+      fields: [nom, nom_en]
+      primary: nom
+    fields:
+      - name: nom
+        label: Nom (français)
+        type: string
+        required: true
+      - name: nom_en
+        label: Nom (anglais, facultatif)
+        type: string
+
+  # ---------------------------------------------------------------- Documents
+  - name: documents
+    label: CV et projet de master (PDF)
+    type: file
+    path: content/documents.json
+    format: json
+    fields:
+      - name: cv_fr
+        label: CV en français
+        type: file
+        required: true
+        options:
+          media: documents
+      - name: cv_en
+        label: CV en anglais
+        type: file
+        required: true
+        options:
+          media: documents
+      - name: projet_master
+        label: Projet de film documentaire (master)
+        type: file
+        required: true
+        options:
+          media: documents
+
+  # ---------------------------------------------------------------- Textes
+  - name: textes
+    label: Textes du site
+    type: file
+    path: content/textes.json
+    format: json
+    fields:
+      - name: identite
+        label: Identité
+        type: object
+        fields:
+          - name: nom
+            label: Nom complet (un mot par ligne dans le menu)
+            type: string
+          - name: nom_court
+            label: Nom court (barre du haut sur mobile)
+            type: string
+          - name: subtitle
+            label: Sous-titre
+            component: texte
+      - name: accueil
+        label: Accueil
+        type: object
+        fields:
+          - name: image_tournage
+            label: Photo de tournage (à gauche)
+            type: image
+            options:
+              media: images
+          - name: image_portrait
+            label: Grand portrait (à droite, affiché en noir et blanc)
+            type: image
+            options:
+              media: images
+          - name: heroCaption
+            label: Légende au-dessus de la photo
+            component: texte
+          - name: heroTitle
+            label: Titre de la page (invisible, lu par Google et les lecteurs d'écran)
+            component: texte
+          - name: heroAltFilming
+            label: Description de la photo de tournage (accessibilité)
+            component: texte
+          - name: heroAltPortrait
+            label: Description du portrait (accessibilité)
+            component: texte
+      - name: navigation
+        label: Menu et boutons
+        type: object
+        fields:
+          - name: nav
+            label: Liens du menu
+            type: object
+            fields:
+              - name: films
+                label: Films
+                component: texte
+              - name: documentaries
+                label: Documentaires
+                component: texte
+              - name: experiences
+                label: Expériences pro
+                component: texte
+              - name: photography
+                label: Photographies
+                component: texte
+              - name: contact
+                label: Contact
+                component: texte
+          - name: cvButton
+            label: Bouton CV
+            component: texte
+          - name: projectButton
+            label: Bouton projet (menu)
+            component: texte
+          - name: projectShort
+            label: Bouton projet (version courte)
+            component: texte
+          - name: menu
+            label: Bouton « Menu » (mobile)
+            component: texte
+          - name: close
+            label: Bouton « Fermer »
+            component: texte
+          - name: language
+            label: Mot « Langue » (accessibilité)
+            component: texte
+          - name: sections
+            label: Mot « Sections » (accessibilité)
+            component: texte
+          - name: navigation
+            label: Mot « Navigation » (accessibilité)
+            component: texte
+          - name: openMenu
+            label: « Ouvrir le menu » (accessibilité)
+            component: texte
+          - name: closeMenu
+            label: « Fermer le menu » (accessibilité)
+            component: texte
+      - name: a_propos
+        label: À propos
+        type: object
+        fields:
+          - name: about
+            label: Titre de la section
+            component: texte
+          - name: aboutLead
+            label: Texte principal (en grand)
+            component: texte_long
+          - name: aboutBody
+            label: Texte secondaire
+            component: texte_long
+          - name: education
+            label: Formations
+            type: object
+            list: true
+            fields:
+              - name: years
+                label: Années (ex. 2025–2026)
+                type: string
+              - name: school
+                label: Établissement
+                component: texte
+              - name: diploma
+                label: Diplôme
+                component: texte
+          - name: tools
+            label: Titre de la carte Outils
+            component: texte
+          - name: toolsList
+            label: Outils (un par ligne)
+            component: texte
+            list: true
+          - name: languages
+            label: Titre de la carte Langues
+            component: texte
+          - name: languagesList
+            label: Langues
+            type: object
+            list: true
+            fields:
+              - name: name
+                label: "Langue (ex. « Anglais : »)"
+                component: texte
+              - name: level
+                label: Niveau
+                component: texte
+          - name: skills
+            label: Titre de la carte Compétences
+            component: texte
+          - name: skillsList
+            label: Compétences (une par ligne)
+            component: texte
+            list: true
+      - name: travaux
+        label: Travaux
+        type: object
+        fields:
+          - name: works
+            label: Titre de la section
+            component: texte
+          - name: all
+            label: Filtre « Tout »
+            component: texte
+          - name: catPlural
+            label: Noms des filtres
+            type: object
+            fields:
+              - name: film
+                label: Films
+                component: texte
+              - name: documentary
+                label: Documentaires
+                component: texte
+              - name: experience
+                label: Expériences pro
+                component: texte
+          - name: catSingular
+            label: Catégorie affichée sur chaque ligne
+            type: object
+            fields:
+              - name: film
+                label: Film
+                component: texte
+              - name: documentary
+                label: Documentaire
+                component: texte
+              - name: experience
+                label: Expérience pro
+                component: texte
+          - name: roles
+            label: Case « Rôles »
+            component: texte
+          - name: duration
+            label: Case « Durée »
+            component: texte
+          - name: composition
+            label: Case « Composition »
+            component: texte
+          - name: production
+            label: Case « Production »
+            component: texte
+          - name: play
+            label: Bouton « Lecture »
+            component: texte
+          - name: watchVideo
+            label: Bouton « Voir la vidéo »
+            component: texte
+          - name: watchOnYoutube
+            label: Lien « Voir sur YouTube »
+            component: texte
+          - name: behindScenes
+            label: Bouton « Coulisses »
+            component: texte
+          - name: photos
+            label: Mot « photos » (bouton Coulisses)
+            component: texte
+          - name: categories
+            label: Mot « Catégories » (accessibilité)
+            component: texte
+          - name: imageOf
+            label: « Image de » (accessibilité)
+            component: texte
+          - name: stillOf
+            label: « Image » (accessibilité)
+            component: texte
+      - name: photographies
+        label: Photographies
+        type: object
+        fields:
+          - name: photoTitleStart
+            label: Titre, première partie (ex. « Photo »)
+            component: texte
+          - name: photoTitleEnd
+            label: Titre, seconde partie en couleur (ex. « graphies »)
+            component: texte
+          - name: readArticle
+            label: Bouton de l'article
+            component: texte
+          - name: articleTitle
+            label: Titre de l'article dans la visionneuse
+            component: texte
+          - name: articleAlt
+            label: Description de l'article (accessibilité)
+            component: texte
+          - name: series
+            label: Mot « Séries » (accessibilité)
+            component: texte
+          - name: byCountry
+            label: « Par pays » (accessibilité)
+            component: texte
+          - name: byEvent
+            label: « Par événement » (accessibilité)
+            component: texte
+      - name: contact
+        label: Contact
+        type: object
+        fields:
+          - name: contact
+            label: Titre de la section
+            component: texte
+          - name: email
+            label: Adresse e-mail
+            type: string
+            required: true
+          - name: phone
+            label: Mot « Téléphone »
+            component: texte
+          - name: telephone
+            label: Numéro de téléphone
+            type: string
+          - name: instagram
+            label: Instagram
+            type: object
+            fields:
+              - name: pseudo
+                label: Pseudo affiché (ex. @kll4er)
+                type: string
+              - name: url
+                label: Adresse du profil (https://...)
+                type: string
+          - name: linkedin
+            label: LinkedIn
+            type: object
+            fields:
+              - name: texte
+                label: Texte affiché
+                type: string
+              - name: url
+                label: Adresse du profil (https://...)
+                type: string
+          - name: base
+            label: Mot « Base »
+            component: texte
+          - name: baseValue
+            label: Lieu de résidence (ex. France)
+            component: texte
+          - name: seeCv
+            label: Bouton « Voir le CV »
+            component: texte
+          - name: rights
+            label: Copyright (bas de page)
+            component: texte
+      - name: fenetres
+        label: Fenêtres (CV, projet, visionneuse)
+        type: object
+        fields:
+          - name: cvTitle
+            label: Titre de la fenêtre CV
+            component: texte
+          - name: projectTitle
+            label: Titre de la fenêtre du projet de master
+            component: texte
+          - name: prev
+            label: Bouton « Précédente »
+            component: texte
+          - name: next
+            label: Bouton « Suivante »
+            component: texte
+          - name: viewer
+            label: Mot « Visionneuse » (accessibilité)
+            component: texte
+
+  # ---------------------------------------------------------------- Réglages
+  - name: reglages
+    label: Réglages (Google, police, couleurs)
+    type: file
+    path: content/reglages.json
+    format: json
+    fields:
+      - name: seo
+        label: Résultat Google
+        type: object
+        fields:
+          - name: titre
+            label: Titre affiché dans Google et l'onglet du navigateur
+            type: string
+            required: true
+          - name: description
+            label: Description affichée sous le titre dans Google
+            type: text
+            required: true
+      - name: police
+        label: Police du site
+        type: select
+        required: true
+        options:
+          values:
+            - name: Bricolage Grotesque
+              label: Bricolage Grotesque (d'origine)
+            - name: Space Grotesk
+              label: Space Grotesk
+            - name: DM Sans
+              label: DM Sans
+            - name: Archivo
+              label: Archivo
+            - name: Instrument Sans
+              label: Instrument Sans
+      - name: theme
+        label: Couleurs du site
+        type: select
+        required: true
+        options:
+          values:
+            - name: rose
+              label: Rose (d'origine)
+            - name: bleu
+              label: Bleu
+            - name: vert
+              label: Vert
+            - name: sable
+              label: Sable

@@ -40,7 +40,7 @@ export function PhotographySection({ t, lang, albums, onOpenGallery }: Photograp
   const activeSubLabel = subs.find((s) => s.key === activeSub)?.label;
   const viewerTitle = activeSub === null ? album.title[lang] : `${album.title[lang]} · ${activeSubLabel}`;
   const gallery: GalleryItem[] = items.map((item) => ({ src: item.url, alt: `${album.title[lang]} · ${placeOf(album, item)[lang]}` }));
-  const ratio = album.id === "portraits" ? "aspect-[4/5]" : "aspect-square";
+  const ratio = album.format === "portrait" ? "aspect-[4/5]" : "aspect-square";
 
   return (
     <section
@@ -96,7 +96,7 @@ export function PhotographySection({ t, lang, albums, onOpenGallery }: Photograp
         {hasSubs && (
           <div
             role="group"
-            aria-label={album.id === "events" ? t.byEvent : t.byCountry}
+            aria-label={album.filter === "evenement" ? t.byEvent : t.byCountry}
             className="flex flex-wrap items-center gap-2 mb-7 pt-5 border-t border-rose/25"
           >
             {subs.map((s) => {

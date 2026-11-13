@@ -1,13 +1,22 @@
-name: Deploy to GitHub Pages
+name: Publication du site
+# Runs on every push to main (yours or Claire's via Pages CMS):
+# 1. converts new photos to WebP and commits them ("[bot] ..."),
+# 2. checks the content (an error stops here: the online site stays on the previous version),
+# 3. builds and publishes the site on GitHub Pages.
 on:
   push:
     branches: [ main ]
   workflow_dispatch: {}
 
 permissions:
-  contents: read
+  contents: write # to commit the optimized images
   pages: write
   id-token: write
+
+# One publication at a time, in order (no cancellation: every save is published)
+concurrency:
+  group: publication
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -17,11 +26,33 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
       - run: npm ci
+
+      - name: Optimiser les nouvelles images (WebP, 2560 px max)
+        run: npm run optimize-images
+
+      - name: Enregistrer les images optimisées
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A public/media content
+            git commit -m "[bot] Optimisation des images (WebP)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          else
+            echo "Aucune image à optimiser."
+          fi
+
+      - name: Vérifier le contenu
+        run: npm run check
+
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+
   deploy:
     needs: build
     runs-on: ubuntu-latest

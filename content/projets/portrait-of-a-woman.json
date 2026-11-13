@@ -1,0 +1,31 @@
+{
+  "titre": "Portrait of a Woman",
+  "masquer": false,
+  "ordre": 4,
+  "categorie": "documentaire",
+  "annee": "2026",
+  "type": {
+    "fr": "Documentaire",
+    "en": "Documentary"
+  },
+  "duree": "5'10",
+  "production": "",
+  "video": "https://www.youtube.com/watch?v=rXBQrhQ6GsE",
+  "roles": {
+    "fr": "Directrice de la photographie (DOP), Monteuse",
+    "en": "Director of Photography (DOP), Editor"
+  },
+  "description": {
+    "fr": "Documentaire consacré à Claire Farrell, membre fondatrice des Friends of Eon, le premier groupe de défense des droits des personnes transgenres en Irlande. Elle a notamment mis en place, depuis son bureau, la toute première ligne téléphonique destinée aux personnes transgenres dans le pays, afin de leur offrir un espace d'écoute et de soutien.",
+    "en": "Documentary about Claire Farrell, founding member of Friends of Eon, the first transgender rights group in Ireland. From her office, she set up the country's very first helpline for transgender people, offering them a space to be heard and supported."
+  },
+  "composition": {
+    "fr": "",
+    "en": ""
+  },
+  "images": [
+    "/media/projets/portrait-of-a-woman/youtube-cover.webp"
+  ],
+  "coulisses": [],
+  "liens": []
+}

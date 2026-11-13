@@ -1,0 +1,32 @@
+{
+  "titre": "Sources",
+  "masquer": false,
+  "ordre": 9,
+  "categorie": "film",
+  "annee": "2023",
+  "type": {
+    "fr": "Film Pocket",
+    "en": "Pocket film"
+  },
+  "duree": "2'30",
+  "production": "Claire Buhaceanu Laborde",
+  "video": "https://youtu.be/NeIuGn0oM4Q?si=1omCvAk2aSP6Y6HA",
+  "roles": {
+    "fr": "Scénariste, Directrice, Co-éditrice [Première Pro]",
+    "en": "Writing, Director, Editor"
+  },
+  "description": {
+    "fr": "Ce premier court métrage, nous permet de rencontrer Alice, jeune femme qui mène une vie confortable mais monotone dans une grande ville. Un jour, elle décide de relâcher son poisson rouge et se lance alors dans un périple à la fois littéral et métaphorique, de la ville à la campagne.",
+    "en": "We meet Alice, a young woman living a comfortable but monotonous life in a big city. One day, she decides to release her goldfish and embarks on a journey both literal and metaphorical."
+  },
+  "composition": {
+    "fr": "",
+    "en": ""
+  },
+  "images": [
+    "/media/projets/sources/capture-d-ecran-2026-02-01-140114.webp",
+    "/media/projets/sources/capture-d-ecran-2026-02-01-140133.webp"
+  ],
+  "coulisses": [],
+  "liens": []
+}

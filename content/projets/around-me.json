@@ -1,0 +1,32 @@
+{
+  "titre": "Around Me, in the Here and Now",
+  "masquer": false,
+  "ordre": 5,
+  "categorie": "documentaire",
+  "annee": "2026",
+  "type": {
+    "fr": "Documentaire",
+    "en": "Documentary"
+  },
+  "duree": "3'",
+  "production": "Claire Buhaceanu Laborde",
+  "video": "https://youtu.be/GpzJsAe2mu8?si=1exsgXpzuvzFOSYl",
+  "roles": {
+    "fr": "Scénariste, Productrice, Editrice [Première Pro]",
+    "en": "Writing, Production, Editor"
+  },
+  "description": {
+    "fr": "Documentaire de 3 minutes réalisé dans le cadre d'un concours avec pour thème \"Around Me, in the Here and Now\". Les fêtes sont un moment de partage et de retrouvailles malgré la situation mondiale.",
+    "en": "3-minute documentary made for a competition themed \"Around Me, in the Here and Now\". The holidays are a time for sharing and reuniting despite the global situation."
+  },
+  "composition": {
+    "fr": "",
+    "en": ""
+  },
+  "images": [
+    "/media/projets/around-me/capture-d_ecran-2026-01-31-163425.webp",
+    "/media/projets/around-me/capture-d_ecran-2026-01-31-163704.webp"
+  ],
+  "coulisses": [],
+  "liens": []
+}

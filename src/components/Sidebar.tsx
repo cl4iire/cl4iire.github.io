@@ -79,7 +79,7 @@ export function Sidebar({
       {/* Mobile top bar */}
       <div className="desk:hidden sticky top-0 z-40 flex items-center justify-between py-2 pr-2 pl-5 bg-ink text-rose">
         <a href="#top" className="no-underline text-[22px] font-extrabold tracking-[-0.02em]">
-          Claire B.L
+          {t.nom_court}
         </a>
         <button
           ref={menuButtonRef}
@@ -100,12 +100,13 @@ export function Sidebar({
       >
         <div>
           <a href="#top" className="block no-underline">
-            <span className="block text-[34px] font-extrabold leading-[0.95] tracking-[-0.03em]">
-              Claire
-              <br />
-              Buhaceanu
-              <br />
-              Laborde
+            {/* One word per line */}
+            <span className="block text-[34px] font-extrabold leading-[0.95] tracking-[-0.03em] [overflow-wrap:anywhere]">
+              {t.nom.split(" ").map((word, i) => (
+                <span key={i} className="block">
+                  {word}
+                </span>
+              ))}
             </span>
             <span className="block mt-3 text-base font-semibold text-pink">{t.subtitle}</span>
           </a>
@@ -147,7 +148,7 @@ export function Sidebar({
           </div>
         </div>
         <div className="flex justify-between items-center gap-3 mt-8">
-          <LinkedInLink />
+          <LinkedInLink url={t.linkedin.url} />
           {langSwitch}
         </div>
       </aside>
@@ -156,7 +157,7 @@ export function Sidebar({
       {menuOpen && (
         <div role="dialog" aria-modal="true" aria-label={t.menu} className="desk:hidden fixed inset-0 z-[90] bg-ink text-rose flex flex-col overflow-y-auto">
           <div className="flex justify-between items-center py-2 pr-2 pl-5">
-            <span className="text-[22px] font-extrabold">Claire B.L</span>
+            <span className="text-[22px] font-extrabold">{t.nom_court}</span>
             <button
               ref={menuCloseRef}
               type="button"
@@ -206,7 +207,7 @@ export function Sidebar({
             </button>
           </div>
           <div className="flex justify-between items-center gap-3 px-5 pb-8 mt-auto">
-            <LinkedInLink />
+            <LinkedInLink url={t.linkedin.url} />
             {langSwitch}
           </div>
         </div>
@@ -215,10 +216,11 @@ export function Sidebar({
   );
 }
 
-function LinkedInLink() {
+function LinkedInLink({ url }: { url: string }) {
+  if (!url) return null;
   return (
     <a
-      href="https://www.linkedin.com/in/claire-buhaceanu-laborde-51a74738b/"
+      href={url}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="LinkedIn"

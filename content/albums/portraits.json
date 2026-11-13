@@ -1,0 +1,112 @@
+{
+  "titre": {
+    "fr": "Portraits",
+    "en": "Portraits"
+  },
+  "description": {
+    "fr": "Visages et regards, Népal.",
+    "en": "Faces and gazes, Nepal."
+  },
+  "ordre": 1,
+  "format": "portrait",
+  "filtre": "pays",
+  "photos": [
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0008-2.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0059-2.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0061.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0063.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0069-2.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0088.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0135-2.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0135.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0141-2.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0150.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0151.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0233.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0242-3.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc00145.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc00146.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc00192.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc00198.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc00200.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc00251.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0007.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0019.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0129-2.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0242.webp",
+      "lieu": "nepal"
+    },
+    {
+      "image": "/media/photos/portraits/nepal/dsc_0116.webp",
+      "lieu": "nepal"
+    }
+  ],
+  "article": []
+}
