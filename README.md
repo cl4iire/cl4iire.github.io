@@ -29,14 +29,13 @@ Le site auto-découvre les médias (photos, stills) depuis les dossiers `src/ass
 - Films : `src/assets/projects/films/<projectId>/`
   - Coulisses (optionnel) : `src/assets/projects/films/<projectId>/<projectId>BehindScenes/`
 - Documentaires : `src/assets/projects/documentaries/<projectId>/`
-  - Documentation PDF (optionnel) : `src/assets/projects/documentaries/<projectId>/documentation/`
 - Expériences professionnelles (stages) : `src/assets/projects/experiences/<projectId>/`
 - Photographies : `src/assets/projects/photographies/` - 3 albums thématiques, chaque sous-dossier (un lieu ou un événement) est fusionné dans l'album :
   - `portraits/<lieu>/` → album « Portraits » (ex. `portraits/nepal/`)
   - `paysages/<lieu>/` → album « Paysages » (ex. `paysages/bretagne/`, `paysages/londres2025/`)
   - `events/<événement>/` → album « Événements » (ex. `events/motors_and_blues/`, `events/nepal/`)
   - Article Blues Magazine (bouton « Voir l'article ») : `events/motors_and_blues/article/`
-  - Le nom du sous-dossier s'affiche au survol de la photo (titre lisible défini dans `src/data/projects/photographies/<sous-dossier>.ts`, ex. `nepal.ts` → « Népal »)
+  - Le libellé du sous-dossier (pays ou événement) s'affiche sur chaque photo et sert de filtre : il est défini dans l'objet `places` du fichier de l'album (voir « Ajouter des photos »)
 
 **Données (fichiers TS écrits à la main)**
 - Films : `src/data/projects/films/<projectId>.ts`
@@ -57,7 +56,7 @@ Le site auto-découvre les médias (photos, stills) depuis les dossiers `src/ass
 
 - Les images sont chargées via `import.meta.glob` de Vite, insensible à la casse : `{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP}`.
 - Films/Docs : toutes les images du dossier projet forment la galerie. La première image est la couverture. Les coulisses sont lues depuis le sous-dossier `<projectId>BehindScenes/` s'il existe.
-- Photographies : chaque dossier feuille sous `src/assets/projects/photographies/**` devient automatiquement un album.
+- Photographies : les sous-dossiers de `portraits/`, `paysages/` et `events/` sont fusionnés dans l'album correspondant (un onglet par album).
 
 ## Ajouter un film, un documentaire ou une expérience
 
@@ -70,14 +69,15 @@ Le site auto-découvre les médias (photos, stills) depuis les dossiers `src/ass
    - Films : `src/data/projects/films/<projectId>.ts`
    - Docs : `src/data/projects/documentaries/<projectId>.ts`
    - Expériences : `src/data/projects/experiences/<projectId>.ts` (`category: 'experience'`)
-3. Enregistrer le projet dans `src/data/portfolio.ts` en important le fichier et en l'ajoutant au tableau `PROJECTS`.
+3. Enregistrer le projet dans `src/data/portfolio.ts` en important le fichier et en l'ajoutant au tableau `PROJECTS`, à sa place dans l'ordre chronologique (du plus récent au plus ancien : c'est l'ordre de la liste « Travaux »).
 
 **Notes :**
-- `videoUrl` peut être une URL YouTube (intégrée automatiquement avec miniature HD) ou `#` pour afficher une image statique.
-- `documentationUrl` (optionnel) : importer un PDF via `?url` pour afficher un bouton "Dossier de Production".
-- La première image découverte est utilisée comme couverture. Sans image ni YouTube, une carte « vidéo » cliquable s'affiche à la place (lien vers `videoUrl`, ou vers le premier `links` si `videoUrl` vaut `#`).
+- `videoUrl` : URL YouTube (la vidéo se lance dans le site au clic sur l'image de couverture), autre page vidéo (ouverte dans un nouvel onglet), ou `#` s'il n'y a pas de vidéo.
+- La première image du dossier (ordre alphabétique) sert de couverture et de preview au survol de la ligne. Sans image, aucune preview ne s'affiche et la ligne ouverte montre une carte noire avec le titre, qui renvoie vers `videoUrl` ou, si `videoUrl` vaut `#`, vers le premier `links`.
+  Astuce : la miniature d'une vidéo YouTube peut servir de couverture (`https://i.ytimg.com/vi/<id>/maxresdefault.jpg`, convertie en `.webp`), comme pour Portrait of a Woman.
+- `documentationUrl` : prévu dans les types mais **non affiché** par le design actuel.
 - `links` (optionnel) : liens supplémentaires (autres vidéos, article de presse, compte TikTok…), au format `{ label: { FR, ENG }, url }`.
-- `producer` (optionnel) : si absent, la ligne « produit par » est masquée.
+- `producer` (optionnel) : si absent, la case « Production » est masquée. Idem pour `duration` (« Durée ») et `composition`.
 
 ## Ajouter des photos
 
@@ -86,9 +86,18 @@ Le site auto-découvre les médias (photos, stills) depuis les dossiers `src/ass
 - `src/assets/projects/photographies/paysages/<lieu>/`
 - `src/assets/projects/photographies/events/<événement>/`
 
-Le sous-dossier peut être nouveau (ex. `paysages/ecosse2027/`). Pour afficher un nom propre au survol des photos, créer `src/data/projects/photographies/<sous-dossier>.ts` exportant un `PhotoAlbumMeta` avec `{ id: '<sous-dossier>', title: { FR, ENG } }` (ex. `nepal.ts` → « Népal »). Sans ce fichier, le nom du dossier est utilisé tel quel.
+Le sous-dossier peut être nouveau (ex. `paysages/ecosse2027/`). Dans ce cas, **l'ajouter à l'objet `places`** du fichier de l'album (`portraits.ts`, `paysages.ts` ou `events.ts`) pour lui donner un libellé FR/EN, affiché sur les photos et dans le filtre :
 
-**Créer un nouvel album** - créer un dossier directement sous `src/assets/projects/photographies/<albumId>/`, puis (optionnel) `src/data/projects/photographies/<albumId>.ts` avec `{ id, title: {FR, ENG}, description?: {FR, ENG} }`. Ajouter `<albumId>` à `ALBUM_ORDER` dans `src/data/portfolio.ts` pour choisir sa position (sinon il s'affiche après les autres).
+```ts
+places: {
+  ecosse2027: { FR: 'Écosse', ENG: 'Scotland' },
+  // ...
+},
+```
+
+Sans cette entrée, le nom brut du dossier s'affiche. Plusieurs sous-dossiers peuvent partager le même libellé (ex. `Irlande2025` et `irlande` → « Irlande »).
+
+**Créer un nouvel album** (nouvel onglet) - créer un dossier directement sous `src/assets/projects/photographies/<albumId>/`, puis (optionnel) `src/data/projects/photographies/<albumId>.ts` avec `{ id, title: {FR, ENG}, description?: {FR, ENG} }`. Ajouter `<albumId>` à `ALBUM_ORDER` dans `src/data/portfolio.ts` pour choisir la position de son onglet (sinon il s'affiche après les autres).
 
 Les albums sont générés automatiquement à partir des dossiers. Redémarrer `npm run dev` si des fichiers ont été déplacés.
 
@@ -104,7 +113,7 @@ L'ordre des photos dans chaque album est enregistré dans le tableau `order` du 
 
 ### Avec l'éditeur (recommandé)
 
-Une page cachée permet de réordonner les photos par glisser-déposer (ou avec les flèches sous chaque photo). Le numéro rouge indique la position sur le site.
+Une page cachée permet de réordonner les photos par glisser-déposer (ou avec les flèches sous chaque photo). Le numéro rose indique la position sur le site.
 
 **En local, enregistrement direct :**
 1. Lancer `npm run dev`
@@ -159,12 +168,12 @@ Le point de rupture `desk:` (901 px) sépare la navigation latérale (ordinateur
 
 | Composant | Rôle |
 |---|---|
-| `Sidebar.tsx` | Navigation latérale noire (01 à 05, CV, projet, e-mail, FR/EN) ; barre du haut et menu plein écran sur mobile |
+| `Sidebar.tsx` | Navigation latérale noire (01 à 05, CV, projet, lien LinkedIn, FR/EN) ; barre du haut et menu plein écran sur mobile |
 | `HeroSection.tsx` | Accueil 50/50 : photo de tournage (`about/claireAbout.webp`) et portrait N&B (`portraits/nepal/DSC00198.webp`) |
-| `AboutSection.tsx` | À propos, formations, cartes Outils / Langues / Compétences |
-| `WorksSection.tsx` | Liste des travaux filtrable, preview au survol, ligne qui s'ouvre au clic |
-| `PhotographySection.tsx` | Onglets Portraits / Paysages / Événements + second filtre par pays ou événement |
-| `ContactSection.tsx` | Contact |
+| `AboutSection.tsx` | À propos, formations, cartes Outils / Langues / Compétences (un élément par ligne) |
+| `WorksSection.tsx` | Liste des travaux filtrable (du plus récent au plus ancien), preview au survol, ligne qui s'ouvre au clic. Sur mobile : titre en haut, catégorie à gauche, bouton +/− à droite |
+| `PhotographySection.tsx` | Onglets Portraits / Paysages / Événements + second filtre par pays ou événement (pas de « Tout » : le premier lieu est sélectionné par défaut) |
+| `ContactSection.tsx` | Contact : e-mail, téléphone, Instagram, LinkedIn, base, boutons CV et projet |
 | `Lightbox.tsx` | Visionneuse plein écran (ne parcourt que les images filtrées) |
 | `DocumentModal.tsx` | Fenêtres CV (FR/EN) et projet documentaire |
 | `PhotoOrderEditor.tsx` | Éditeur d'ordre des photos (`?editor`) |
@@ -176,7 +185,8 @@ Les textes de l'interface (FR/EN) sont dans `TRANSLATIONS` (`src/data/portfolio.
 ## Fonctionnalités
 
 - **Bilingue FR / EN** - détection automatique de la langue du navigateur, bascule dans la navigation
-- **Travaux** - liste indexée filtrable (Tout, Films, Documentaires, Expériences pro), preview au survol, détails au clic (images, vidéo YouTube intégrée, liens, coulisses)
+- **Travaux** - liste indexée filtrable (Tout, Films, Documentaires, Expériences pro), du plus récent au plus ancien, lignes fermées au chargement, preview au survol, détails au clic (images, vidéo YouTube lancée au clic sur l'image, liens, coulisses)
+- **Accueil** - plein écran sur ordinateur (hauteur de la fenêtre)
 - **Photographies** - onglets Portraits / Paysages / Événements, filtre par pays ou par événement, article Blues Magazine
 - **Visionneuse** - plein écran, flèches du clavier, Échap, swipe mobile
 - **CV et projet documentaire** - fenêtres PDF plein écran, choix FR / EN pour le CV
@@ -187,6 +197,8 @@ Les textes de l'interface (FR/EN) sont dans `TRANSLATIONS` (`src/data/portfolio.
 
 - **Rien n'apparaît dans le mur photo :** vérifier que les photos sont bien dans `src/assets/projects/photographies/**` et que les extensions sont `png/jpg/jpeg/webp`. Redémarrer le serveur Vite si des fichiers ont été déplacés.
 - **Le PDF ne s'ouvre pas :** vérifier que le fichier est importé avec le suffixe `?url` (`import monPdf from './mon.pdf?url'`).
+- **Erreur `Failed to resolve import "../../../../../o:/www/..."` (Windows) :** le serveur a été lancé depuis `o:\` (lettre de lecteur en minuscule). Ouvrir le terminal dans `O:\www\Portfolio` (majuscule) et relancer `npm run dev`.
+- **Un filtre photo affiche un nom de dossier brut :** ajouter ce sous-dossier à l'objet `places` du fichier de l'album.
 
 ## Déploiement (GitHub Pages)
 
@@ -207,9 +219,9 @@ export default defineConfig(({ mode }) => ({
 }))
 ```
 
-**2. Déploiement automatique via GitHub Actions**
+**2. Déploiement automatique via GitHub Actions** (déjà en place)
 
-Créer `.github/workflows/deploy.yml` :
+Le workflow existe dans `.github/workflows/main.yml`. Son contenu, pour référence :
 
 ```yaml
 name: Deploy to GitHub Pages
@@ -249,7 +261,7 @@ jobs:
 
 Puis : Settings → Pages → Build and deployment → Source : "GitHub Actions".
 
-**3. Publication manuelle**
+**3. Publication manuelle** (alternative, non utilisée actuellement)
 
 ```bash
 npm run build
