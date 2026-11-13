@@ -11,7 +11,6 @@ const meta: PhotoAlbumMeta = {
   places: {
     motors_and_blues: { FR: 'Motors & Blues', ENG: 'Motors & Blues' },
     nepal: { FR: 'Fêtes au Népal', ENG: 'Festivals in Nepal' },
-    Irlande2025: { FR: 'Irlande', ENG: 'Ireland' },
     coulisses: { FR: 'Tournage en Irlande', ENG: 'Filming in Ireland' },
   },
   order: [
@@ -42,7 +41,6 @@ const meta: PhotoAlbumMeta = {
     'nepal/DSC_0111.webp',
     'nepal/DSC_0117.webp',
     'nepal/DSC_0132.webp',
-    'Irlande2025/5.webp',
     'coulisses/IMG_4972.webp',
     'coulisses/IMG_4976.webp',
     'coulisses/IMG_5003.webp',

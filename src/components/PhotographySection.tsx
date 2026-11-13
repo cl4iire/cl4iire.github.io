@@ -16,7 +16,7 @@ const placeOf = (album: PhotoAlbum, item: PhotoItem): LocaleText =>
 
 export function PhotographySection({ t, lang, albums, onOpenGallery }: PhotographySectionProps) {
   const [albumId, setAlbumId] = useState(albums[0]?.id);
-  const [sub, setSub] = useState("all");
+  const [sub, setSub] = useState<string | null>(null);
   const album = albums.find((a) => a.id === albumId) ?? albums[0];
 
   // Second filter: one button per place / event, in order of first appearance
@@ -31,13 +31,14 @@ export function PhotographySection({ t, lang, albums, onOpenGallery }: Photograp
     return list;
   }, [album, lang]);
   const hasSubs = subs.length > 1;
-  const activeSub = hasSubs && subs.some((s) => s.key === sub) ? sub : "all";
+  // No "all" filter: default to the first place / event
+  const activeSub = hasSubs ? (subs.some((s) => s.key === sub) ? sub : subs[0].key) : null;
 
   if (!album) return null;
 
-  const items = album.items.filter((item) => activeSub === "all" || placeOf(album, item).FR === activeSub);
+  const items = album.items.filter((item) => activeSub === null || placeOf(album, item).FR === activeSub);
   const activeSubLabel = subs.find((s) => s.key === activeSub)?.label;
-  const viewerTitle = activeSub === "all" ? album.title[lang] : `${album.title[lang]} · ${activeSubLabel}`;
+  const viewerTitle = activeSub === null ? album.title[lang] : `${album.title[lang]} · ${activeSubLabel}`;
   const gallery: GalleryItem[] = items.map((item) => ({ src: item.url, alt: `${album.title[lang]} · ${placeOf(album, item)[lang]}` }));
   const ratio = album.id === "portraits" ? "aspect-[4/5]" : "aspect-square";
 
@@ -65,7 +66,7 @@ export function PhotographySection({ t, lang, albums, onOpenGallery }: Photograp
                 aria-controls="photo-panel"
                 onClick={() => {
                   setAlbumId(a.id);
-                  setSub("all");
+                  setSub(null);
                 }}
                 className={`min-h-[46px] px-5 rounded-full border-[1.5px] border-rose text-base font-bold cursor-pointer ${on ? "bg-rose text-ink" : "bg-transparent text-rose hover:bg-rose/15"}`}
               >
@@ -98,7 +99,7 @@ export function PhotographySection({ t, lang, albums, onOpenGallery }: Photograp
             aria-label={album.id === "events" ? t.byEvent : t.byCountry}
             className="flex flex-wrap items-center gap-2 mb-7 pt-5 border-t border-rose/25"
           >
-            {[{ key: "all", label: t.all, count: album.items.length }, ...subs].map((s) => {
+            {subs.map((s) => {
               const on = activeSub === s.key;
               return (
                 <button

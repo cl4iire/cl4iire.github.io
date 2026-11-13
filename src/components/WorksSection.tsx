@@ -172,28 +172,26 @@ function WorkRow({ project: p, num, t, lang, open, onToggle, onOpenGallery }: Wo
                 ) : (
                   <img src={cover} alt={`${t.imageOf} ${p.title}`} className="block w-full h-full object-cover" />
                 )}
+                {/* The whole preview starts the video; the pill is only the visual cue */}
                 {hasVideo && !playing && (
                   youtubeId ? (
                     <button
                       type="button"
                       onClick={() => setPlaying(true)}
                       aria-label={`${t.play}, ${p.title}`}
-                      className="absolute left-[18px] bottom-[18px] inline-flex items-center gap-2.5 min-h-12 px-5 rounded-full bg-rose text-ink text-base font-bold cursor-pointer hover:bg-pink"
+                      className="group absolute inset-0 p-0 bg-transparent border-0 cursor-pointer"
                     >
-                      <PlayIcon />
-                      {t.play}
-                      {p.duration ? ` · ${p.duration}` : ""}
+                      <PlayPill label={t.play} duration={p.duration} />
                     </button>
                   ) : (
                     <a
                       href={p.videoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="absolute left-[18px] bottom-[18px] inline-flex items-center gap-2.5 min-h-12 px-5 rounded-full bg-rose text-ink text-base font-bold no-underline hover:bg-pink"
+                      aria-label={`${t.play}, ${p.title}`}
+                      className="group absolute inset-0 no-underline"
                     >
-                      <PlayIcon />
-                      {t.play}
-                      {p.duration ? ` · ${p.duration}` : ""}
+                      <PlayPill label={t.play} duration={p.duration} />
                     </a>
                   )
                 )}
@@ -268,6 +266,16 @@ function WorkRow({ project: p, num, t, lang, open, onToggle, onOpenGallery }: Wo
         </div>
       )}
     </li>
+  );
+}
+
+function PlayPill({ label, duration }: { label: string; duration?: string | null }) {
+  return (
+    <span className="absolute left-[18px] bottom-[18px] inline-flex items-center gap-2.5 min-h-12 px-5 rounded-full bg-rose text-ink text-base font-bold group-hover:bg-pink">
+      <PlayIcon />
+      {label}
+      {duration ? ` · ${duration}` : ""}
+    </span>
   );
 }
 

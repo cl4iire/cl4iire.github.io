@@ -62,7 +62,7 @@ export const TRANSLATIONS = {
       { years: "2023–2026", school: "IUT de Tarbes", diploma: "BUT Métiers du Multimédia et de l’Internet, parcours Création numérique" },
     ],
     tools: "Outils",
-    toolsText: "Premiere Pro, Lightroom, After Effects, suite Blackmagic Design, Avid Pro Tools, Figma, Canva. DaVinci Resolve en cours d’apprentissage.",
+    toolsList: ["Premiere Pro", "Lightroom", "After Effects", "Suite Blackmagic Design", "Avid Pro Tools", "Figma", "Canva", "DaVinci Resolve (en cours d’apprentissage)"],
     languages: "Langues",
     languagesList: [
       { name: "Anglais :", level: "un an en Irlande, certification Cambridge C1 (2024)." },
@@ -145,7 +145,7 @@ export const TRANSLATIONS = {
       { years: "2023–2026", school: "IUT de Tarbes", diploma: "B.U.T. in Multimedia and Internet Professions, Digital Creation track" },
     ],
     tools: "Tools",
-    toolsText: "Premiere Pro, Lightroom, After Effects, Blackmagic Design suite, Avid Pro Tools, Figma, Canva. Currently learning DaVinci Resolve.",
+    toolsList: ["Premiere Pro", "Lightroom", "After Effects", "Blackmagic Design suite", "Avid Pro Tools", "Figma", "Canva", "DaVinci Resolve (currently learning)"],
     languages: "Languages",
     languagesList: [
       { name: "English:", level: "one year in Ireland, Cambridge C1 certificate (2024)." },
@@ -197,16 +197,19 @@ export const TRANSLATIONS = {
 
 export type Translations = typeof TRANSLATIONS.FR;
 
-// Order of the "Work" list (as in the validated design)
+// Order of the "Work" list: most recent first
 export const PROJECTS: ProjectData[] = [
-  friday,
-  portraitOfAWoman,
+  // 2026
   confestayres,
-  sasane,
-  progrey,
-  aroundMe,
   potAnnuelTvpi,
+  sasane,
+  portraitOfAWoman,
+  aroundMe,
+  // 2025
+  friday,
   indies,
+  progrey,
+  // 2023
   sources,
 ];
 

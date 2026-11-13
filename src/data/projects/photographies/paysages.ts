@@ -33,6 +33,7 @@ const meta: PhotoAlbumMeta = {
     'bardenas2025/15.webp',
     'londres2025/20.webp',
     'Irlande2025/13.webp',
+    'Irlande2025/5.webp',
     'bardenas2025/16.webp',
     'bardenas2025/18.webp',
     'marrakech2025/37.webp',

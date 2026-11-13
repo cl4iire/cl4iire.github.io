@@ -29,18 +29,23 @@ export function AboutSection({ t }: { t: Translations }) {
       <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-3.5 mt-3.5">
         <div className="p-[22px] bg-ink text-rose rounded-2xl">
           <h3 className={`${cardTitle} text-pink`}>{t.tools}</h3>
-          <p className="m-0 text-lg leading-[1.55]">{t.toolsText}</p>
+          {/* One tool per line */}
+          <ul className="list-none m-0 p-0 text-lg leading-[1.55]">
+            {t.toolsList.map((tool) => (
+              <li key={tool}>{tool}</li>
+            ))}
+          </ul>
         </div>
         <div className="p-[22px] bg-white rounded-2xl">
           <h3 className={`${cardTitle} text-accent`}>{t.languages}</h3>
-          <p className="m-0 text-lg leading-[1.55]">
-            {t.languagesList.map((l, i) => (
-              <span key={l.name}>
-                {i > 0 && " "}
+          {/* One language per line */}
+          <ul className="list-none m-0 p-0 text-lg leading-[1.55] flex flex-col gap-2">
+            {t.languagesList.map((l) => (
+              <li key={l.name}>
                 <b>{l.name}</b> {l.level}
-              </span>
+              </li>
             ))}
-          </p>
+          </ul>
         </div>
         <div className="p-[22px] bg-pink text-ink rounded-2xl">
           <h3 className={cardTitle}>{t.skills}</h3>
