@@ -154,6 +154,7 @@ content:
     type: collection
     path: content/albums
     format: json
+    filename: "{primary}.json" # without it Pages CMS does not list the existing .json albums
     view:
       fields: [titre.fr, ordre]
       primary: titre.fr
