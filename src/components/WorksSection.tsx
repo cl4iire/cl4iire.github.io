@@ -108,7 +108,7 @@ function WorkRow({ project: p, num, t, lang, open, onToggle, onOpenGallery }: Wo
   const mainLabel = hasVideo ? (youtubeId ? t.watchOnYoutube : t.watchVideo) : p.links?.[0]?.label[lang] ?? "";
 
   const facts = [
-    { k: t.roles, v: p.role[lang] },
+    ...(p.role[lang]?.trim() ? [{ k: t.roles, v: p.role[lang] }] : []),
     ...(p.duration ? [{ k: t.duration, v: p.duration }] : []),
     ...(p.composition ? [{ k: t.composition, v: p.composition[lang] }] : []),
     ...(p.producer ? [{ k: t.production, v: p.producer }] : []),

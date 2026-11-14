@@ -21,7 +21,7 @@ Ouvrir `http://localhost:3000/`. Sous Windows, lancer le terminal depuis `O:\www
 |---|---|
 | `npm run dev` | Serveur de développement (rechargement automatique) |
 | `npm run check` | Vérifie le contenu (champs obligatoires, images et PDF existants, liens valides) |
-| `npm run optimize-images` | Convertit les JPG/PNG de `public/media` en WebP (2560 px max) et met à jour le contenu |
+| `npm run optimize-images` | Range les photos envoyées dans le dossier de leur projet ou album, convertit les JPG/PNG en WebP (2560 px max) et met à jour le contenu |
 | `npm run build` | Construit le site dans `dist/` |
 | `npm run lint` | Vérification TypeScript |
 
@@ -78,8 +78,8 @@ Ce qui reste dans le code : la mise en page, les animations, de nouvelles sectio
 
 Pages CMS crée un commit sur `main`, ce qui lance le workflow **Publication du site** (`.github/workflows/main.yml`) :
 
-1. **Optimisation des images** : les JPG/PNG envoyés sont convertis en WebP (2560 px max, noms nettoyés), le contenu est mis à jour, et un commit `[bot] Optimisation des images (WebP)` est ajouté.
-2. **Vérification du contenu** (`npm run check`) : en cas d'erreur (texte obligatoire vide, image manquante, lien invalide...), le workflow s'arrête avec un message en français et **le site en ligne reste sur la version précédente**.
+1. **Rangement et optimisation des images** : une photo envoyée à la racine d'un dossier de médias et utilisée à un seul endroit est rangée dans `projets/<projet>/` (ou `coulisses/`) ou `photos/<album>/<lieu>/` ; les JPG/PNG sont convertis en WebP (2560 px max, noms nettoyés) ; le contenu est mis à jour et un commit `[bot] Rangement et optimisation des images` est ajouté.
+2. **Vérification du contenu** (`npm run check`) : en cas d'erreur (description vide, image manquante, lien invalide...), le workflow s'arrête et **le site en ligne reste sur la version précédente**. Chaque problème s'affiche en français directement sur la page de la publication (résumé et annotations), sans ouvrir le journal. Un lien entièrement vide est ignoré ; les rôles sont facultatifs.
 3. **Construction et publication** sur GitHub Pages (1 à 2 minutes au total).
 
 ### Suivre les modifications et revenir en arrière
@@ -181,7 +181,8 @@ Le point de rupture `desk:` (901 px) sépare la navigation latérale (ordinateur
 
 ## Dépannage
 
-- **La publication est en ❌ dans l'onglet Actions** : ouvrir le workflow, étape « Vérifier le contenu » : la liste des problèmes s'affiche en français. Corriger dans Pages CMS et enregistrer à nouveau. Le site en ligne n'a pas changé.
+- **La publication est en ❌ dans l'onglet Actions** : cliquer sur la publication : la liste des problèmes s'affiche en français dans le résumé et les annotations. Corriger dans Pages CMS et enregistrer à nouveau. Le site en ligne n'a pas changé.
+- **Noms de dossiers ou de branche bizarres dans Pages CMS** (« principal » au lieu de `main`, « fait-d'ici-vendredi »...) : c'est la traduction automatique du navigateur. La désactiver pour app.pagescms.org (Chrome : icône de traduction dans la barre d'adresse > « Ne jamais traduire ce site »).
 - **Une photo envoyée en JPG n'apparaît pas tout de suite** : la conversion en WebP a lieu pendant la publication ; attendre 1 à 2 minutes.
 - **Un filtre photo affiche un identifiant brut** : le lieu de la photo n'existe pas dans « Lieux et événements » (`npm run check` le signale).
 - **Erreur `Failed to resolve import "../../../../../o:/www/..."` (Windows)** : le serveur a été lancé depuis `o:\` (lettre en minuscule). Ouvrir le terminal dans `O:\www\Portfolio` et relancer `npm run dev`.

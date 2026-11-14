@@ -1,6 +1,6 @@
 name: Publication du site
 # Runs on every push to main (yours or Claire's via Pages CMS):
-# 1. converts new photos to WebP and commits them ("[bot] ..."),
+# 1. tidies new photos into their folder, converts them to WebP and commits them ("[bot] ..."),
 # 2. checks the content (an error stops here: the online site stays on the previous version),
 # 3. builds and publishes the site on GitHub Pages.
 on:
@@ -29,7 +29,7 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Optimiser les nouvelles images (WebP, 2560 px max)
+      - name: Ranger et optimiser les nouvelles images (WebP, 2560 px max)
         run: npm run optimize-images
 
       - name: Enregistrer les images optimisées
@@ -38,7 +38,7 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add -A public/media content
-            git commit -m "[bot] Optimisation des images (WebP)"
+            git commit -m "[bot] Rangement et optimisation des images"
             git pull --rebase origin main
             git push origin HEAD:main
           else

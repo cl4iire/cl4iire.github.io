@@ -61,12 +61,15 @@ for (const file of projects) {
   if (empty(p.annee)) errors.push(`${name} : l'année est vide`);
   if (p.ordre !== undefined && p.ordre !== null && typeof p.ordre !== 'number') errors.push(`${name} : la position doit être un nombre`);
   if (p.masquer === true) warnings.push(`${name} : masqué (n'apparaît pas sur le site)`);
-  checkText(`${name}, rôles`, p.roles);
+  // Roles are optional (the "Rôles" box is hidden when empty); the description is required
   checkText(`${name}, description`, p.description);
   if (!empty(p.video) && !isUrl(p.video)) errors.push(`${name} : le lien vidéo « ${p.video} » n'est pas une adresse web (https://...)`);
   (p.images ?? []).forEach((img: string, i: number) => checkMedia(`${name}, image ${i + 1}`, img));
   (p.coulisses ?? []).forEach((img: string, i: number) => checkMedia(`${name}, coulisse ${i + 1}`, img));
   (p.liens ?? []).forEach((l: any, i: number) => {
+    // A completely empty link (often added by the form) is ignored by the site: no error
+    const blank = empty(l?.url) && empty(l?.texte?.fr) && empty(l?.texte?.en);
+    if (blank) return warnings.push(`${name}, lien ${i + 1} : vide, il est ignoré`);
     if (!isUrl(l?.url)) errors.push(`${name}, lien ${i + 1} : adresse invalide (« ${l?.url ?? ''} »)`);
     checkText(`${name}, lien ${i + 1}`, l?.texte);
   });
@@ -142,11 +145,37 @@ if (settings) {
 }
 
 // ---------- Report ----------
-for (const w of warnings) console.log(`⚠️  ${w}`);
+// On GitHub, each problem is also shown on the summary page of the publication (annotations + summary),
+// not only in the log, so it can be read without opening the technical details.
+const onGitHub = !!process.env.GITHUB_ACTIONS;
+const annotation = (s: string) => s.replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
+function summary(lines: string[]) {
+  if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
+}
+
+for (const w of warnings) {
+  console.log(`⚠️  ${w}`);
+  if (onGitHub) console.log(`::warning title=À vérifier::${annotation(w)}`);
+}
 if (errors.length) {
   console.error(`\n❌ ${errors.length} problème(s) à corriger avant publication :`);
-  for (const e of errors) console.error(`   - ${e}`);
+  for (const e of errors) {
+    console.error(`   - ${e}`);
+    if (onGitHub) console.log(`::error title=À corriger dans Pages CMS::${annotation(e)}`);
+  }
   console.error('\nLe site en ligne n’a pas été modifié. Corrigez dans Pages CMS puis enregistrez à nouveau.');
+  summary([
+    `## ❌ Site non publié : ${errors.length} problème(s) à corriger`,
+    '',
+    ...errors.map((e) => `- ${e}`),
+    '',
+    'Le site en ligne n’a **pas** été modifié. Corrigez ces points dans Pages CMS puis enregistrez à nouveau.',
+    ...(warnings.length ? ['', '### À vérifier (ne bloque pas)', '', ...warnings.map((w) => `- ${w}`)] : []),
+  ]);
   process.exit(1);
 }
 console.log(`\n✅ Contenu valide : ${projects.length} projets, ${albums.length} albums, ${places.size} lieux.`);
+summary([
+  `## ✅ Contenu valide : ${projects.length} projets, ${albums.length} albums, ${places.size} lieux`,
+  ...(warnings.length ? ['', '### À vérifier (ne bloque pas)', '', ...warnings.map((w) => `- ${w}`)] : []),
+]);

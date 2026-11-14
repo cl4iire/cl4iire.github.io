@@ -110,10 +110,10 @@ content:
           regex: "^(https?://.+)?$"
           message: "Adresse complète commençant par https://"
       - name: roles
-        label: Rôles
+        label: Rôles (facultatif)
         component: texte_long
       - name: description
-        label: Description
+        label: Description (obligatoire en français)
         component: texte_long
       - name: composition
         label: Composition (facultatif, ex. pour une émission)
@@ -122,7 +122,7 @@ content:
         label: Images
         type: image
         list: true
-        description: La première image sert de couverture et d'aperçu au survol. Les JPG sont convertis automatiquement en WebP.
+        description: La première image sert de couverture et d'aperçu au survol. Les JPG et PNG sont convertis en WebP et rangés dans le dossier du projet automatiquement.
         options:
           media: images
           path: public/media/projets
