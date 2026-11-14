@@ -1,0 +1,21 @@
+{
+  "titre": "test",
+  "masquer": false,
+  "ordre": 10,
+  "categorie": "film",
+  "annee": "2020",
+  "type": {
+    "fr": "Test",
+    "en": "Test"
+  },
+  "duree": "2'30",
+  "images": [
+    "/media/projets/casque-du-lheris.webp"
+  ],
+  "coulisses": [
+    "/media/projets/confestayres/3-bandana.webp"
+  ],
+  "liens": [
+    {}
+  ]
+}
