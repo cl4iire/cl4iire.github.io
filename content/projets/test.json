@@ -9,6 +9,18 @@
     "en": "Test"
   },
   "duree": "2'30",
+  "roles": {
+    "fr": "test",
+    "en": "test"
+  },
+  "description": {
+    "fr": "test",
+    "en": "test"
+  },
+  "composition": {
+    "fr": "test",
+    "en": "test"
+  },
   "images": [
     "/media/projets/test/casque-du-lheris.webp"
   ],
