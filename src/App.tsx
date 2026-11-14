@@ -9,7 +9,8 @@ import { ContactSection } from "./components/ContactSection";
 import { Lightbox, type Gallery, type GalleryItem } from "./components/Lightbox";
 import { DocumentModal, type DocumentKind } from "./components/DocumentModal";
 
-function initialLang(): Lang {
+/** Language of the visitor: saved choice, else browser language (French by default) */
+export function initialLang(): Lang {
   try {
     const stored = localStorage.getItem("lang");
     if (stored === "FR" || stored === "ENG") return stored;
@@ -19,8 +20,9 @@ function initialLang(): Lang {
   }
 }
 
-export default function App() {
-  const [lang, setLang] = useState<Lang>(initialLang);
+// `ssrLang` is only used for the pre-rendered HTML (src/entry-server.tsx), always in French
+export default function App({ ssrLang }: { ssrLang?: Lang }) {
+  const [lang, setLang] = useState<Lang>(() => ssrLang ?? initialLang());
   const [category, setCategory] = useState<WorkCategory>("all");
   const [activeSection, setActiveSection] = useState<SectionId>("top");
   const [menuOpen, setMenuOpen] = useState(false);

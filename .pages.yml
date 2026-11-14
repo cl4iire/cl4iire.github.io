@@ -109,6 +109,10 @@ content:
         pattern:
           regex: "^(https?://.+)?$"
           message: "Adresse complète commençant par https://"
+      - name: date_video
+        label: Date de mise en ligne de la vidéo (pour Google)
+        type: date
+        description: Indiquée sous la vidéo sur YouTube. Sans cette date, Google n'affiche pas la vidéo dans ses résultats vidéo.
       - name: roles
         label: Rôles (facultatif)
         component: texte_long
@@ -166,6 +170,10 @@ content:
       - name: titre
         label: Nom de l'onglet
         component: texte
+      - name: masquer
+        label: Masquer cet album
+        type: boolean
+        description: Activé = l'onglet n'apparaît plus sur le site (sans être supprimé).
       - name: description
         label: Description
         component: texte_long
@@ -236,6 +244,10 @@ content:
       - name: nom_en
         label: Nom (anglais, facultatif)
         type: string
+      - name: ordre
+        label: Position dans le filtre (1 = premier)
+        type: number
+        description: Le premier lieu de chaque album est celui affiché par défaut. Sans position, le lieu vient après les autres.
 
   # ---------------------------------------------------------------- Documents
   - name: documents
@@ -244,6 +256,9 @@ content:
     path: content/documents.json
     format: json
     fields:
+      - name: afficher_cv
+        label: Afficher le bouton CV sur le site
+        type: boolean
       - name: cv_fr
         label: CV en français
         type: file
@@ -256,6 +271,9 @@ content:
         required: true
         options:
           media: documents
+      - name: afficher_projet
+        label: Afficher le bouton du projet de master sur le site
+        type: boolean
       - name: projet_master
         label: Projet de film documentaire (master)
         type: file
@@ -524,6 +542,9 @@ content:
           - name: contact
             label: Titre de la section
             component: texte
+          - name: afficher_email
+            label: Afficher l'adresse e-mail sur le site
+            type: boolean
           - name: email
             label: Adresse e-mail
             type: string
@@ -531,9 +552,15 @@ content:
           - name: phone
             label: Mot « Téléphone »
             component: texte
+          - name: afficher_telephone
+            label: Afficher le téléphone sur le site
+            type: boolean
           - name: telephone
             label: Numéro de téléphone
             type: string
+          - name: afficher_instagram
+            label: Afficher Instagram sur le site
+            type: boolean
           - name: instagram
             label: Instagram
             type: object
@@ -544,6 +571,9 @@ content:
               - name: url
                 label: Adresse du profil (https://...)
                 type: string
+          - name: afficher_linkedin
+            label: Afficher LinkedIn sur le site (contact et menu)
+            type: boolean
           - name: linkedin
             label: LinkedIn
             type: object
@@ -554,6 +584,9 @@ content:
               - name: url
                 label: Adresse du profil (https://...)
                 type: string
+          - name: afficher_base
+            label: Afficher le lieu de résidence sur le site
+            type: boolean
           - name: base
             label: Mot « Base »
             component: texte
@@ -605,6 +638,20 @@ content:
             label: Description affichée sous le titre dans Google
             type: text
             required: true
+      - name: favicon
+        label: Icône du site (onglet du navigateur et Google)
+        type: image
+        description: Image carrée de préférence (sinon recadrée au centre). Toutes les tailles sont générées automatiquement.
+        options:
+          media: images
+          path: public/media/site
+      - name: image_partage
+        label: Image de partage (aperçu du lien sur WhatsApp, LinkedIn...)
+        type: image
+        description: Recadrée automatiquement en 1200 x 630 px en gardant le sujet principal.
+        options:
+          media: images
+          path: public/media/site
       - name: police
         label: Police du site
         type: select

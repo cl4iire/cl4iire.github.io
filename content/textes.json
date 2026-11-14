@@ -363,20 +363,25 @@
       "fr": "Contact",
       "en": "Contact"
     },
+    "afficher_email": true,
     "email": "claire.blaborde@gmail.com",
     "phone": {
       "fr": "Téléphone",
       "en": "Phone"
     },
+    "afficher_telephone": true,
     "telephone": "06 33 99 79 06",
+    "afficher_instagram": true,
     "instagram": {
       "pseudo": "@kll4er",
       "url": "https://www.instagram.com/kll4er"
     },
+    "afficher_linkedin": true,
     "linkedin": {
       "texte": "Claire Buhaceanu Laborde",
       "url": "https://www.linkedin.com/in/claire-buhaceanu-laborde-51a74738b/"
     },
+    "afficher_base": true,
     "base": {
       "fr": "Base",
       "en": "Based in"

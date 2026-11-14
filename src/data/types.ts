@@ -42,6 +42,7 @@ export interface ProjectFile {
   duree?: string;
   production?: string;
   video?: string;
+  date_video?: string; // YYYY-MM-DD, upload date of the video (structured data for Google, seo-plugin.ts)
   roles: Bilingual;
   description: Bilingual;
   composition?: Bilingual;
@@ -52,6 +53,7 @@ export interface ProjectFile {
 
 export interface AlbumFile {
   titre: Bilingual;
+  masquer?: boolean; // true = tab hidden from the site without deleting it
   description?: Bilingual;
   ordre?: number; // position of the tab (1 = first)
   format?: 'portrait' | 'carre'; // shape of the thumbnails
@@ -63,11 +65,14 @@ export interface AlbumFile {
 export interface PlaceFile {
   nom: string; // French name (also the file name and the label in the CMS drop-down list)
   nom_en?: string; // English name (French used if empty)
+  ordre?: number; // position of the button in the photo filter (1 = first)
 }
 
 export interface DocumentsFile {
+  afficher_cv?: boolean; // false = no "CV" button on the site
   cv_fr: string;
   cv_en: string;
+  afficher_projet?: boolean; // false = no "master's project" button on the site
   projet_master: string;
 }
 
@@ -75,4 +80,6 @@ export interface SettingsFile {
   seo: { titre: string; description: string };
   police: string;
   theme: string;
+  favicon?: string; // source image of the icons (scripts/generate-icons.ts)
+  image_partage?: string; // source image of the link preview (public/og-image.jpg)
 }

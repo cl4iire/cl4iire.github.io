@@ -4,5 +4,7 @@
     "description": "Portfolio de Claire Buhaceanu Laborde - réalisatrice et monteuse de films. Découvrez ses courts-métrages, documentaires et photographies."
   },
   "police": "Bricolage Grotesque",
-  "theme": "rose"
+  "theme": "rose",
+  "favicon": "/media/site/favicon.webp",
+  "image_partage": "/media/accueil/tournage.webp"
 }

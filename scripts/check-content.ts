@@ -64,6 +64,8 @@ for (const file of projects) {
   // Roles are optional (the "Rôles" box is hidden when empty); the description is required
   checkText(`${name}, description`, p.description);
   if (!empty(p.video) && !isUrl(p.video)) errors.push(`${name} : le lien vidéo « ${p.video} » n'est pas une adresse web (https://...)`);
+  if (!empty(p.date_video) && !/^\d{4}-\d{2}-\d{2}/.test(p.date_video)) errors.push(`${name} : date de mise en ligne de la vidéo invalide (« ${p.date_video} »)`);
+  if (/youtu\.?be/.test(p.video ?? '') && empty(p.date_video)) warnings.push(`${name} : vidéo YouTube sans date de mise en ligne (Google ne pourra pas l'afficher dans ses résultats vidéo)`);
   (p.images ?? []).forEach((img: string, i: number) => checkMedia(`${name}, image ${i + 1}`, img));
   (p.coulisses ?? []).forEach((img: string, i: number) => checkMedia(`${name}, coulisse ${i + 1}`, img));
   (p.liens ?? []).forEach((l: any, i: number) => {
@@ -81,6 +83,7 @@ const places = new Set(listJson('content/lieux').map((f) => path.basename(f, '.j
 for (const file of listJson('content/lieux')) {
   const l = readJson(file);
   if (l) checkText(`Lieu « ${path.basename(file, '.json')} »`, { fr: l.nom, en: l.nom_en });
+  if (l && l.ordre !== undefined && l.ordre !== null && typeof l.ordre !== 'number') errors.push(`Lieu « ${l.nom} » : la position doit être un nombre`);
 }
 const albums = listJson('content/albums');
 if (albums.length === 0) errors.push('content/albums : aucun album trouvé');
@@ -89,6 +92,7 @@ for (const file of albums) {
   if (!a) continue;
   const name = `Album « ${a.titre?.fr || path.basename(file, '.json')} »`;
   checkText(`${name}, titre`, a.titre);
+  if (a.masquer === true) warnings.push(`${name} : masqué (n'apparaît pas sur le site)`);
   if (a.format && !['portrait', 'carre'].includes(a.format)) errors.push(`${name} : format invalide (« ${a.format} »)`);
   if (a.filtre && !['pays', 'evenement'].includes(a.filtre)) errors.push(`${name} : type de filtre invalide (« ${a.filtre} »)`);
   const seen = new Set<string>();
@@ -142,6 +146,8 @@ if (settings) {
   if (empty(settings.seo?.description)) errors.push('Réglages : la description Google est vide');
   if (!FONTS[settings.police]) errors.push(`Réglages : police inconnue (« ${settings.police} »)`);
   if (!THEMES[settings.theme]) errors.push(`Réglages : thème inconnu (« ${settings.theme} »)`);
+  checkMedia('Réglages, icône du site', settings.favicon);
+  checkMedia('Réglages, image de partage', settings.image_partage);
 }
 
 // ---------- Report ----------

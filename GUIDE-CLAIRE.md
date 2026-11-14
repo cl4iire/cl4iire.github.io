@@ -39,6 +39,7 @@ Menu **Projets (Travaux)** > **Add an entry** (ajouter une entrée), puis rempli
 - **Position dans la liste** : 1 = tout en haut de « Travaux ». À position égale, le projet le plus récent passe devant.
 - **Description** : obligatoire en français. **Rôles** : facultatif.
 - **Lien de la vidéo** : colle l'adresse complète (qui commence par `https://`). Une vidéo YouTube se lance directement sur le site.
+- **Date de mise en ligne de la vidéo** : la date indiquée sous la vidéo sur YouTube. Elle permet à Google d'afficher ta vidéo dans ses résultats de recherche vidéo.
 - **Images** : clique sur **Upload** pour envoyer tes photos (JPG et PNG acceptés). Pas besoin de choisir un dossier : elles sont rangées dans le dossier du projet et converties automatiquement à la publication. **La première image** sert de couverture et d'aperçu quand on passe la souris sur le projet.
 - **Coulisses** : photos de tournage (facultatif), affichées avec un bouton « Coulisses ».
 - **Liens supplémentaires** : un article, une autre vidéo... avec le texte du bouton et l'adresse.
@@ -62,9 +63,15 @@ Menu **Photos (albums)** > choisis l'album (Portraits, Paysages, Événements).
 
 **Retirer une photo** : supprime sa ligne dans la liste (**Delete**), puis **Save**.
 
+**Cacher tout un album sans le supprimer** : active **Masquer cet album**.
+
+**Choisir l'ordre des filtres** (Londres, Népal...) : dans **Lieux et événements**, ouvre un lieu et change sa **Position dans le filtre** (1 = premier). Le premier lieu de l'album est celui affiché quand on ouvre l'onglet.
+
 ## Remplacer le CV
 
 Menu **CV et projet de master** > clique sur le CV à changer, envoie le nouveau PDF > **Save**.
+
+Tu peux aussi **cacher le bouton CV** ou **le bouton du projet de master** sur tout le site avec les interrupteurs « Afficher le bouton... ».
 
 ## Modifier un texte du site
 
@@ -72,7 +79,7 @@ Menu **Textes du site** : tous les textes sont rangés par partie du site (Accue
 
 - les **deux photos de l'accueil** (dans « Accueil ») ;
 - tes **formations**, **outils**, **langues** et **compétences** (dans « À propos ») : une ligne par élément ;
-- ton **e-mail**, ton **téléphone**, **Instagram** et **LinkedIn** (dans « Contact »).
+- ton **e-mail**, ton **téléphone**, **Instagram** et **LinkedIn** (dans « Contact »). Chacun a un interrupteur **Afficher ... sur le site** : désactive-le pour ne plus le montrer (par exemple ton numéro de téléphone), sans effacer l'information.
 
 ## Police, couleurs et résultat Google
 
@@ -81,6 +88,8 @@ Menu **Réglages** :
 - **Police du site** : 5 polices au choix, testées avec la mise en page.
 - **Couleurs du site** : Rose (d'origine), Bleu, Vert ou Sable.
 - **Résultat Google** : le titre et la description qui s'affichent dans Google. Google met parfois plusieurs jours à les mettre à jour.
+- **Icône du site** : la petite image dans l'onglet du navigateur et dans Google. Envoie une image carrée de préférence : toutes les tailles sont créées automatiquement.
+- **Image de partage** : l'aperçu qui s'affiche quand tu envoies le lien de ton site sur WhatsApp, LinkedIn, Messenger... Elle est recadrée automatiquement. Les applications gardent parfois l'ancien aperçu en mémoire quelques jours.
 
 ## Si ça ne marche pas
 

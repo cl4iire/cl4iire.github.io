@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
+    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && tsx scripts/prerender.ts",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
     "check": "tsx scripts/check-content.ts",
-    "optimize-images": "tsx scripts/optimize-images.ts"
+    "optimize-images": "tsx scripts/optimize-images.ts",
+    "icons": "tsx scripts/generate-icons.ts"
   },
   "dependencies": {
     "@fontsource/bebas-neue": "^5.2.7",

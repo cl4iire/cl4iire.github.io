@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import type { Lang, Translations } from "../data/portfolio";
+import { DOCUMENTS, type Lang, type Translations } from "../data/portfolio";
 import type { WorkCategory } from "./WorksSection";
 
 export type SectionId = "top" | "travaux" | "photographies" | "contact";
@@ -130,25 +130,30 @@ export function Sidebar({
               })}
             </ul>
           </nav>
+          {/* Each button can be hidden in Pages CMS ("CV et projet de master") */}
           <div className="flex flex-col gap-2 mt-7">
-            <button
-              type="button"
-              onClick={onOpenCv}
-              className="min-h-[46px] px-[18px] rounded-full bg-rose text-ink text-base font-bold text-left cursor-pointer hover:bg-pink"
-            >
-              {t.cvButton} ↗
-            </button>
-            <button
-              type="button"
-              onClick={onOpenProject}
-              className="min-h-[46px] px-[18px] rounded-full bg-transparent text-rose border-[1.5px] border-rose text-base font-semibold text-left cursor-pointer hover:bg-rose hover:text-ink"
-            >
-              {t.projectButton}
-            </button>
+            {DOCUMENTS.showCv && (
+              <button
+                type="button"
+                onClick={onOpenCv}
+                className="min-h-[46px] px-[18px] rounded-full bg-rose text-ink text-base font-bold text-left cursor-pointer hover:bg-pink"
+              >
+                {t.cvButton} ↗
+              </button>
+            )}
+            {DOCUMENTS.showProject && (
+              <button
+                type="button"
+                onClick={onOpenProject}
+                className="min-h-[46px] px-[18px] rounded-full bg-transparent text-rose border-[1.5px] border-rose text-base font-semibold text-left cursor-pointer hover:bg-rose hover:text-ink"
+              >
+                {t.projectButton}
+              </button>
+            )}
           </div>
         </div>
         <div className="flex justify-between items-center gap-3 mt-8">
-          <LinkedInLink url={t.linkedin.url} />
+          {t.afficher_linkedin !== false ? <LinkedInLink url={t.linkedin.url} /> : <span />}
           {langSwitch}
         </div>
       </aside>
@@ -185,29 +190,33 @@ export function Sidebar({
             ))}
           </nav>
           <div className="flex flex-wrap gap-2.5 px-5 pt-3 pb-7">
-            <button
-              type="button"
-              onClick={() => {
-                setMenuOpen(false);
-                onOpenCv();
-              }}
-              className="min-h-12 px-[22px] rounded-full bg-rose text-ink text-base font-bold cursor-pointer"
-            >
-              {t.cvButton}
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setMenuOpen(false);
-                onOpenProject();
-              }}
-              className="min-h-12 px-[22px] rounded-full bg-transparent text-rose border-[1.5px] border-rose text-base font-bold cursor-pointer"
-            >
-              {t.projectShort}
-            </button>
+            {DOCUMENTS.showCv && (
+              <button
+                type="button"
+                onClick={() => {
+                  setMenuOpen(false);
+                  onOpenCv();
+                }}
+                className="min-h-12 px-[22px] rounded-full bg-rose text-ink text-base font-bold cursor-pointer"
+              >
+                {t.cvButton}
+              </button>
+            )}
+            {DOCUMENTS.showProject && (
+              <button
+                type="button"
+                onClick={() => {
+                  setMenuOpen(false);
+                  onOpenProject();
+                }}
+                className="min-h-12 px-[22px] rounded-full bg-transparent text-rose border-[1.5px] border-rose text-base font-bold cursor-pointer"
+              >
+                {t.projectShort}
+              </button>
+            )}
           </div>
           <div className="flex justify-between items-center gap-3 px-5 pb-8 mt-auto">
-            <LinkedInLink url={t.linkedin.url} />
+            {t.afficher_linkedin !== false ? <LinkedInLink url={t.linkedin.url} /> : <span />}
             {langSwitch}
           </div>
         </div>

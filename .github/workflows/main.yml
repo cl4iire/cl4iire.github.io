@@ -32,13 +32,16 @@ jobs:
       - name: Ranger et optimiser les nouvelles images (WebP, 2560 px max)
         run: npm run optimize-images
 
+      - name: Générer l'icône du site et l'image de partage
+        run: npm run icons
+
       - name: Enregistrer les images optimisées
         run: |
           if [ -n "$(git status --porcelain)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add -A public/media content
-            git commit -m "[bot] Rangement et optimisation des images"
+            git add -A public content
+            git commit -m "[bot] Rangement et optimisation des images, icônes"
             git pull --rebase origin main
             git push origin HEAD:main
           else

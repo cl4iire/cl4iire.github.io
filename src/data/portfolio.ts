@@ -98,6 +98,12 @@ export interface Translations {
   instagram: { pseudo: string; url: string };
   linkedin: { texte: string; url: string };
   base: string;
+  // what is shown in the contact section (missing = shown)
+  afficher_email?: boolean;
+  afficher_telephone?: boolean;
+  afficher_instagram?: boolean;
+  afficher_linkedin?: boolean;
+  afficher_base?: boolean;
   baseValue: string;
   seeCv: string;
   rights: string;
@@ -124,6 +130,8 @@ export const DOCUMENTS = {
   cvFr: asset(docs.cv_fr),
   cvEn: asset(docs.cv_en),
   project: asset(docs.projet_master),
+  showCv: docs.afficher_cv !== false,
+  showProject: docs.afficher_projet !== false,
 };
 
 // ---------- Projects (content/projets/*.json) ----------
@@ -166,13 +174,18 @@ export const PROJECTS: ProjectData[] = Object.entries(projectFiles)
 /** A photo's place may be stored as "nepal", "nepal.json" or "content/lieux/nepal.json" (CMS reference) */
 export const placeId = (ref: string) => (ref ?? '').split('/').pop()!.replace(/\.json$/, '');
 
+/** Position of each place in the photo filter (no position = after the others, in order of appearance) */
+export const PLACE_ORDER: Record<string, number> = Object.fromEntries(
+  Object.entries(placeFiles).map(([path, place]) => [fileId(path), typeof place.ordre === 'number' ? place.ordre : Infinity])
+);
+
 const PLACES: Record<string, LocaleText> = Object.fromEntries(
   Object.entries(placeFiles).map(([path, place]) => [fileId(path), toLocale({ fr: place.nom, en: place.nom_en })])
 );
 
 export type PhotoItem = {
   url: string;
-  srcPath: string; // image path as stored in the album file (key used by the order editor)
+  srcPath: string; // image path as stored in the album file (unique key of the photo)
   group: string; // place / event id
   desc: string; // place label (French), fallback text
 };
@@ -188,6 +201,7 @@ export type PhotoAlbum = {
 };
 
 export const PHOTOGRAPHY_ALBUMS: PhotoAlbum[] = Object.entries(albumFiles)
+  .filter(([, a]) => a.masquer !== true)
   .sort(([pa, a], [pb, b]) => (a.ordre ?? 999) - (b.ordre ?? 999) || fileId(pa).localeCompare(fileId(pb)))
   .map(([path, a]) => {
     const items = (a.photos ?? [])
@@ -208,8 +222,3 @@ export const PHOTOGRAPHY_ALBUMS: PhotoAlbum[] = Object.entries(albumFiles)
       articleImages: (a.article ?? []).filter(Boolean).map(asset),
     } satisfies PhotoAlbum;
   });
-
-/** Key of a photo in the album's "photos" list (used by the order editor) */
-export function orderKey(_albumId: string, srcPath: string): string {
-  return srcPath;
-}

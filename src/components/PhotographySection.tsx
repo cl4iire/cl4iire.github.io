@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { Lang, PhotoAlbum, PhotoItem, Translations } from "../data/portfolio";
+import { PLACE_ORDER, type Lang, type PhotoAlbum, type PhotoItem, type Translations } from "../data/portfolio";
 import type { LocaleText } from "../data/types";
 import type { GalleryItem } from "./Lightbox";
 
@@ -21,14 +21,18 @@ export function PhotographySection({ t, lang, albums, onOpenGallery }: Photograp
 
   // Second filter: one button per place / event, in order of first appearance
   const subs = useMemo(() => {
-    const list: { key: string; label: string; count: number }[] = [];
+    const list: { key: string; label: string; count: number; order: number }[] = [];
     album?.items.forEach((item) => {
       const place = placeOf(album, item);
+      const order = PLACE_ORDER[item.group] ?? Infinity;
       const existing = list.find((s) => s.key === place.FR);
-      if (existing) existing.count++;
-      else list.push({ key: place.FR, label: place[lang], count: 1 });
+      if (existing) {
+        existing.count++;
+        existing.order = Math.min(existing.order, order);
+      } else list.push({ key: place.FR, label: place[lang], count: 1, order });
     });
-    return list;
+    // "Position" chosen in "Lieux et événements" first; places without a position keep their order of appearance
+    return list.map((s, i) => ({ ...s, i })).sort((a, b) => a.order - b.order || a.i - b.i);
   }, [album, lang]);
   const hasSubs = subs.length > 1;
   // No "all" filter: default to the first place / event
