@@ -3,7 +3,7 @@ import { DOCUMENTS, type Translations } from "../data/portfolio";
 const label = "text-[13px] font-bold tracking-[0.04em] uppercase text-muted";
 const linkClass = "no-underline inline-flex items-center min-h-[44px] hover:text-accent";
 
-// "06 33 99 79 06" -> "+33633997906" (French numbers), other formats are kept as typed
+// "06 12 34 56 78" -> "+33612345678" (French numbers), other formats are kept as typed
 const toTel = (phone: string) => {
   const digits = phone.replace(/[^\d+]/g, "");
   return /^0\d{9}$/.test(digits) ? `+33${digits.slice(1)}` : digits;

@@ -369,8 +369,8 @@
       "fr": "Téléphone",
       "en": "Phone"
     },
-    "afficher_telephone": true,
-    "telephone": "06 33 99 79 06",
+    "afficher_telephone": false,
+    "telephone": "",
     "afficher_instagram": true,
     "instagram": {
       "pseudo": "@kll4er",
