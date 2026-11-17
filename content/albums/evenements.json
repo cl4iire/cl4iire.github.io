@@ -13,19 +13,19 @@
   "filtre": "evenement",
   "photos": [
     {
-      "image": "/media/photos/evenements/motors_and_blues/1.webp",
-      "lieu": "motors-and-blues"
-    },
-    {
       "image": "/media/photos/evenements/motors_and_blues/8.webp",
       "lieu": "motors-and-blues"
     },
     {
-      "image": "/media/photos/evenements/motors_and_blues/3.webp",
+      "image": "/media/photos/evenements/motors_and_blues/5.webp",
       "lieu": "motors-and-blues"
     },
     {
       "image": "/media/photos/evenements/motors_and_blues/4.webp",
+      "lieu": "motors-and-blues"
+    },
+    {
+      "image": "/media/photos/evenements/motors_and_blues/1.webp",
       "lieu": "motors-and-blues"
     },
     {
@@ -45,15 +45,15 @@
       "lieu": "motors-and-blues"
     },
     {
-      "image": "/media/photos/evenements/motors_and_blues/5.webp",
-      "lieu": "motors-and-blues"
-    },
-    {
-      "image": "/media/photos/evenements/nepal/dsc_0012.webp",
+      "image": "/media/photos/evenements/nepal/dsc_0021.webp",
       "lieu": "fetes-au-nepal"
     },
     {
-      "image": "/media/photos/evenements/nepal/dsc_0021.webp",
+      "image": "/media/photos/evenements/nepal/dsc00055.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc00034.webp",
       "lieu": "fetes-au-nepal"
     },
     {
@@ -61,15 +61,23 @@
       "lieu": "fetes-au-nepal"
     },
     {
-      "image": "/media/photos/evenements/nepal/dsc_0054.webp",
+      "image": "/media/photos/evenements/nepal/dsc_0111.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0132.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0072.webp",
+      "lieu": "fetes-au-nepal"
+    },
+    {
+      "image": "/media/photos/evenements/nepal/dsc_0100.webp",
       "lieu": "fetes-au-nepal"
     },
     {
       "image": "/media/photos/evenements/nepal/dsc_0119.webp",
-      "lieu": "fetes-au-nepal"
-    },
-    {
-      "image": "/media/photos/evenements/nepal/dsc_0131.webp",
       "lieu": "fetes-au-nepal"
     },
     {
@@ -81,43 +89,7 @@
       "lieu": "fetes-au-nepal"
     },
     {
-      "image": "/media/photos/evenements/nepal/dsc00034.webp",
-      "lieu": "fetes-au-nepal"
-    },
-    {
-      "image": "/media/photos/evenements/nepal/dsc00055.webp",
-      "lieu": "fetes-au-nepal"
-    },
-    {
-      "image": "/media/photos/evenements/nepal/dsc00248.webp",
-      "lieu": "fetes-au-nepal"
-    },
-    {
-      "image": "/media/photos/evenements/nepal/sans-titre.webp",
-      "lieu": "fetes-au-nepal"
-    },
-    {
-      "image": "/media/photos/evenements/nepal/dsc_0072.webp",
-      "lieu": "fetes-au-nepal"
-    },
-    {
-      "image": "/media/photos/evenements/nepal/dsc_0091.webp",
-      "lieu": "fetes-au-nepal"
-    },
-    {
-      "image": "/media/photos/evenements/nepal/dsc_0100.webp",
-      "lieu": "fetes-au-nepal"
-    },
-    {
-      "image": "/media/photos/evenements/nepal/dsc_0111.webp",
-      "lieu": "fetes-au-nepal"
-    },
-    {
-      "image": "/media/photos/evenements/nepal/dsc_0117.webp",
-      "lieu": "fetes-au-nepal"
-    },
-    {
-      "image": "/media/photos/evenements/nepal/dsc_0132.webp",
+      "image": "/media/photos/evenements/nepal/dsc_0054.webp",
       "lieu": "fetes-au-nepal"
     },
     {
