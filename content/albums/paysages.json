@@ -17,27 +17,7 @@
       "lieu": "londres"
     },
     {
-      "image": "/media/photos/paysages/londres2025/23.webp",
-      "lieu": "londres"
-    },
-    {
-      "image": "/media/photos/paysages/marrakech2025/30.webp",
-      "lieu": "marrakech"
-    },
-    {
       "image": "/media/photos/paysages/londres2025/25.webp",
-      "lieu": "londres"
-    },
-    {
-      "image": "/media/photos/paysages/irlande2025/3.webp",
-      "lieu": "irlande"
-    },
-    {
-      "image": "/media/photos/paysages/irlande2025/6.webp",
-      "lieu": "irlande"
-    },
-    {
-      "image": "/media/photos/paysages/londres2025/22.webp",
       "lieu": "londres"
     },
     {
@@ -46,6 +26,26 @@
     },
     {
       "image": "/media/photos/paysages/londres2025/27.webp",
+      "lieu": "londres"
+    },
+    {
+      "image": "/media/photos/paysages/londres2025/23.webp",
+      "lieu": "londres"
+    },
+    {
+      "image": "/media/photos/paysages/marrakech2025/30.webp",
+      "lieu": "marrakech"
+    },
+    {
+      "image": "/media/photos/paysages/irlande2025/6.webp",
+      "lieu": "irlande"
+    },
+    {
+      "image": "/media/photos/paysages/irlande2025/3.webp",
+      "lieu": "irlande"
+    },
+    {
+      "image": "/media/photos/paysages/londres2025/22.webp",
       "lieu": "londres"
     },
     {
@@ -187,6 +187,7 @@
     {
       "image": "/media/photos/paysages/nepal/dsc0038.webp",
       "lieu": "content/lieux/nepal.json"
-    }
+    },
+    {}
   ]
 }
