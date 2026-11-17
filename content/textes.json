@@ -10,13 +10,13 @@
   "accueil": {
     "image_tournage": "/media/accueil/tournage.webp",
     "image_portrait": "/media/photos/portraits/nepal/dsc00198.webp",
-    "heroTitle": {
-      "fr": "Claire Buhaceanu Laborde, audiovisuel et photographie",
-      "en": "Claire Buhaceanu Laborde, audiovisual and photography"
-    },
     "heroCaption": {
       "fr": "/ Claire Buhaceanu Laborde",
       "en": "/ Claire Buhaceanu Laborde"
+    },
+    "heroTitle": {
+      "fr": "Claire Buhaceanu Laborde, audiovisuel et photographie",
+      "en": "Claire Buhaceanu Laborde, audiovisual and photography"
     },
     "heroAltFilming": {
       "fr": "Claire en tournage, caméra sur stabilisateur",
@@ -50,14 +50,6 @@
         "en": "Contact"
       }
     },
-    "sections": {
-      "fr": "Sections",
-      "en": "Sections"
-    },
-    "navigation": {
-      "fr": "Navigation",
-      "en": "Navigation"
-    },
     "cvButton": {
       "fr": "CV 2026",
       "en": "CV 2026"
@@ -70,13 +62,25 @@
       "fr": "Projet de master",
       "en": "Master's project"
     },
+    "menu": {
+      "fr": "Menu",
+      "en": "Menu"
+    },
+    "close": {
+      "fr": "Fermer",
+      "en": "Close"
+    },
     "language": {
       "fr": "Langue",
       "en": "Language"
     },
-    "menu": {
-      "fr": "Menu",
-      "en": "Menu"
+    "sections": {
+      "fr": "Sections",
+      "en": "Sections"
+    },
+    "navigation": {
+      "fr": "Navigation",
+      "en": "Navigation"
     },
     "openMenu": {
       "fr": "Ouvrir le menu",
@@ -85,20 +89,16 @@
     "closeMenu": {
       "fr": "Fermer le menu",
       "en": "Close the menu"
-    },
-    "close": {
-      "fr": "Fermer",
-      "en": "Close"
     }
   },
   "a_propos": {
     "about": {
-      "fr": "À propos",
+      "fr": "Qui suis-je ?",
       "en": "About"
     },
     "aboutLead": {
-      "fr": "Diplômée d’un BUT Métiers du Multimédia et de l’Internet, avec une spécialisation en production cinéma et télévision en Irlande dans le cadre d’Erasmus.",
-      "en": "Graduate of a B.U.T. in Multimedia and Internet Professions, with a specialisation in film and television production completed in Ireland through Erasmus."
+      "fr": "Titulaire d’un BUT Métiers du Multimédia et de l’Internet, je me suis spécialisée en production cinéma et télévision en Irlande dans le cadre d’Erasmus.",
+      "en": "Graduate of a B.U.T. in Multimedia and Internet Professions, I specialised in Film and Television Production in Ireland as part of the Erasmus programme. "
     },
     "aboutBody": {
       "fr": "Passionnée par les voyages et les enjeux contemporains, je souhaite approfondir mes compétences techniques en audiovisuel afin d’intégrer un master en création documentaire.",
@@ -112,14 +112,14 @@
           "en": "Licence CIAN, Saint-Brieuc"
         },
         "diploma": {
-          "fr": "Licence d’un an en production son et image",
+          "fr": "Licence professionelle en production son et image",
           "en": "One-year bachelor's degree in sound and image production"
         }
       },
       {
         "years": "2025–2026",
         "school": {
-          "fr": "DkIT, Dundalk (Irlande)",
+          "fr": "DKIT, Dundalk (Irlande)",
           "en": "DkIT, Dundalk (Ireland)"
         },
         "diploma": {
@@ -209,8 +209,8 @@
     },
     "skillsList": [
       {
-        "fr": "Image",
-        "en": "Cinematography"
+        "fr": "Cinématographie ",
+        "en": "Cinematography "
       },
       {
         "fr": "Post-production",
@@ -221,16 +221,16 @@
         "en": "Documentary production"
       },
       {
-        "fr": "Studio TV",
+        "fr": "Studio de production TV",
         "en": "TV studio"
       },
       {
-        "fr": "Écriture",
-        "en": "Writing"
+        "fr": "Photographie",
+        "en": "Photography"
       },
       {
-        "fr": "Réalisation",
-        "en": "Directing"
+        "fr": "Théorie et histoire du cinéma",
+        "en": "Theory and film History"
       },
       {
         "fr": "Conception sonore",
@@ -242,10 +242,6 @@
     "works": {
       "fr": "Travaux",
       "en": "Work"
-    },
-    "categories": {
-      "fr": "Catégories",
-      "en": "Categories"
     },
     "all": {
       "fr": "Tout",
@@ -315,6 +311,10 @@
       "fr": "photos",
       "en": "photos"
     },
+    "categories": {
+      "fr": "Catégories",
+      "en": "Categories"
+    },
     "imageOf": {
       "fr": "Image de",
       "en": "Image from"
@@ -333,18 +333,6 @@
       "fr": "graphies",
       "en": "graphy"
     },
-    "series": {
-      "fr": "Séries",
-      "en": "Series"
-    },
-    "byCountry": {
-      "fr": "Par pays",
-      "en": "By country"
-    },
-    "byEvent": {
-      "fr": "Par événement",
-      "en": "By event"
-    },
     "readArticle": {
       "fr": "Lire l’article · Blues Magazine",
       "en": "Read the article · Blues Magazine"
@@ -356,6 +344,18 @@
     "articleAlt": {
       "fr": "Article Motors & Blues, Blues Magazine",
       "en": "Motors & Blues article, Blues Magazine"
+    },
+    "series": {
+      "fr": "Séries",
+      "en": "Series"
+    },
+    "byCountry": {
+      "fr": "Par pays",
+      "en": "By country"
+    },
+    "byEvent": {
+      "fr": "Par événement",
+      "en": "By event"
     }
   },
   "contact": {
@@ -370,7 +370,6 @@
       "en": "Phone"
     },
     "afficher_telephone": false,
-    "telephone": "",
     "afficher_instagram": true,
     "instagram": {
       "pseudo": "@kll4er",
@@ -400,9 +399,13 @@
     }
   },
   "fenetres": {
-    "viewer": {
-      "fr": "Visionneuse",
-      "en": "Viewer"
+    "cvTitle": {
+      "fr": "CV 2026 · Claire Buhaceanu Laborde",
+      "en": "CV 2026 · Claire Buhaceanu Laborde"
+    },
+    "projectTitle": {
+      "fr": "Projet de film documentaire · « La mémoire dans la peau »",
+      "en": "Documentary film project · « La mémoire dans la peau »"
     },
     "prev": {
       "fr": "Précédente",
@@ -412,13 +415,9 @@
       "fr": "Suivante",
       "en": "Next"
     },
-    "cvTitle": {
-      "fr": "CV 2026 · Claire Buhaceanu Laborde",
-      "en": "CV 2026 · Claire Buhaceanu Laborde"
-    },
-    "projectTitle": {
-      "fr": "Projet de film documentaire · « La mémoire dans la peau »",
-      "en": "Documentary film project · « La mémoire dans la peau »"
+    "viewer": {
+      "fr": "Visionneuse",
+      "en": "Viewer"
     }
   }
 }
