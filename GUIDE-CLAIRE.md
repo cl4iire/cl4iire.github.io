@@ -57,13 +57,24 @@ Menu **Photos (albums)** > choisis l'album (Portraits, Paysages, Événements).
 3. **Lieu ou événement** : choisis dans la liste (Népal, Irlande, Motors & Blues...). C'est ce qui sert aux filtres sous les onglets.
 4. **Save**.
 
+**Passe toujours par l'album.** Déposer une photo dans *Médias > Images* la range seulement dans la bibliothèque : elle n'apparaît sur le site que si elle est ajoutée dans la liste **Photos** d'un album (étapes ci-dessus, en la choisissant dans la bibliothèque au lieu de l'envoyer).
+
+## Taille des photos : moins de 3 Mo
+
+Pages CMS refuse les fichiers trop lourds : la photo apparaît puis disparaît, avec une erreur **413**. Le site n'a pas besoin de la pleine résolution (il affiche au maximum 2560 px). Avant d'envoyer, réduis tes photos :
+
+- **Depuis Lightroom** (le plus simple) : Fichier > Exporter > **Dimensionner** : « Bord long » **2560 pixels** ; **Format** JPEG, **Qualité 80**. Enregistre ces réglages comme paramètre prédéfini « Portfolio » pour les prochaines fois. Une photo pèse alors environ 1 Mo.
+- **Sans Lightroom** : sur le site gratuit **[squoosh.app](https://squoosh.app)**, dépose la photo, coche « Resize » avec une largeur de 2560, puis télécharge le résultat.
+
 **Le lieu n'existe pas encore ?** Va d'abord dans **Lieux et événements** > **Add an entry**, écris le nom en français (et en anglais si tu veux), **Save**. Il apparaîtra ensuite dans la liste des photos.
 
 **Changer l'ordre des photos** : déplace les lignes dans la liste **Photos** : l'ordre de la liste est l'ordre sur le site.
 
-**Retirer une photo** : supprime sa ligne dans la liste (**Delete**), puis **Save**.
+**Retirer une photo** : supprime sa ligne dans la liste (**Delete**), puis **Save**. La photo n'est plus sur le site, mais son fichier reste dans la bibliothèque (**Médias > Images**), au cas où tu voudrais la remettre. Pour la supprimer définitivement : dans **Médias > Images**, ouvre le dossier, menu **⋮** de la photo > **Delete**. La page de publication sur GitHub liste les photos qui ne servent plus (« Médias inutilisés »).
 
 **Cacher tout un album sans le supprimer** : active **Masquer cet album**.
+
+**Ajouter des filtres à un album** (y compris Portraits, qui n'en a pas pour l'instant) : il suffit de donner un **lieu différent** à certaines photos. Dès qu'un album contient au moins deux lieux, les boutons de filtre apparaissent tout seuls ; avec un seul lieu, il n'y a pas de filtre.
 
 **Choisir l'ordre des filtres** (Londres, Népal...) : dans **Lieux et événements**, ouvre un lieu et change sa **Position dans le filtre** (1 = premier). Le premier lieu de l'album est celui affiché quand on ouvre l'onglet.
 

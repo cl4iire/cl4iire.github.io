@@ -11,7 +11,8 @@
     "lint": "tsc --noEmit",
     "check": "tsx scripts/check-content.ts",
     "optimize-images": "tsx scripts/optimize-images.ts",
-    "icons": "tsx scripts/generate-icons.ts"
+    "icons": "tsx scripts/generate-icons.ts",
+    "media-inutilises": "tsx scripts/unused-media.ts"
   },
   "dependencies": {
     "@fontsource/bebas-neue": "^5.2.7",

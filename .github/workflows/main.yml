@@ -21,8 +21,14 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      superseded: ${{ steps.save.outputs.superseded }}
     steps:
+      # Always the latest version of main (not the commit that triggered the run): when Claire saves
+      # twice in a row, the second publication starts from the robot's work of the first one (no conflict)
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -36,28 +42,38 @@ jobs:
         run: npm run icons
 
       - name: Enregistrer les images optimisées
+        id: save
         run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add -A public content
-            git commit -m "[bot] Rangement et optimisation des images, icônes"
-            git pull --rebase origin main
-            git push origin HEAD:main
-          else
+          if [ -z "$(git status --porcelain)" ]; then
             echo "Aucune image à optimiser."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A public content
+          git commit -m "[bot] Rangement et optimisation des images, icônes"
+          # A newer save arrived during this publication: its own publication will redo the work
+          if ! git pull --rebase origin main || ! git push origin HEAD:main; then
+            git rebase --abort 2>/dev/null || true
+            echo "superseded=true" >> "$GITHUB_OUTPUT"
+            echo "## ⏭️ Publication remplacée par une plus récente" >> "$GITHUB_STEP_SUMMARY"
+            echo "Une modification plus récente a été enregistrée pendant cette publication : c'est sa publication qui mettra le site à jour." >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Vérifier le contenu
+        if: steps.save.outputs.superseded != 'true'
         run: npm run check
 
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
+      - if: steps.save.outputs.superseded != 'true'
+        run: npm run build
+      - if: steps.save.outputs.superseded != 'true'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
   deploy:
     needs: build
+    if: needs.build.outputs.superseded != 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

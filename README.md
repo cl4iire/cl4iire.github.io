@@ -24,6 +24,7 @@ Ouvrir `http://localhost:3000/`. Sous Windows, lancer le terminal depuis `O:\www
 | `npm run check` | Vérifie le contenu (champs obligatoires, images et PDF existants, liens valides) |
 | `npm run optimize-images` | Range les photos envoyées dans le dossier de leur projet ou album, convertit les JPG/PNG en WebP (2560 px max) et met à jour le contenu |
 | `npm run icons` | Génère la favicon (toutes tailles) et l'image de partage `og-image.jpg` (1200 x 630) depuis les images choisies dans les réglages |
+| `npm run media-inutilises` | Liste les médias de `public/media` utilisés nulle part dans `content/` (photos retirées d'un album ou d'un projet) ; `npm run media-inutilises -- --supprimer` les supprime (puis commit + push). `npm run check` les signale sans jamais les supprimer |
 | `npm run build` | Construit le site dans `dist/`, puis pré-rend la page en HTML (`src/entry-server.tsx` + `scripts/prerender.ts`) |
 | `npm run lint` | Vérification TypeScript |
 
@@ -186,6 +187,9 @@ Le point de rupture `desk:` (901 px) sépare la navigation latérale (ordinateur
 
 - **La publication est en ❌ dans l'onglet Actions** : cliquer sur la publication : la liste des problèmes s'affiche en français dans le résumé et les annotations. Corriger dans Pages CMS et enregistrer à nouveau. Le site en ligne n'a pas changé.
 - **Noms de dossiers ou de branche bizarres dans Pages CMS** (« principal » au lieu de `main`, « fait-d'ici-vendredi »...) : c'est la traduction automatique du navigateur. La désactiver pour app.pagescms.org (Chrome : icône de traduction dans la barre d'adresse > « Ne jamais traduire ce site »).
+- **Erreur 413 à l'envoi d'une image dans Pages CMS** (l'image apparaît puis disparaît) : fichier trop lourd pour le service en ligne de Pages CMS (en pratique au-delà d'environ 3 à 4 Mo, une photo pleine résolution 6000 px). Réduire avant l'envoi (Lightroom : bord long 2560 px, JPEG qualité 80 ; ou squoosh.app). Pour un fichier exceptionnellement lourd : l'envoyer par l'interface web de GitHub (« Add file > Upload files », jusqu'à 25 Mo) dans `public/media/...`, puis le choisir dans la bibliothèque de Pages CMS ; le robot le réduira à la publication.
+- **« X média(s) utilisé(s) nulle part » dans la publication** : des photos ont été retirées d'un album ou d'un projet mais sont restées dans la bibliothèque (et en ligne à leur adresse directe). La liste est dans le résumé de la publication. Rien n'est supprimé automatiquement : les supprimer dans Pages CMS (Médias > Images) ou avec `npm run media-inutilises -- --supprimer`.
+- **Une photo déposée dans *Médias* n'apparaît pas sur le site** : il faut l'ajouter à la liste « Photos » d'un album (ou aux images d'un projet) ; la bibliothèque seule ne publie rien.
 - **Une photo envoyée en JPG n'apparaît pas tout de suite** : la conversion en WebP a lieu pendant la publication ; attendre 1 à 2 minutes.
 - **Un filtre photo affiche un identifiant brut** : le lieu de la photo n'existe pas dans « Lieux et événements » (`npm run check` le signale).
 - **Erreur `Failed to resolve import "../../../../../o:/www/..."` (Windows)** : le serveur a été lancé depuis `o:\` (lettre en minuscule). Ouvrir le terminal dans `O:\www\Portfolio` et relancer `npm run dev`.

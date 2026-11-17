@@ -7,6 +7,7 @@
 import fs from 'fs';
 import path from 'path';
 import { FONTS, THEMES } from '../site-settings-plugin';
+import { findUnusedMedia } from './unused-media';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const errors: string[] = [];
@@ -98,6 +99,8 @@ for (const file of albums) {
   const seen = new Set<string>();
   (a.photos ?? []).forEach((ph: any, i: number) => {
     const where = `${name}, photo ${i + 1}`;
+    // A completely empty row (often added by the form) is ignored by the site: no error
+    if (empty(ph?.image) && empty(ph?.lieu)) return warnings.push(`${where} : ligne vide, elle est ignorée`);
     checkMedia(where, ph?.image);
     if (ph?.image && seen.has(ph.image)) warnings.push(`${where} : photo présente deux fois (« ${ph.image} »)`);
     seen.add(ph?.image);
@@ -150,6 +153,27 @@ if (settings) {
   checkMedia('Réglages, image de partage', settings.image_partage);
 }
 
+// ---------- Unused media (reported, never deleted) ----------
+const unused = findUnusedMedia(ROOT);
+const unusedKb = unused.reduce((s, m) => s + m.kb, 0);
+if (unused.length) {
+  warnings.push(`${unused.length} média(s) utilisé(s) nulle part (${(unusedKb / 1024).toFixed(1)} Mo) : photos retirées d'un album ou d'un projet. Liste dans le résumé de la publication ; à supprimer dans Pages CMS (Médias) si elles ne servent plus.`);
+}
+const unusedSection = unused.length
+  ? [
+      '',
+      `### 🗂️ Médias inutilisés (${unused.length}, ${(unusedKb / 1024).toFixed(1)} Mo)`,
+      '',
+      "Ces fichiers ne sont plus utilisés par le site mais restent dans la bibliothèque des médias (et en ligne à leur adresse directe). Rien n'est supprimé automatiquement : les supprimer dans Pages CMS (Médias > Images) s'ils ne servent plus, ou les remettre dans un album.",
+      '',
+      '<details><summary>Voir la liste</summary>',
+      '',
+      ...unused.map((m) => `- \`${m.url}\` (${m.kb} Ko)`),
+      '',
+      '</details>',
+    ]
+  : [];
+
 // ---------- Report ----------
 // On GitHub, each problem is also shown on the summary page of the publication (annotations + summary),
 // not only in the log, so it can be read without opening the technical details.
@@ -177,6 +201,7 @@ if (errors.length) {
     '',
     'Le site en ligne n’a **pas** été modifié. Corrigez ces points dans Pages CMS puis enregistrez à nouveau.',
     ...(warnings.length ? ['', '### À vérifier (ne bloque pas)', '', ...warnings.map((w) => `- ${w}`)] : []),
+    ...unusedSection,
   ]);
   process.exit(1);
 }
@@ -184,4 +209,5 @@ console.log(`\n✅ Contenu valide : ${projects.length} projets, ${albums.length}
 summary([
   `## ✅ Contenu valide : ${projects.length} projets, ${albums.length} albums, ${places.size} lieux`,
   ...(warnings.length ? ['', '### À vérifier (ne bloque pas)', '', ...warnings.map((w) => `- ${w}`)] : []),
+  ...unusedSection,
 ]);
