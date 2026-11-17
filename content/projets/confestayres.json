@@ -8,20 +8,15 @@
     "fr": "Rubrique TV quotidienne - Stage TVPI, Bayonne",
     "en": "Daily TV segment - TVPI internship, Bayonne"
   },
-  "duree": "",
   "production": "TVPI",
-  "video": "",
+  "date_video": "2026-11-17",
   "roles": {
-    "fr": "Production et montage, aux côtés d'une autre stagiaire",
+    "fr": "Production et montage",
     "en": "Production and editing, alongside another intern"
   },
   "description": {
-    "fr": "À l'occasion des Fêtes de Bayonne, j'ai eu la chance de produire, aux côtés d'une autre stagiaire, une rubrique quotidienne imaginée pour les férias : les Confes'tayres. Le concept reposait sur l'installation d'une petite cabine au cœur des fêtes, à côté des Halles. Les festayres étaient invités à y entrer, seuls ou en groupe, afin de partager devant notre caméra un souvenir, une anecdote ou une confidence liée aux Fêtes de Bayonne.",
-    "en": "During the Fêtes de Bayonne, I had the chance to produce, alongside another intern, a daily segment created for the ferias: the Confes'tayres. The concept was a small booth set up in the heart of the festivities, next to Les Halles. Festival-goers were invited to step inside, alone or in groups, and share a memory, an anecdote or a confession about the Fêtes de Bayonne in front of our camera."
-  },
-  "composition": {
-    "fr": "",
-    "en": ""
+    "fr": "À l'occasion des Fêtes de Bayonne, j'ai eu la chance de co-produire avec une autre stagiaire, une rubrique quotidienne imaginée pour les férias : les Confes'tayres. Le concept consistait à demander aux festayres de partager devant notre caméra un souvenir, une anecdote ou une confidence liée aux Férias.",
+    "en": "During the Fêtes de Bayonne, I had the chance to produce, alongside another intern, a daily segment created for the ferias: the Confes'tayres. The Festival-goers were invited to step inside, alone or in groups, and share a memory, an anecdote or a confession about the Férias in front of our camera."
   },
   "images": [
     "/media/projets/confestayres/1-cabine.webp",
@@ -29,7 +24,6 @@
     "/media/projets/confestayres/3-bandana.webp",
     "/media/projets/confestayres/4-article-sud-ouest.webp"
   ],
-  "coulisses": [],
   "liens": [
     {
       "texte": {
