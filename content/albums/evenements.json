@@ -103,6 +103,10 @@
     {
       "image": "/media/photos/evenements/coulisses/img_5003.webp",
       "lieu": "tournage-en-irlande"
+    },
+    {
+      "image": "/media/photos/dsc0015.webp",
+      "lieu": "content/lieux/fetes-au-nepal.json"
     }
   ],
   "article": [
