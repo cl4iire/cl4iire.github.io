@@ -65,6 +65,41 @@ function freeTarget(dir: string, base: string, ext: string, self?: string) {
   return target;
 }
 
+// ---------- 0. Repair references to files already converted ----------
+// Race in Pages CMS: a photo is uploaded (a.png), the robot converts it (a.webp), then the photo is picked in the
+// library while the CMS still shows the old name: the content points to a.png, which no longer exists.
+// Fix: point to the converted file (same folder, cleaned name, .webp), or to the only file with that name.
+const mediaUrls = (() => {
+  const urls = new Set<string>();
+  const collect = (v: unknown) => {
+    if (typeof v === 'string' && v.startsWith('/media/')) urls.add(v);
+    else if (Array.isArray(v)) v.forEach(collect);
+    else if (v && typeof v === 'object') Object.values(v).forEach(collect);
+  };
+  for (const file of walk(CONTENT).filter((f) => f.endsWith('.json'))) {
+    try {
+      collect(JSON.parse(fs.readFileSync(file, 'utf8')));
+    } catch {
+      // invalid file: reported by `npm run check`
+    }
+  }
+  return urls;
+})();
+const allMedia = walk(MEDIA);
+const repaired = new Map<string, string>();
+for (const url of mediaUrls) {
+  const file = toFile(url);
+  if (fs.existsSync(file)) continue;
+  const base = cleanName(path.basename(file, path.extname(file)));
+  const sameFolder = path.join(path.dirname(file), `${base}.webp`);
+  const elsewhere = allMedia.filter((f) => path.basename(f) === `${base}.webp`);
+  const target = fs.existsSync(sameFolder) ? sameFolder : elsewhere.length === 1 ? elsewhere[0] : null;
+  if (!target) continue; // really missing: reported by `npm run check`
+  repaired.set(url, toUrl(target));
+  console.log(`🔧 ${url} -> ${toUrl(target)} (fichier déjà converti)`);
+}
+updateReferences(repaired);
+
 // ---------- 1. Tidy the files left at the root of an upload folder ----------
 const readJson = (file: string): any => {
   try {
@@ -135,7 +170,7 @@ for (const file of walk(MEDIA)) {
 updateReferences(renames);
 
 console.log(
-  moved.size || optimized
-    ? `✅ ${moved.size} image(s) rangée(s), ${optimized} image(s) optimisée(s), ${renames.size} renommée(s).`
-    : '✅ Aucune image à ranger ni à optimiser.'
+  repaired.size || moved.size || optimized
+    ? `✅ ${repaired.size} référence(s) réparée(s), ${moved.size} image(s) rangée(s), ${optimized} image(s) optimisée(s), ${renames.size} renommée(s).`
+    : '✅ Aucune image à réparer, ranger ni optimiser.'
 );
