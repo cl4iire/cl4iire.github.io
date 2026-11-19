@@ -13,11 +13,11 @@
   "filtre": "evenement",
   "photos": [
     {
-      "image": "/media/photos/evenements/motors_and_blues/8.webp",
+      "image": "/media/photos/evenements/motors_and_blues/5.webp",
       "lieu": "motors-and-blues"
     },
     {
-      "image": "/media/photos/evenements/motors_and_blues/5.webp",
+      "image": "/media/photos/evenements/motors_and_blues/8.webp",
       "lieu": "motors-and-blues"
     },
     {
@@ -37,12 +37,16 @@
       "lieu": "motors-and-blues"
     },
     {
-      "image": "/media/photos/evenements/motors_and_blues/10.webp",
+      "image": "/media/photos/evenements/motors_and_blues/12.webp",
       "lieu": "motors-and-blues"
     },
     {
-      "image": "/media/photos/evenements/motors_and_blues/12.webp",
-      "lieu": "motors-and-blues"
+      "image": "/media/photos/evenements/fetes-au-nepal/dsc0015.webp",
+      "lieu": "content/lieux/fetes-au-nepal.json"
+    },
+    {
+      "image": "/media/photos/e.png",
+      "lieu": "content/lieux/fetes-au-nepal.json"
     },
     {
       "image": "/media/photos/evenements/nepal/dsc_0021.webp",
@@ -103,10 +107,6 @@
     {
       "image": "/media/photos/evenements/coulisses/img_5003.webp",
       "lieu": "tournage-en-irlande"
-    },
-    {
-      "image": "/media/photos/evenements/fetes-au-nepal/dsc0015.webp",
-      "lieu": "content/lieux/fetes-au-nepal.json"
     }
   ],
   "article": [
