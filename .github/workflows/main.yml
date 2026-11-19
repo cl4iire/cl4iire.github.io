@@ -44,20 +44,35 @@ jobs:
       - name: Enregistrer les images optimisées
         id: save
         run: |
-          if [ -z "$(git status --porcelain)" ]; then
-            echo "Aucune image à optimiser."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A public content
-          git commit -m "[bot] Rangement et optimisation des images, icônes"
-          # A newer save arrived during this publication: its own publication will redo the work
-          if ! git pull --rebase origin main || ! git push origin HEAD:main; then
-            git rebase --abort 2>/dev/null || true
+          superseded() {
             echo "superseded=true" >> "$GITHUB_OUTPUT"
             echo "## ⏭️ Publication remplacée par une plus récente" >> "$GITHUB_STEP_SUMMARY"
-            echo "Une modification plus récente a été enregistrée pendant cette publication : c'est sa publication qui mettra le site à jour." >> "$GITHUB_STEP_SUMMARY"
+            echo "Une modification plus récente a été enregistrée pendant cette publication : c'est sa publication qui vérifiera le contenu et mettra le site à jour." >> "$GITHUB_STEP_SUMMARY"
+            echo "Modification plus récente détectée : la publication suivante prend le relais."
+          }
+          # Commits saved on main since this publication started (e.g. Claire adds the photo to an album
+          # a few seconds after uploading it): this publication's checks would not see their repair
+          git fetch -q origin main
+          newer=$(git rev-list --count HEAD..origin/main)
+
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A public content
+            git commit -m "[bot] Rangement et optimisation des images, icônes"
+            if ! git rebase origin/main || ! git push origin HEAD:main; then
+              git rebase --abort 2>/dev/null || true
+              superseded
+              exit 0
+            fi
+          else
+            echo "Aucune image à ranger ni à optimiser."
+          fi
+
+          # The robot's work is saved; the newer commits have their own publication (queued after this one),
+          # which starts from the latest version, repairs it if needed, checks it and publishes it
+          if [ "$newer" -gt 0 ]; then
+            superseded
           fi
 
       - name: Vérifier le contenu

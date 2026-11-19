@@ -220,6 +220,8 @@ L'adresse du site est la constante `SITE_URL` de `seo-plugin.ts` (à changer aus
 
 Le dépôt s'appelle `cl4iire.github.io` (site utilisateur) : le site est servi à la racine **https://cl4iire.github.io/** avec `base: '/'` (`vite.config.ts`).
 
+> **Ancienne adresse** `https://cl4iire.github.io/portfolioClaire/` (avant le renommage du dépôt) : `public/portfolioClaire/index.html` redirige vers le site (redirection immédiate + lien canonique, traités par Google comme une redirection permanente). À conserver tant que l'ancienne adresse peut circuler (Google, anciens CV, LinkedIn).
+>
 > Ne pas renommer le dépôt : Google lit le nom du site et le favicon sur la page d'accueil du domaine (`https://cl4iire.github.io/`). Avec un dépôt de projet (ex. `portfolioClaire`), cette page n'existe pas et Google affiche « GitHub Pages documentation » sans favicon.
 
 | Workflow | Déclenchement | Rôle |
