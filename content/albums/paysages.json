@@ -161,10 +161,6 @@
       "lieu": "nepal"
     },
     {
-      "image": "/media/photos/paysages/nepal/dsc_0077.webp",
-      "lieu": "nepal"
-    },
-    {
       "image": "/media/photos/paysages/nepal/dsc_0095-2.webp",
       "lieu": "nepal"
     },
@@ -175,10 +171,6 @@
     {
       "image": "/media/photos/paysages/nepal/dsc_0005.webp",
       "lieu": "nepal"
-    },
-    {
-      "image": "/media/photos/paysages/nepal/nepalmoto.webp",
-      "lieu": "content/lieux/nepal.json"
     }
   ]
 }
