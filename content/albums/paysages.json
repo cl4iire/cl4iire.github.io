@@ -125,11 +125,27 @@
       "lieu": "bretagne"
     },
     {
-      "image": "/media/photos/paysages/nepal/dsc_0014.webp",
-      "lieu": "nepal"
+      "image": "/media/photos/c.png",
+      "lieu": "content/lieux/nepal.json"
     },
     {
-      "image": "/media/photos/paysages/nepal/dsc_0005.webp",
+      "image": "/media/photos/b.png",
+      "lieu": "content/lieux/nepal.json"
+    },
+    {
+      "image": "/media/photos/a.png",
+      "lieu": "content/lieux/nepal.json"
+    },
+    {
+      "image": "/media/photos/paysages/nepal/dsc0038.webp",
+      "lieu": "content/lieux/nepal.json"
+    },
+    {
+      "image": "/media/photos/d.png",
+      "lieu": "content/lieux/nepal.json"
+    },
+    {
+      "image": "/media/photos/paysages/nepal/dsc_0257.webp",
       "lieu": "nepal"
     },
     {
@@ -137,15 +153,11 @@
       "lieu": "nepal"
     },
     {
-      "image": "/media/photos/paysages/nepal/dsc_0034.webp",
-      "lieu": "nepal"
-    },
-    {
       "image": "/media/photos/paysages/nepal/dsc_0037.webp",
       "lieu": "nepal"
     },
     {
-      "image": "/media/photos/paysages/nepal/dsc_0069.webp",
+      "image": "/media/photos/paysages/nepal/dsc_0138-2.webp",
       "lieu": "nepal"
     },
     {
@@ -157,17 +169,12 @@
       "lieu": "nepal"
     },
     {
-      "image": "/media/photos/paysages/nepal/dsc_0138-2.webp",
+      "image": "/media/photos/paysages/nepal/dsc_0014.webp",
       "lieu": "nepal"
     },
     {
-      "image": "/media/photos/paysages/nepal/dsc_0257.webp",
+      "image": "/media/photos/paysages/nepal/dsc_0005.webp",
       "lieu": "nepal"
-    },
-    {
-      "image": "/media/photos/paysages/nepal/dsc0038.webp",
-      "lieu": "content/lieux/nepal.json"
-    },
-    {}
+    }
   ]
 }
