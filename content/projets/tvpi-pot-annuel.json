@@ -10,21 +10,15 @@
   },
   "duree": "3'21",
   "production": "TVPI",
-  "video": "",
+  "date_video": "2026-11-24",
   "roles": {
     "fr": "Journaliste Reporter d'Images (JRI)",
-    "en": "Video Journalist (JRI)"
+    "en": "Video Journalist "
   },
   "description": {
     "fr": "Reportage sur le pot annuel organisé par TVPI avec ses différents partenaires, diffusé ensuite sur la chaîne.",
-    "en": "Report on the annual reception hosted by TVPI with its partners, then broadcast on the channel."
+    "en": "Coverage of the annual reception hosted by TVPI with its partners. It was then broadcast on the channel."
   },
-  "composition": {
-    "fr": "",
-    "en": ""
-  },
-  "images": [],
-  "coulisses": [],
   "liens": [
     {
       "texte": {
